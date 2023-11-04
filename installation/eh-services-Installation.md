@@ -16,7 +16,7 @@ mkdir -p /epiclabs23/eh
 
 #### Mariadb Installation in DEV environment
 ```bash
-cd /epiclabs23/eh/eh-services
+cd /epiclabs23/eh
 git clone https://github.com/EpicLabs23/eh-services.git
 cd /epiclabs23/eh/eh-services/mariadb
 cp .env.sample .env

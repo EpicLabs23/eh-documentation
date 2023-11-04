@@ -15,7 +15,7 @@ Mapped with host port: `2329`
 
 **EHM:**
 Runs on host machine.
-ehm-api uses port: 
+ehm-api uses port: `2326`
 ehm-ui uses port:
 
 **ECP:**
