@@ -1,7 +1,8 @@
 # Epic Host Documentation
 ### Installation Steps
 1. [Docker Installation](installation/docker-installation.md)
-2. [EH Services Installation](installation/eh-services-Installation.md)
+2. [ehm-api Installation](installation/ehm-api-installation.md)
+3. [ehm-ui Installation](installation/ehm-ui-installation.md)
 
 ### Services, Ports and IPs
 **EH MariDB:** 
@@ -16,7 +17,7 @@ Mapped with host port: `2329`
 **EHM:**
 Runs on host machine.
 ehm-api uses port: `2326`
-ehm-ui uses port:
+ehm-ui uses port: `2325`
 
 **ECP:**
 Runs on docker conainer.
