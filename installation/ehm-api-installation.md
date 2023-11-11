@@ -1,6 +1,6 @@
 # EHM Installation
 #### Install depenent softwares
-[Ref: ](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager)
+[NodeJS Ref: ](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager)
 
 ```bash
 sudo su
@@ -9,6 +9,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 source ~/.bashrc
 nvm install v20.9.0
 npm install --global yarn
+yarn global add pm2
 mkdir -p /epiclabs23/eh/ehm
 ```
 ### ehm-api DEV
@@ -37,8 +38,11 @@ yarn start:dev
 # production mode
 yarn start:prod
 
-# With PM2
+# Dev With PM2
 ./run.sh
+
+# Prod With PM2
+./run-prod.sh
 ```
 ### ehm-api installation in Productoin environment
 Build the application, and make the easy intallation.
