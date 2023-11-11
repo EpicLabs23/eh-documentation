@@ -1,7 +1,15 @@
 # EHM Installation
+#### Install depenent softwares
+[Ref: ](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager)
+
 ```bash
-mkdir /epiclabs23/eh/ehm
+sudo su
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+nvm install v20.9.0
 npm install --global yarn
+mkdir -p /epiclabs23/eh/ehm
 ```
 ### ehm-api DEV
 #### Installation
@@ -16,8 +24,6 @@ yarn prisma db seed
 ```
 #### Run
 This application must run as `root`
-
-[Install `NVM`, `NodeJS 18` and `Yarn` using `nvm` for `root` user (if needed)](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager)
 
 ```bash
 sudo su
