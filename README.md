@@ -1,8 +1,9 @@
 # Epic Host Documentation
 ### Installation Steps
-1. [Docker Installation](installation/docker-installation.md)
-2. [ehm-api Installation](installation/ehm-api-installation.md)
-3. [ehm-ui Installation](installation/ehm-ui-installation.md)
+1. [Nginx Installation]() 
+2. [Docker Installation](installation/docker-installation.md)
+3. [ehm-api Installation](installation/ehm-api-installation.md)
+4. [ehm-ui Installation](installation/ehm-ui-installation.md)
 
 ### Services, Ports and IPs
 **EH MariDB:** 
