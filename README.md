@@ -23,5 +23,5 @@ ehm-ui uses port: `2325`
 
 **ECP:**
 Runs on docker conainer.
-ecp-api uses port:
-ecp-ui uses port:
+ecp-api uses port: `2324`
+ecp-ui uses port: `2323`

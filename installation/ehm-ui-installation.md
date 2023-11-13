@@ -2,7 +2,7 @@
 #### Installation
 ```bash
 cd /epiclabs23/eh/ehm
-git clone https://nahidacm:github.com/nahidacm/ehm-ui.git
+git clone https://github.com/nahidacm/ehm-ui.git
 cd /epiclabs23/eh/ehm/ehm-ui
 yarn install
 cp .env.sample .env
@@ -18,6 +18,8 @@ OR with pm2
 ```
 #### Run in production mode
 ```bash
+npm install -g serve
 yarn build
+./run-prod.sh
 ```
 @ToDO Write detail production document later
