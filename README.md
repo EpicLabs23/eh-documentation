@@ -2,7 +2,7 @@
 ### Installation Steps
 1. [Nginx Installation](installation/nginx-installation.md) 
 2. [Docker Installation](installation/docker-installation.md)
-3. [EH Services Installation](installation/eh-services-installation.md)
+3. [EH Services Installation](installation/eh-services-Installation.md)
 3. [ehm-api Installation](installation/ehm-api-installation.md)
 4. [ehm-ui Installation](installation/ehm-ui-installation.md)
 
