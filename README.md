@@ -1,10 +1,23 @@
 # Epic Host Documentation
-### Installation Steps
+### System and EHM Installation Steps
 1. [Nginx Installation](installation/nginx-installation.md) 
 2. [Docker Installation](installation/docker-installation.md)
 3. [EH Services Installation](installation/eh-services-Installation.md)
 3. [ehm-api Installation](installation/ehm-api-installation.md)
 4. [ehm-ui Installation](installation/ehm-ui-installation.md)
+
+### ECP Installation
+1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
+### Release new version
+1. Push EHM-UI and EHM-API latest code to master.
+2. Build ECP Docker continer with latest ECP-UI and ECP-API.
+3. Push the ECP docker image with latest tag to the docker hub.
+
+### Updated Existing system
+1. Login to the client server with root.
+2. Git pull in EHM-API and EHM-UI.
+3. Compile and run the the EHM-API and EHM-UI.
+4. Docker pull latest ECP image.
 
 ### Services, Ports and IPs
 **EH MariDB:** 
