@@ -8,10 +8,9 @@
 
 ### ECP Installation
 1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
+
 ### Release new version
-1. Push EHM-UI and EHM-API latest code to master.
-2. Build ECP Docker continer with latest ECP-UI and ECP-API.
-3. Push the ECP docker image with latest tag to the docker hub.
+https://github.com/EpicLabs23/ehm-release
 
 ### Updated Existing system
 1. Login to the client server with root.
