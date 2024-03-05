@@ -17,9 +17,4 @@ OR with pm2
 ./run.sh
 ```
 #### Run in production mode
-```bash
-npm install -g serve
-yarn build
-./run-prod.sh
-```
-@ToDO Write detail production document later
+EHM API and UI production release documentation: https://github.com/EpicLabs23/ehm-release
