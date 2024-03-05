@@ -23,4 +23,4 @@ http{
     include /etc/nginx/epiclabs23/*/*.conf;
 }
 ```
-Now Restart the nginx service `sevice nginx restart`
+Now Restart the nginx service `service nginx restart`
