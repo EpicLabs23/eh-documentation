@@ -12,11 +12,8 @@
 ### Release new version
 https://github.com/EpicLabs23/ehm-release
 
-### Updated Existing system
-1. Login to the client server with root.
-2. Git pull in EHM-API and EHM-UI.
-3. Compile and run the the EHM-API and EHM-UI.
-4. Docker pull latest ECP image.
+### Updated Existing production system
+https://github.com/EpicLabs23/ehm-release?tab=readme-ov-file#update
 
 ### Services, Ports and IPs
 **EH MariDB:** 
