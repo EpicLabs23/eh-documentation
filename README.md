@@ -9,8 +9,11 @@
 ### ECP Installation
 1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
 
-### Release new version
+### Release new EHM version
 https://github.com/EpicLabs23/ehm-release
+
+### Releas new ECP version
+https://github.com/nahidacm/ecp-docker/blob/main/README.md
 
 ### Updated Existing production system
 https://github.com/EpicLabs23/ehm-release?tab=readme-ov-file#update
