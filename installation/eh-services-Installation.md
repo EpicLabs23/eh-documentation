@@ -3,7 +3,7 @@
 #### Description
 The service includes `Mariadb` and `PhpMyAdmin` for now.
 This `Maridb` is mostly used by the`EHM`.
-And this `PhpMyAdmin` is using by `EHM` to access DB as root. `ECP` accounts also uses this very same `PhpMyAdmin` to access datbase server inside `ECP` containers.
+And this `PhpMyAdmin` is using by `EHM` and `ECP` to access DB.
 
 This `Mariadb` and `PhpMyAdmin` are running in seperate container but same network with fixed local IP.
 

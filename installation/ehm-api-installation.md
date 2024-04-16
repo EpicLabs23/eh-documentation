@@ -9,7 +9,8 @@ sudo su
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 source ~/.bashrc
-nvm install v20.10.0
+nvm install --lts
+nvm use --lts
 npm install --global yarn
 yarn global add pm2
 yarn global add serve
@@ -24,6 +25,7 @@ git clone https://github.com/nahidacm/ehm-api.git
 cd /epiclabs23/eh/ehm/ehm-api
 yarn install
 cp .env.sample .env
+# Update DB and URLs in .env file
 yarn prisma db push
 yarn prisma db seed
 ```
