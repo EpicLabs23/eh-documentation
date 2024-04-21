@@ -6,6 +6,8 @@ Install Latest LTS version.
 
 ```bash
 sudo su
+apt update
+apt install build-essential
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 source ~/.bashrc
@@ -26,6 +28,7 @@ cd /epiclabs23/eh/ehm/ehm-api
 yarn install
 cp .env.sample .env
 # Update DB and URLs in .env file
+yarn prisma generate
 yarn prisma db push
 yarn prisma db seed
 ```
