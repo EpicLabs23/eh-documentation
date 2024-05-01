@@ -20,7 +20,7 @@ http{
     ##
     ................
     ................
-    include /etc/nginx/epiclabs23/*/*.conf;
+    include /etc/nginx/epiclabs23/*/sites_enabled/*.conf;
 }
 ```
 Now Restart the nginx service `service nginx restart`
