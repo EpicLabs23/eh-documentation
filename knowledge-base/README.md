@@ -1,2 +1,2 @@
-1. [Selling Points](selling-poinsts/unique-features.md)
+1. [Selling Points](selling-points)
 2. [Development](devlopment)
