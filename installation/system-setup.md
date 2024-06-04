@@ -9,7 +9,7 @@ Installing on bare-meta ubuntu server 22.04
 # Installing the Quota Tools
 sudo su
 apt update
-apt install quota
+apt install quota -y
 quota --version
 
 # Updating Filesystem Mount Options
@@ -26,8 +26,30 @@ quotaon -v /
 repquota -s /
 ```
 
+Installing on Contabo cloud server ubuntu server 20.04
+```bash
+# Installing the Quota Tools
+sudo su
+apt update
+apt install quota -y
+quota --version
+
+# Updating Filesystem Mount Options
+vim /etc/fstab
+# Add usrquota option to the mount point /. for example, update following line:
+# UUID=02328cc3-b55a-428a-8176-572b596997c6 /               ext4    errors=remount-ro 0       0
+# With
+# UUID=02328cc3-b55a-428a-8176-572b596997c6 /               ext4    usrquota,errors=remount-ro 0       0
+mount -o remount /
+
+# Enabling Quotas
+quotacheck -um /
+quotaon -v /
+repquota -s /
+```
+
 ##### Zip - Unzip
 ```bash
-apt install zip
-apt install unzip
+apt install zip -y
+apt install unzip -y
 ```
