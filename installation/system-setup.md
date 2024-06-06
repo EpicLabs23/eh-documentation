@@ -53,3 +53,7 @@ repquota -s /
 apt install zip -y
 apt install unzip -y
 ```
+##### Create a nonroot user to avoid some classic issue that conflicts with ECP user
+```bash
+useradd ehm
+```
