@@ -15,5 +15,5 @@ Check user quota `sudo quota -vs <username>`
 
 Find all the files owened by a user: `sudo find / -user <username>`
 
-Find larger directory of files by this user: `sudo find / -user username -type d -exec du -h --max-depth=1 {} + | sort -rh | head -n 10`
+Find larger directory of files by this user: `sudo find / -user <username> -type d -exec du -h --max-depth=1 {} + | sort -rh | head -n 10`
 
