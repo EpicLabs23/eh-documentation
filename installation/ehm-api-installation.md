@@ -30,7 +30,7 @@ cp .env.sample .env
 # Update DB and URLs in .env file
 yarn prisma generate
 yarn prisma db push
-yarn prisma db seed
+yarn init-data
 ```
 ##### Run
 This application must run as `root`
