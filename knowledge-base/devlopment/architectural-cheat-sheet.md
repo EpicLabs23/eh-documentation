@@ -34,3 +34,17 @@ Max upload size controlled in many level, you have update all of them to make it
 3. ECP main.js file.
 4. ECP nginx server blocks.
 5. For PHP applications, php.ini settings
+
+### Authentication system
+EHM authentication system is regular. But, ECP is complicated.
+
+During the ECP account creation from EHM, we generate an unique personal key for each each account.
+We store the key in: `/ehm/userdata/<ecp_username>/personal-key.txt` 
+The use of this personal-key:
+1. Authentication.
+2. Encoding-Decoding.
+
+**Authentication:** this key is identical to the `ECP_JWT_SECRET` in ECP `.env` file. When ECP makes any request to EHM, EHM validates the request using this personal-key.
+**Encoding-Decoding:** We store some sensitive data in DB, like MySql password. Those sensitive data are encoded with this personal-key.
+
+This directory also stores SSL certificates of this user in the directory: `/ehm/userdata/<ecp_username>/ssl-certificates/`.
