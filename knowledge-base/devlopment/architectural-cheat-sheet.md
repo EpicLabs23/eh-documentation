@@ -48,3 +48,34 @@ The use of this personal-key:
 **Encoding-Decoding:** We store some sensitive data in DB, like MySql password. Those sensitive data are encoded with this personal-key.
 
 This directory also stores SSL certificates of this user in the directory: `/ehm/userdata/<ecp_username>/ssl-certificates/`.
+
+### Required directory structure of the services
+#### Dev PC
+/epiclabs23/eh
+/epiclabs23/eh/ehm
+/epiclabs23/eh/ehm/ehm-api
+/epiclabs23/eh/ehm/ehm-ui
+/epiclabs23/eh/ehm/ehm-release
+/epiclabs23/eh/ehm/ehm-installer
+
+/epiclabs23/eh/ecp
+/epiclabs23/eh/ecp/ecp-api
+/epiclabs23/eh/ecp/ecp-ui
+/epiclabs23/eh/ecp/ecp-docker
+
+/epiclabs23/eh/eh-services
+/epiclabs23/eh/oneclick-apps
+
+#### Live server
+/epiclabs23/eh
+/epiclabs23/eh/ehm
+/epiclabs23/eh/ehm/ehm-api
+/epiclabs23/eh/ehm/ehm-ui
+~/ehm-installer
+
+/epiclabs23/eh/ecp
+/epiclabs23/eh/ecp/ecp-api
+/epiclabs23/eh/ecp/ecp-ui
+
+/epiclabs23/eh/eh-services
+/epiclabs23/eh/oneclick-apps
