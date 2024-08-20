@@ -22,11 +22,16 @@ cd /epiclabs23/eh/eh-services/mariadb
 cp .env.sample .env
 # Then update .env file accordingly
 
+# Create the docker network
 docker network create \
   --driver=bridge \
   --subnet=172.1.0.0/16 \
   --gateway=172.1.255.254 \
   eh_network
+
+# Build and push the docker image
+docker build -t nahidacm/eh-mariadb:11.5.2 -f Dockerfile .
+docker push nahidacm/eh-mariadb:11.5.2
 ```
 **In Dev:** `docker compose up -d`
 
@@ -36,10 +41,11 @@ docker run -d \
   --name ehm-db-container \
   --restart unless-stopped \
   -v ./dbdata:/var/lib/mysql \
+  -v /epiclabs23/eh/oneclick-apps:/oneclick-apps \
   --network eh_network \
   --ip 172.1.0.6 \
-  --env-file .env \
-  mariadb
+  --env-file /epiclabs23/eh/eh-services/mariadb/.env \
+  nahidacm/eh-mariadb:11.5.2
 ```
 
 #### PhpMyAdmin Installation in DEV environment
