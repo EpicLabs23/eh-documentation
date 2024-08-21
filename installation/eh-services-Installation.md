@@ -41,6 +41,8 @@ docker run -d \
   --name ehm-db-container \
   --restart unless-stopped \
   -v ./dbdata:/var/lib/mysql \
+  -v /epiclabs23/eh/oneclick-apps:/epiclabs23/eh/oneclick-apps \
+  -v /epiclabs23/eh/oneclick-apps/sql-files:/epiclabs23/eh/oneclick-apps/sql-files \
   --network eh_network \
   --ip 172.1.0.6 \
   --env-file /epiclabs23/eh/eh-services/mariadb/.env \
