@@ -13,6 +13,8 @@ This `Mariadb` and `PhpMyAdmin` are running in seperate container but same netwo
 sudo su
 mkdir -p /epiclabs23/eh
 ```
+#### DNS server installation
+[DNS Installation Guide](https://github.com/EpicLabs23/eh-services/blob/main/dns/README.md)
 
 #### Mariadb Installation
 ```bash
