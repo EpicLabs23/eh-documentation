@@ -25,3 +25,10 @@ Find larger directory of files by this user: `sudo find / -user <username> -type
 Check in the terminal if it says `error:  JsonWebTokenError: invalid signature`
 
 Most probable reason is, may be another dev account was created after this account, and that account replaced the `ECP_JWT_SECRET` value in .env with his new `personal-key.txt`.
+
+##### DNS is not working as per expected
+It can be for various reason, may be DNS server or may be Nginx host or guest configure issue.
+
+- Check the DNS with `dig`
+- Check the nGinx config settings.
+- Check if there is any error in nGinx config with `nginx -t`
