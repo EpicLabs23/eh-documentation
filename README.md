@@ -29,6 +29,16 @@ Running on docker container.
 With local IP: `172.1.0.5`
 Mapped with host port: `2329`
 
+**MongoDB**
+Running on docker container.
+With local IP: `172.1.0.7`
+Mapped with host port: `27017`
+
+**PostgreSQL**
+Running on docker container.
+With local IP: `172.1.0.8`
+Mapped with host port: `5432`
+
 **EHM:**
 Runs on host machine.
 ehm-api uses port: `2326`
@@ -38,3 +48,4 @@ ehm-ui uses port: `2325`
 Runs on docker conainer.
 ecp-api uses port: `2324`
 ecp-ui uses port: `2323`
+
