@@ -18,6 +18,8 @@ vim /etc/fstab
 # /dev/disk/by-id/dm-uuid-LVM-wuyD4BzwAnaGztJ6frKFDjKjdgSCviOpA67WhOOLR7DkB8n1TxeOoWeXALpZpzbj / ext4 defaults 0 1
 # With
 # /dev/disk/by-id/dm-uuid-LVM-wuyD4BzwAnaGztJ6frKFDjKjdgSCviOpA67WhOOLR7DkB8n1TxeOoWeXALpZpzbj / ext4 defaults,usrquota 0 1
+# If the /etc/fstab contents look different ask ChatGpt with the file content and ask how do you add usrquota
+
 mount -o remount /
 
 # Enabling Quotas

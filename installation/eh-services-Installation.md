@@ -77,10 +77,3 @@ docker run -d \
   -v ./theme/:/www/themes/theme/ \
   phpmyadmin/phpmyadmin:latest
 ```
-
-#### MongoDB Installation
-```bash
-cd /epiclabs23/eh/eh-services/mongodb
-docker compose up -d
-# Then update .env file accordingly
-```

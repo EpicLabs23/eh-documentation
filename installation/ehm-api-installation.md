@@ -55,4 +55,11 @@ yarn start:prod
 ```
 ### ehm-api & ehm-ui Production
 ======================================================
+Seed users:
+
+```bash
+cd /epiclabs23/eh/ehm/<version-number>/ehm-api/dist/prisma
+node seed.js
+```
+
 Production / Release documentation avalable in: https://github.com/EpicLabs23/ehm-release
