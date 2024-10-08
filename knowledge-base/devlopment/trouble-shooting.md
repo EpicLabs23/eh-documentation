@@ -32,3 +32,13 @@ It can be for various reason, may be DNS server or may be Nginx host or guest co
 - Check the DNS with `dig`
 - Check the nGinx config settings.
 - Check if there is any error in nGinx config with `nginx -t`
+
+##### Nginx 502 Bad Gateway
+- Check if host's Nginx is running. `service nginx status`
+- Check if host's Nginx syntax is ok `sudo nginx -t`
+- Exec into ECP container and:
+-- check if returns 502 `curl localhost` 
+-- check if Nginx is running `service nginx status` 
+-- check if Nginx syntax is ok `sudo nginx -t`
+-- check Nginx log: `/var/log/nginx/error.log`
+-- Check if curresponding php-fpm is running `service php8.1-fpm status`
