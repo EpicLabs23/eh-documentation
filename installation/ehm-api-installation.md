@@ -18,6 +18,23 @@ yarn global add pm2
 yarn global add serve
 mkdir -p /epiclabs23/eh/ehm
 ```
+
+### EHM-API & EHM-UI Production
+======================================================
+```bash
+cd /epiclabs23/eh/ehm
+git clone https://github.com/EpicLabs23/ehm-installer.git
+cd ehm-installer
+./ehm-update_ubuntu_<OS_version>.sh
+# supported ubuntu versions are 20.04, 22.04
+```
+
+Seed users:
+```bash
+cd /epiclabs23/eh/ehm/<ehm-version-number>/ehm-api/dist/prisma
+node seed.js
+```
+
 ### ehm-api DEV
 ============================================================
 ##### Installation
@@ -53,13 +70,4 @@ yarn start:prod
 # Prod With PM2
 ./run-prod.sh
 ```
-### ehm-api & ehm-ui Production
-======================================================
-Seed users:
 
-```bash
-cd /epiclabs23/eh/ehm/<version-number>/ehm-api/dist/prisma
-node seed.js
-```
-
-Production / Release documentation avalable in: https://github.com/EpicLabs23/ehm-release
