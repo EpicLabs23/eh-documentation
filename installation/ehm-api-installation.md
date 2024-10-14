@@ -15,6 +15,7 @@ nvm install --lts
 nvm use --lts
 npm install --global yarn
 yarn global add pm2
+pm2 startup
 yarn global add serve
 mkdir -p /epiclabs23/eh/ehm
 ```
