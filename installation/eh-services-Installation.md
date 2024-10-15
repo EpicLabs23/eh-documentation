@@ -34,6 +34,9 @@ docker network create \
 # Build and push the docker image
 docker build -t nahidacm/eh-mariadb:11.5.2 -f Dockerfile .
 docker push nahidacm/eh-mariadb:11.5.2
+
+# Install mysqldump
+sudo apt install mariadb-client
 ```
 **In Dev:** `docker compose up -d`
 
