@@ -1,7 +1,6 @@
 ##### Quota
-Ref.: https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-20-04
-
-Skip step 2 of the reference
+Ref.: 
+https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-20-04
 
 Installing on bare-meta ubuntu server 22.04
 
