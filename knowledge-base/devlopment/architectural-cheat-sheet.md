@@ -18,6 +18,8 @@ Target: '/etc/nginx/sites-available'
 ```bash
 host.docker.internal:host-gateway,
 mysql-db.server:172.1.0.6,
+mongodb.server:172.1.0.7,
+postgres.server:172.1.0.8
 ```
 
 #### Checking ECP pm2 log
