@@ -1,62 +1,41 @@
-# Epic Host Documentation
-### System and EHM Installation Steps
-1. [System Setup](installation/system-setup.md) 
-2. [Nginx Installation](installation/nginx-installation.md) 
-3. [Docker Installation](installation/docker-installation.md)
-4. [EH Services Installation](installation/eh-services-Installation.md)
-5. [ehm-api Installation](installation/ehm-api-installation.md)
-6. [ehm-ui Installation](installation/ehm-ui-installation.md)
+# Website
 
-### ECP Installation
-1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
+This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-### Release new EHM version
-https://github.com/EpicLabs23/ehm-release
+### Installation
 
-### Releas new ECP version
-https://github.com/nahidacm/ecp-docker/blob/main/README.md
+```
+$ yarn
+```
 
-### Updated Existing production system
-https://github.com/EpicLabs23/ehm-release?tab=readme-ov-file#update
+### Local Development
 
-### Services, Ports and IPs
-**EH MariDB:** 
-Running on docker container.
-With local IP: `172.1.0.6`
-Mapped with host port: `3306`
+```
+$ yarn start
+```
 
-**MongoDB**
-Running on docker container.
-With local IP: `172.1.0.7`
-Mapped with host port: `27017`
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-**PostgreSQL**
-Running on docker container.
-With local IP: `172.1.0.8`
-Mapped with host port: `5432`
+### Build
 
-**ECP:**
-Runs on docker conainer.
-ecp-ui uses port: `2323`
-ecp-api uses port: `2324`
+```
+$ yarn build
+```
 
-**EHM:**
-Runs on host machine.
-ehm-ui uses port: `2325`
-ehm-api uses port: `2326`
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-**PhpMyAdmin:**
-Running on docker container.
-With local IP: `172.1.0.5`
-Mapped with host port: `2329`
+### Deployment
 
-**Backup System:**
-Rclone rcd uses port: `5572`
-Epic backup API uses port: `2330`
-Epic backup UI uses port: `2331`
+Using SSH:
 
-**EH System Monitor:**
-Running on docker container.
-cAdvisor uses port: 2332
-Prometheus uses port: 2333
-Grafana uses port: 2334
+```
+$ USE_SSH=true yarn deploy
+```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
