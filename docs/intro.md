@@ -2,46 +2,66 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Intro
 
-Let's discover **Docusaurus in less than 5 minutes**.
+### System and EHM Installation Steps
+1. [System Setup](installation/system-setup.md) 
+2. [Nginx Installation](installation/nginx-installation.md) 
+3. [Docker Installation](installation/docker-installation.md)
+4. [EH Services Installation](installation/eh-services-Installation.md)
+5. [ehm-api Installation](installation/ehm-api-installation.md)
+6. [ehm-ui Installation](installation/ehm-ui-installation.md)
 
-## Getting Started
+### ECP Installation
+1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
 
-Get started by **creating a new site**.
+### Release new EHM version
+https://github.com/EpicLabs23/ehm-release
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### Releas new ECP version
+https://github.com/nahidacm/ecp-docker/blob/main/README.md
 
-### What you'll need
+### Updated Existing production system
+https://github.com/EpicLabs23/ehm-release?tab=readme-ov-file#update
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### Services, Ports and IPs
+**EH MariDB:** 
+Running on docker container.
+With local IP: `172.1.0.6`
+Mapped with host port: `3306`
 
-## Generate a new site
+**MongoDB**
+Running on docker container.
+With local IP: `172.1.0.7`
+Mapped with host port: `27017`
 
-Generate a new Docusaurus site using the **classic template**.
+**PostgreSQL**
+Running on docker container.
+With local IP: `172.1.0.8`
+Mapped with host port: `5432`
 
-The classic template will automatically be added to your project after you run the command:
+**ECP:**
+Runs on docker conainer.
+ecp-ui uses port: `2323`
+ecp-api uses port: `2324`
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+**EHM:**
+Runs on host machine.
+ehm-ui uses port: `2325`
+ehm-api uses port: `2326`
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+**PhpMyAdmin:**
+Running on docker container.
+With local IP: `172.1.0.5`
+Mapped with host port: `2329`
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+**Backup System:**
+Rclone rcd uses port: `5572`
+Epic backup API uses port: `2330`
+Epic backup UI uses port: `2331`
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+**EH System Monitor:**
+Running on docker container.
+cAdvisor uses port: 2332
+Prometheus uses port: 2333
+Grafana uses port: 2334
