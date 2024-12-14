@@ -19,8 +19,10 @@ With latest version number in the same directory. Make neccessary updates on the
 ```bash
 sudo su
 cd /epiclabs23/eh/ehm/ehm-release
-./distribute_ubuntu_22.04.sh
+./distribute_ubuntu_24.04.sh
 ```
+
+Above commands build and push the code to the version repository server. The updater or installer will pull the code from the server.
 
 ### For Ubuntu 22.04
 
