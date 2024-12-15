@@ -1,4 +1,4 @@
-# Epic Host Documentation
+# Old Docs
 ### System and EHM Installation Steps
 1. [System Setup](installation/system-setup.md) 
 2. [Nginx Installation](installation/nginx-installation.md) 
