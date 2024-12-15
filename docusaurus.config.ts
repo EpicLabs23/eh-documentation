@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'ECP-EHM',
+  title: 'Epic Labs 23',
   tagline: 'Epic Labs 23',
   favicon: 'img/favicon.ico',
 
