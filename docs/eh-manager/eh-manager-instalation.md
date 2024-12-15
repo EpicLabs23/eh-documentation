@@ -12,6 +12,12 @@ npm install
 npm link
 ```
 ## Example Usage
+
+### Interactive EHM Installation
 ```bash
-eh-manager install ehm 0.0.1
+eh-manager install
+```
+### Non-interactive EHM Installation
+```bash
+eh-manager install -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```
