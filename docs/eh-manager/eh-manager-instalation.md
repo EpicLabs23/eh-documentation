@@ -5,6 +5,7 @@ sidebar_position: 2
 # EH Manager Installation
 
 ```bash
+sudo su
 cd /epiclabs23/eh
 git clone https://github.com/EpicLabs23/eh-manager.git
 cd /epiclabs23/eh/eh-manager
