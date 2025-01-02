@@ -9,6 +9,8 @@ sidebar_position: 1
 - Nodejs 20
 - PM2
 - Rclone
+- mysqldump
+- mariabackup
 
 ### Install Nodejs using Node Version Manager (NVM)
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
@@ -31,4 +33,9 @@ Reference: https://rclone.org/install/
 Set you own passowd on the command.
 ```bash
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon
+```
+
+## mariabackup
+```bash
+sudo apt-get install mariadb-backup
 ```
