@@ -11,6 +11,7 @@ sidebar_position: 1
 - Rclone
 - mysqldump
 - mariabackup
+- pg_dump
 
 ### Install Nodejs using Node Version Manager (NVM)
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
@@ -38,4 +39,14 @@ pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --na
 ## mariabackup
 ```bash
 sudo apt-get install mariadb-backup
+```
+
+## mysqldump
+```bash
+sudo apt-get install mysql-client
+```
+
+## pg_dump
+```bash
+sudo apt-get install postgresql-client
 ```
