@@ -10,7 +10,7 @@ sidebar_position: 1
 - PM2
 - Rclone
 - mysqldump
-- mariabackup
+- mariadb-dump
 - pg_dump
 
 ### Install Nodejs using Node Version Manager (NVM)
@@ -36,9 +36,9 @@ Set you own passowd on the command.
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon
 ```
 
-## mariabackup
+## mariadb-dump
 ```bash
-sudo apt-get install mariadb-backup
+sudo apt-get install mariadb-client
 ```
 
 ## mysqldump
