@@ -4,23 +4,7 @@ sidebar_position: 2
 
 # API Installation
 
-## Dev Installation
-This application must run as `root`
-```bash
-cd /epiclabs23/eh/epic-backup
-git clone https://github.com/nahidacm/epic-backup-api.git
-cd /epiclabs23/eh/epic-backup/epic-backup-api
-npm install
-cp .env-sample .env
-npx prisma db push
-npm run start:dev
-```
-
 ## Install epic-backup-api production version
-@ToDo: Following is a temporary installation solution. We will automate this process in the future. That will let user update from UI. Currently it does not have any relation with the release script
-
-Install Rclone and PM2 as per instruction given above
-
 
 ```bash
 # Create the directory if it does not exist
@@ -56,6 +40,18 @@ pm2 start "node dist/main" --name epic-backup-api
 # Upload and extract the code as per above
 # Restore the .env and database.db file
 # then continue from Installation section
+```
+
+## Dev Installation
+This application must run as `root`
+```bash
+cd /epiclabs23/eh/epic-backup
+git clone https://github.com/nahidacm/epic-backup-api.git
+cd /epiclabs23/eh/epic-backup/epic-backup-api
+npm install
+cp .env-sample .env
+npx prisma db push
+npm run start:dev
 ```
 
 # Troubleshooting

@@ -9,9 +9,9 @@ sidebar_position: 1
 - Nodejs 20
 - PM2
 - Rclone
-- mysqldump
-- mariadb-dump
-- pg_dump
+- mysqldump (Optional)
+- mariadb-dump (Optional)
+- pg_dump (Optional)
 
 ### Install Nodejs using Node Version Manager (NVM)
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
@@ -36,17 +36,17 @@ Set you own passowd on the command.
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon
 ```
 
-## mariadb-dump
+## mariadb-dump (Optional)
 ```bash
 sudo apt-get install mariadb-client
 ```
 
-## mysqldump
+## mysqldump (Optional)
 ```bash
 sudo apt-get install mysql-client
 ```
 
-## pg_dump
+## pg_dump (Optional)
 ```bash
 sudo apt-get install postgresql-client
 ```
