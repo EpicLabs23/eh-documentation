@@ -1,0 +1,11 @@
+{
+    "position": 6,
+    "label": "Knowledge Base",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "Knowledge Base overview"
+    }
+  }

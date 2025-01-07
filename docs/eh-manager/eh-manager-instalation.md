@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# EH Manager Installation
+# Installation
 
 ```bash
 sudo su

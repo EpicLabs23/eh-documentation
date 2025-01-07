@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# ECP Release
+# Release
 
 ## Production (ecp-base)
 

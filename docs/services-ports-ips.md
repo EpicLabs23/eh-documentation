@@ -1,25 +1,5 @@
-# Old Docs
-### System and EHM Installation Steps
-1. [System Setup](installation/system-setup.md) 
-2. [Nginx Installation](installation/nginx-installation.md) 
-3. [Docker Installation](installation/docker-installation.md)
-4. [EH Services Installation](installation/eh-services-Installation.md)
-5. [ehm-api Installation](installation/ehm-api-installation.md)
-6. [ehm-ui Installation](installation/ehm-ui-installation.md)
+# Services, Ports and IPs
 
-### ECP Installation
-1. [Build ECP Image](https://github.com/nahidacm/ecp-docker/blob/main/README.md)
-
-### Release new EHM version
-https://github.com/EpicLabs23/ehm-release
-
-### Releas new ECP version
-https://github.com/nahidacm/ecp-docker/blob/main/README.md
-
-### Updated Existing production system
-https://github.com/EpicLabs23/ehm-release?tab=readme-ov-file#update
-
-### Services, Ports and IPs
 **EH MariDB:** 
 Running on docker container.
 With local IP: `172.1.0.6`

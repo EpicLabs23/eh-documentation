@@ -1,11 +1,14 @@
 ---
 sidebar_position: 3
 ---
-# Install EHM
+# Install
 
 ### Pre-requisite
-- System Setup
+- [System Setup](./system-setup)
+- [Nginx Installation](./nginx-installation)
+- [Docker Installation](./docker-installation)
 - [EH Manager Installation](../eh-manager/eh-manager-instalation)
+
 ### Interactive Installation
 ```bash
 eh-manager install

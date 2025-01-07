@@ -1,3 +1,8 @@
+---
+sidebar_position: 3
+---
+
+# Docker Installation
 The `EH` eco system is heavily depending on `docker`.
 
 #### Install docker on the host machine.

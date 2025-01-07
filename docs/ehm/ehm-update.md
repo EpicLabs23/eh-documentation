@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 ---
-# Update EHM
+# Update
 
 ### Install the updater script
 ```bash
