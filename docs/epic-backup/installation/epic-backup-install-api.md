@@ -5,30 +5,10 @@ sidebar_position: 2
 # API Installation
 
 ## Install epic-backup-api production version
+[Install eh-manager](../eh-manager/eh-manager-instalation)
 
 ```bash
-# Create the directory if it does not exist
-mkdir -p /epiclabs23/eh/epic-backup/epic-backup-api
-cd /epiclabs23/eh/epic-backup/epic-backup-api
-
-# Run from Local to upload the built files.
-scp /epiclabs23/eh/epic-backup/epic-backup-api/epic-backup-api-0.0.1.tar.gz root@84.247.150.42:/epiclabs23/eh/epic-backup/epic-backup-api/
-
-# In remote server extract the tar.gz file
-tar -xvzf epic-backup-api-0.0.1.tar.gz
-
-#Make necessary changes in .env
-
-# Install dependencies
-npm install --omit=dev
-
-# npx prisma generate --schema=./dist/prisma/schema.prisma
-npx prisma db push --schema=./dist/prisma/schema.prisma
-# Run the seed
-node dist/prisma/seed.js
-
-pm2 delete epic-backup-api
-pm2 start "node dist/main" --name epic-backup-api
+eh-manager install-epic-backup
 ```
 
 # Update epic-backup-api production version
