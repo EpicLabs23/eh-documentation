@@ -5,11 +5,18 @@ sidebar_position: 2
 # API Installation
 
 ## Install epic-backup-api production version
-[Install eh-manager](../eh-manager/eh-manager-instalation)
+Pre-requisite: [Install eh-manager](../eh-manager/eh-manager-instalation)
 
+### Interactive Installation
 ```bash
 eh-manager install-epic-backup
 ```
+
+### Non-interactive Installation
+```bash
+eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2333 --targetDir /epiclabs23/eh-prod/epic-backup
+```
+`--targetDir` is optional default value is `/epiclabs23/eh/epic-backup`
 
 # Update epic-backup-api production version
 @ToDo: Following is a temporary installation solution. We will automate this process in the future. That will let user update from UI. Currently it does not have any relation with the release script
