@@ -9,7 +9,8 @@ sidebar_position: 2
 cd /epiclabs23/eh/epic-backup/epic-backup-api/release/docker-files/nodejs-20
 docker build -t nahidacm/epic-backup-build:nodejs-20 -f Dockerfile . 
 ```
-### Build pacakage
+### Build API and UI
+Thoug the build script is under api folder, but this will build both the api and ui
 ```bash
 cd /epiclabs23/eh/epic-backup/epic-backup-api
 sudo ./release.sh
