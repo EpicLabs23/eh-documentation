@@ -9,11 +9,13 @@ Pre-requisite: [Install eh-manager](../eh-manager/eh-manager-instalation)
 
 ### Interactive Installation
 ```bash
+sudo su
 eh-manager install-epic-backup
 ```
 
 ### Non-interactive Installation
 ```bash
+sudo su
 eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2333 --targetDir /epiclabs23/eh-prod/epic-backup
 ```
 `--targetDir` is optional default value is `/epiclabs23/eh/epic-backup`
