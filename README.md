@@ -9,13 +9,13 @@ cd /epiclabs23/eh/eh-documentation
 ```
 ### Installation
 
-```
+```bash
 npm install
 ```
 
 ### Local Development
 
-```
+```bash
 npm start
 ```
 
@@ -23,7 +23,7 @@ This command starts a local development server and opens up a browser window. Mo
 
 ### Build
 
-```
+```bash
 npm run build
 ```
 
