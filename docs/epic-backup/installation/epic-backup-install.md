@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# API Installation
+# Epic Backup Installation
 
 ## Install epic-backup-api production version
 Pre-requisite: [Install eh-manager](../../eh-manager/eh-manager-instalation)
