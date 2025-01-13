@@ -1,32 +1,19 @@
 ---
 sidebar_position: 4
 ---
-# Update
+# EHM Update
 
-### Install the updater script
-```bash
-git clone https://github.com/EpicLabs23/ehm-installer.git /epiclabs23/eh/eh-installer
-cd /epiclabs23/eh/eh-installer
-# Or you may need to update, if you already have the installer
-git pull
-```
-##### In Ubuntu 24.04
-```bash
-cd /epiclabs23/eh/eh-installer
-./ehm-update_ubuntu_24.04.sh
-```
-Prompts will ask for information that is required to update.
+### Pre-requisite
+- [EH Manager Installation](../eh-manager/eh-manager-instalation)
 
-##### In Ubuntu 22.04
+### Interactive Installation
 ```bash
-cd /epiclabs23/eh/eh-installer
-./ehm-update_ubuntu_22.04.sh
+sudo su
+eh-manager update-ehm
 ```
-Prompts will ask for information that is required to update.
 
-##### In Ubuntu 20.04
+### Non-interactive Installation
 ```bash
-cd /epiclabs23/eh/eh-installer
-./ehm-update_ubuntu_20.04.sh
+sudo su
+eh-manager update-ehm -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```
-Prompts will ask for information that is required to update.

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 ---
-# Install
+# EHM Install
 
 ### Pre-requisite
 - [System Setup](./system-setup)
@@ -11,10 +11,12 @@ sidebar_position: 3
 
 ### Interactive Installation
 ```bash
-eh-manager install
+sudo su
+eh-manager install-ehm
 ```
 
 ### Non-interactive Installation
 ```bash
-eh-manager install -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+sudo su
+eh-manager install-ehm -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```

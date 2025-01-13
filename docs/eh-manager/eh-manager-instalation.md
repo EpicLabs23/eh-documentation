@@ -16,11 +16,13 @@ npm link
 
 ### Interactive use
 ```bash
-eh-manager install
-eh-manager update
+sudo su
+eh-manager install-ehm
+eh-manager update-epic-backup
 ```
 ### Non-interactive use
 ```bash
-eh-manager install -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
-eh-manager update --currentversion v0.0.1 --newversion v0.0.2 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+sudo su
+eh-manager install-ehm -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+eh-manager update-epic-backup --currentversion v0.0.1 --newversion v0.0.2 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```
