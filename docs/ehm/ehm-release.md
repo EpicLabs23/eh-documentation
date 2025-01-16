@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 ---
 
-# Release
+# Release EHM
 
 ### For Ubuntu 24.04
 

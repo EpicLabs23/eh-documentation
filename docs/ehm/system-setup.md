@@ -1,13 +1,36 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # System Setup
 
-##### Quota
+### Quota
 Ref.: 
 https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-20-04
 
+:::tip
+User Quota is highly dependent on the file system and OS version.
+
+Taking help from ChatGPT to install quota tools is a very good idea.
+
+Example: https://chatgpt.com/share/67886a9a-5d74-8000-99ee-eaa8388475c4
+:::
+
+#### Quota setup on ubuntu 24.04
+```bash
+sudo cp /etc/fstab /etc/fstab.bak
+vim /etc/fstab
+# Add usrquota option to the mount point /. for example, update following line:
+# /dev/disk/by-id/dm-uuid-LVM-wuyD4BzwAnaGztJ6frKFDjKjdgSCviOpA67WhOOLR7DkB8n1TxeOoWeXALpZpzbj / ext4 defaults 0 1
+# With
+# /dev/disk/by-id/dm-uuid-LVM-wuyD4BzwAnaGztJ6frKFDjKjdgSCviOpA67WhOOLR7DkB8n1TxeOoWeXALpZpzbj / ext4 defaults,usrquota 0 1
+sudo mount -o remount /
+
+# Enabling Quotas
+quotacheck -um /
+quotaon -v /
+repquota -s /
+```
 Installing on bare-meta ubuntu server 22.04
 
 ```bash

@@ -1,7 +1,7 @@
 ---
-sidebar_position: 4
+sidebar_position: 7
 ---
-# EHM Update
+# Update EHM
 
 ### Pre-requisite
 - [EH Manager Installation](../eh-manager/eh-manager-instalation)

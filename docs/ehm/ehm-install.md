@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 ---
-# EHM Install
+# Install EHM
 
 ### Pre-requisite
 - [System Setup](./system-setup)
