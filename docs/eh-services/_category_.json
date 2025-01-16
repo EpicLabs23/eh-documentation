@@ -1,0 +1,11 @@
+{
+    "position": 1,
+    "label": "EH Services",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "EH Services"
+    }
+  }

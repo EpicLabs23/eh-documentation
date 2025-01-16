@@ -78,6 +78,12 @@ quotaon -v /
 repquota -s /
 ```
 
+
+#### Dependencies
+```bash
+sudo apt update
+sudo apt install -y build-essential
+```
 ##### Zip - Unzip
 ```bash
 apt install zip -y
