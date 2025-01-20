@@ -7,6 +7,10 @@ sidebar_position: 2
 ## Install epic-backup-api production version
 Pre-requisite: [Install eh-manager](../../eh-manager/eh-manager-instalation)
 
+:::warning
+During dependency installation, if installer gets stuck or shows error, try running the command again.
+:::
+
 ### Interactive Installation
 ```bash
 sudo su

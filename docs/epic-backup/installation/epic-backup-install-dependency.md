@@ -13,6 +13,14 @@ sidebar_position: 1
 - mariadb-dump (Optional)
 - pg_dump (Optional)
 
+:::tip
+You may install dependencies manually, using follwow steps.
+
+Also, you can install automatically during the installation process.
+
+You may skip to the next step for automation [Installation](./epic-backup-install)
+:::
+
 ### Install Nodejs using Node Version Manager (NVM)
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
 
