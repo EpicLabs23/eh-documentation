@@ -1,0 +1,11 @@
+{
+    "position": 1,
+    "label": "Installation",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "Epic Backup Installation"
+    }
+  }

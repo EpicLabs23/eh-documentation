@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Epic Backup Update
+# Update
 
 ### Interactive update
 ```bash
