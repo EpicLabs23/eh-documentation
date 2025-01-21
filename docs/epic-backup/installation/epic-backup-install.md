@@ -24,6 +24,14 @@ eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2333 --
 ```
 `--targetDir` is optional default value is `/epiclabs23/eh/epic-backup`
 
+### Create first Admin user
+```bash
+node <path-to-epic-backup-api>/prisma/create-admin.mjs
+```
+
+### Access the UI
+By default this runs on port `2333` e.g: `http://localhost:2333`
+
 # Update epic-backup-api production version
 @ToDo: Following is a temporary installation solution. We will automate this process in the future. That will let user update from UI. Currently it does not have any relation with the release script
 

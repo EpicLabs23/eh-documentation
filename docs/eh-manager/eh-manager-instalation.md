@@ -24,5 +24,5 @@ eh-manager update-epic-backup
 ```bash
 sudo su
 eh-manager install-ehm -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
-eh-manager update-epic-backup --currentversion v0.0.1 --newversion v0.0.2 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+eh-manager update-epic-backup --apiurl http://localhost:2333 --targetDir /epiclabs23/eh-prod/epic-backup --newversion 0.0.1
 ```
