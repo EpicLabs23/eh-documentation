@@ -18,5 +18,5 @@ eh-manager install-ehm
 ### Non-interactive Installation
 ```bash
 sudo su
-eh-manager install-ehm -v v0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```
