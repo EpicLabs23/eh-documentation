@@ -3,7 +3,7 @@ slug: postgresql-data-types
 title: PostgreSQL Data Types
 authors: mahmudur
 tags: [mysql, postgres, idatatypes]
-time: 2021-08-26T11:00
+time: 2025-01-23T11:00
 ---
 PostgreSQL offers a wide range of data types that can be broadly categorized as follows:
 

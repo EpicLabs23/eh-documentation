@@ -3,7 +3,7 @@ slug: mysql-to-postgresql
 title: MySQL to PostgreSQL Guide
 authors: mahmudur
 tags: [mysql, postgres, into]
-time: 2021-08-26T10:00
+time: 2025-01-23T10:00
 ---
 This is a comprehensive PostgreSQL learning guide for someone familiar with MySQL:
 
