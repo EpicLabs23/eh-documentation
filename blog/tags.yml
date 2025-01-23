@@ -1,0 +1,9 @@
+ecp:
+  label: ECP
+  permalink: /ecp
+  description: Related to ECP
+
+hello:
+  label: EHM
+  permalink: /ehm
+  description: Related to EHM
