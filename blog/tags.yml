@@ -3,7 +3,52 @@ ecp:
   permalink: /ecp
   description: Related to ECP
 
-hello:
-  label: EHM
-  permalink: /ehm
-  description: Related to EHM
+postgres:
+  label: Postgres
+  permalink: /postgres
+  description: Related to Postgres
+
+mysql:
+  label: MySql
+  permalink: /mysql
+  description: Related to MySql
+
+mariadb:
+  label: MariaDB
+  permalink: /mariadb
+  description: Related to MariaDB
+
+mongodb:
+  label: MongoDB
+  permalink: /mongodb
+  description: Related to MongoDB
+
+unique:
+  label: Unique
+  permalink: /unique
+  description: Related to Unique
+
+sql:
+  label: SQL
+  permalink: /sql
+  description: Related to SQL
+
+datatypes:
+  label: Datatypes
+  permalink: /datatypes
+  description: Related to Datatypes
+
+aclitem:
+  label: ACLItem
+  permalink: /aclitem
+  description: Related to ACLItem
+
+constraints:
+  label: Constraints
+  permalink: /constraints
+  description: Related to Constraints
+
+postgresql:
+  label: PostgreSQL
+  permalink: /postgresql
+  description: Related to PostgreSQL

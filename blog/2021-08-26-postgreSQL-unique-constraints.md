@@ -26,7 +26,7 @@ In PostgreSQL, a **unique constraint** ensures that the values in one or more co
    ```
    In this example:
    - The `email` column must have unique values.
-
+<!-- truncate -->
 2. **Multi-Column Uniqueness (Composite Unique Constraint):**
    Ensures uniqueness across a combination of multiple columns.
    ```sql

@@ -8,7 +8,7 @@ time: 2025-01-23T12:00
 In PostgreSQL, **`aclitem`** is a specialized data type used internally to represent **access control lists (ACLs)** for database objects, such as tables, views, sequences, functions, and schemas. It defines who (roles or users) has specific privileges on a database object.
 
 Although it's not commonly used directly in application-level development, it's stored in PostgreSQL system catalogs like `pg_class`, `pg_proc`, and `pg_namespace` to manage permissions.
-
+<!-- truncate -->
 ---
 
 ### **Structure of `aclitem`**

@@ -2,7 +2,7 @@
 slug: mysql-to-postgresql
 title: MySQL to PostgreSQL Guide
 authors: mahmudur
-tags: [mysql, postgres, into]
+tags: [mysql, postgres]
 time: 2025-01-23T10:00
 ---
 This is a comprehensive PostgreSQL learning guide for someone familiar with MySQL:
@@ -13,7 +13,7 @@ This is a comprehensive PostgreSQL learning guide for someone familiar with MySQ
 sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
-
+<!-- truncate -->
 ### On Docker:
 ```bash
 docker run --name postgres -e POSTGRES_USER=your_user -e POSTGRES_PASSWORD=your_password -p 5432:5432 -d postgres

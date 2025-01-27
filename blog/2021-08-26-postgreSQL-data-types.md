@@ -2,7 +2,7 @@
 slug: postgresql-data-types
 title: PostgreSQL Data Types
 authors: mahmudur
-tags: [mysql, postgres, idatatypes]
+tags: [mysql, postgres, datatypes]
 time: 2025-01-23T11:00
 ---
 PostgreSQL offers a wide range of data types that can be broadly categorized as follows:
@@ -17,7 +17,7 @@ PostgreSQL offers a wide range of data types that can be broadly categorized as 
 - **Real:** `REAL` (4 bytes, single-precision floating-point)
 - **Double Precision:** `DOUBLE PRECISION` (8 bytes, double-precision floating-point)
 - **Serial:** `SERIAL`, `BIGSERIAL`, `SMALLSERIAL` (Auto-incrementing integers)
-
+<!-- truncate -->
 ---
 
 ### **2. Character Types**
