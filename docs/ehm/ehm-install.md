@@ -6,7 +6,10 @@ sidebar_position: 6
 ### Pre-requisite
 - [System Setup](./system-setup)
 - [Nginx Installation](./nginx-installation)
-- [Docker Installation](./docker-installation)
+- [Docker Installation](../eh-services/intro)
+- [MariaDB Installation](../eh-services/install-mariadb)
+- [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
+- [EH Services Installation](./eh-services-installation)
 - [EH Manager Installation](../eh-manager/eh-manager-instalation)
 
 ### Interactive Installation
