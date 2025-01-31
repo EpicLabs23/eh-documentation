@@ -9,7 +9,7 @@ sidebar_position: 1
 # Download source codes 
 Clone repository from: https://github.com/EpicLabs23/eh-services
 ```bash
-git clone https://github.com/EpicLabs23/eh-services.git /epiclabs23/eh/eh-services
+git clone https://nahidacm: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@github.com/EpicLabs23/eh-services.git /epiclabs23/eh/eh-services
 ```
 # Create Docker network
 ```bash

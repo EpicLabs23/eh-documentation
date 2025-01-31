@@ -1,11 +1,11 @@
 {
     "position": 10,
-    "label": "EH Manager",
+    "label": "Epic Manager",
     "collapsible": true,
     "collapsed": false,
     "className": "red",
     "link": {
       "type": "generated-index",
-      "title": "EH Manager overview"
+      "title": "Epic Manager overview"
     }
   }

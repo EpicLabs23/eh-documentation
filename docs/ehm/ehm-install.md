@@ -4,13 +4,17 @@ sidebar_position: 6
 # Install EHM
 
 ### Pre-requisite
-- [System Setup](./system-setup)
-- [Nginx Installation](./nginx-installation)
-- [Docker Installation](./docker-installation)
-- [MariaDB Installation](../eh-services/install-mariadb)
-- [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
-- [EH Services Installation](../eh-services/intro)
-- [EH Manager Installation](../eh-manager/eh-manager-instalation)
+1. [System Setup](./system-setup)
+2. [Nginx Installation](./nginx-installation)
+3. [Docker Installation](./docker-installation)
+4. [EH Services Installation](../eh-services/intro)
+5. [MariaDB Installation](../eh-services/install-mariadb)
+6. [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
+7. [EH Manager Installation](../eh-manager/eh-manager-instalation)
+
+:::warning
+Please ask for the installation details to EpicLabs23
+:::
 
 ### Interactive Installation
 ```bash
