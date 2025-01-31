@@ -1,6 +1,6 @@
 ---
-slug: postgresql-acl-item
-title: PostgreSQL ACL Item
+slug: wordpress-security-best-practices
+title: WordPress Security Best Practices
 authors: mahmudur
 tags: [postgres, aclitem]
 time: 2025-01-23T12:00
