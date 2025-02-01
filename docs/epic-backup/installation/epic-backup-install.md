@@ -5,11 +5,21 @@ sidebar_position: 2
 # Epic Backup Installation
 
 ## Install epic-backup-api production version
-Pre-requisite: [Install eh-manager](../../eh-manager/eh-manager-instalation)
+
+**Pre-requisite:** [Install eh-manager](../../eh-manager/eh-manager-instalation)
 
 :::warning
 During dependency installation, if installer gets stuck or shows error, try running the command again.
 :::
+:::warning
+if you see following error:
+
+✖ Error: Unexpected token '>', "
+>>>> In-me"... is not valid JSON
+
+Run this command: `pm2 update`
+:::
+
 
 ### Interactive Installation
 ```bash
@@ -26,8 +36,12 @@ eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2333 --
 
 ### Create first Admin user
 ```bash
-node <path-to-epic-backup-api>/prisma/create-admin.mjs
+node <path-to-epic-backup-api>/dist/prisma/create-admin.mjs
 ```
+:::info
+Default path-to-epic-backup-api is `/epiclabs23/eh/epic-backup/<version>/epic-backup-api`
+Ex: `/epiclabs23/eh/epic-backup/0.0.1/epic-backup-api`
+:::
 
 ### Access the UI
 By default this runs on port `2333` e.g: `http://localhost:2333`

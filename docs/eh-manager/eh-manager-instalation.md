@@ -7,7 +7,7 @@ sidebar_position: 2
 ```bash
 sudo su
 cd /epiclabs23/eh
-git clone https://github.com/EpicLabs23/eh-manager.git
+git clone https://nahidacm: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@github.com/EpicLabs23/eh-manager.git
 cd /epiclabs23/eh/eh-manager
 npm install
 npm link
