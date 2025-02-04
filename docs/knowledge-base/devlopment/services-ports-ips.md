@@ -1,5 +1,16 @@
 # Services, Ports and IPs
 
+**Ports that should be open for public access:**
+
+| Service | Port |
+| --- | --- |
+| ehm-ui | 2325 |
+| ehm-api | 2326 |
+| ecp-ui | 2323 |
+| ecp-api | 2324 |
+| PhpMyAdmin | 2329 |
+
+
 **EH MariDB:** 
 
 Running on docker container.
