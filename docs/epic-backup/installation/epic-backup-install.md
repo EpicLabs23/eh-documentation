@@ -30,7 +30,7 @@ eh-manager install-epic-backup
 ### Non-interactive Installation
 ```bash
 sudo su
-eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2333 --targetDir /epiclabs23/eh-prod/epic-backup
+eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2330 --targetDir /epiclabs23/eh-prod/epic-backup
 ```
 `--targetDir` is optional default value is `/epiclabs23/eh/epic-backup`
 
@@ -44,9 +44,9 @@ Ex: `/epiclabs23/eh/epic-backup/0.0.1/epic-backup-api`
 :::
 
 ### Access the UI
-By default frontend runs on port `2332` e.g: `http://localhost:2333`
+By default frontend runs on port `2331` e.g: `http://localhost:2331`
 
-If your firewall does not allow you to access port `2332` and `2333` then you can create 2 subdomain and use nginx proxy_pass to map the ports. 
+If your firewall does not allow you to access port `2330` and `2331` then you can create 2 subdomain and use nginx proxy_pass to map the ports. 
 
 # Update epic-backup-api production version
 @ToDo: Following is a temporary installation solution. We will automate this process in the future. That will let user update from UI. Currently it does not have any relation with the release script
