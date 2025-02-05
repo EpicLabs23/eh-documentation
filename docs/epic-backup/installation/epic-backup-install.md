@@ -40,6 +40,7 @@ node <path-to-epic-backup-api>/dist/prisma/create-admin.mjs
 ```
 :::info
 Default path-to-epic-backup-api is `/epiclabs23/eh/epic-backup/<version>/epic-backup-api`
+
 Ex: `/epiclabs23/eh/epic-backup/0.0.1/epic-backup-api`
 :::
 
