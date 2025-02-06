@@ -39,7 +39,9 @@ sudo -v ; curl https://rclone.org/install.sh | sudo bash
 Reference: https://rclone.org/install/
 
 ## rclon start
-Set you own passowd on the command.
+:::warning
+Set you own user ( `--rc-user` ) and passowd ( `--rc-pass` ) on the command.
+:::
 ```bash
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon
 ```
