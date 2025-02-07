@@ -52,3 +52,13 @@ postgresql:
   label: PostgreSQL
   permalink: /postgresql
   description: Related to PostgreSQL
+
+google-drive:
+  label: Google Drive
+  permalink: /google-drive
+  description: Related to Google Drive
+
+epic-backup:
+  label: Epic Backup
+  permalink: /epic-backup
+  description: Related to Epic Backup
