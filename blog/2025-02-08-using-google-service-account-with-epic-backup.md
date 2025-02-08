@@ -32,6 +32,7 @@ To create a Google Service Account and use it for Google Drive API, follow these
 5. Assign the role **"Editor"** or **"Owner"** (or select **"Cloud Storage Admin"** if needed).
 6. Click **"Continue"**, then **"Done"**.
 
+<!-- truncate -->
 ---
 
 ### **Step 4: Generate JSON Key**
