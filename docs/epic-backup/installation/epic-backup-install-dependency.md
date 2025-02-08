@@ -14,7 +14,7 @@ sidebar_position: 1
 - pg_dump (Optional)
 
 :::tip
-You may install dependencies manually, using follwow steps.
+You may install dependencies manually, using following steps.
 
 Also, you can install automatically during the installation process.
 
@@ -31,6 +31,9 @@ This application dpends of PM2 and Rclone
 ```bash
 npm install -g pm2
 ```
+```bash
+pm2 startup
+```
 
 ## Install Rclone
 ```bash
@@ -40,7 +43,7 @@ Reference: https://rclone.org/install/
 
 ## rclon start
 :::warning
-Set you own user ( `--rc-user` ) and passowd ( `--rc-pass` ) on the command.
+Set your own user ( `--rc-user` ) and passowd ( `--rc-pass` ) on the command.
 :::
 ```bash
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon

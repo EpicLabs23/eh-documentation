@@ -97,3 +97,17 @@ apt install wget -y
 ```bash
 useradd ehm
 ```
+
+### Install Nodejs using Node Version Manager (NVM)
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
+
+
+This application dpends of PM2 and Rclone
+
+## Install PM2
+```bash
+npm install -g pm2
+```
+```bash
+pm2 startup
+```
