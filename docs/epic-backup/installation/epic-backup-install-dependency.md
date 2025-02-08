@@ -47,6 +47,7 @@ Set your own user ( `--rc-user` ) and passowd ( `--rc-pass` ) on the command.
 :::
 ```bash
 pm2 start "rclone rcd --rc-user=nahid --rc-pass=SwitchKnif --rc-addr=:5572" --name rclone-daemon
+pm2 save
 ```
 
 ## mariadb-dump (Optional)
