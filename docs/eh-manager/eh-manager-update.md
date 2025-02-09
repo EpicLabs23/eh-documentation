@@ -6,6 +6,8 @@ sidebar_position: 6
 
 ```bash
 sudo su
+```
+```bash
 cd /epiclabs23/eh/eh-manager
 git pull
 ```

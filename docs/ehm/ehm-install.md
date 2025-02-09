@@ -27,3 +27,14 @@ eh-manager install-ehm
 sudo su
 eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
 ```
+
+### Create first Admin user
+```bash
+cd /epiclabs23/eh/epic-backup/<version>/epic-backup-api/dist/prisma
+node  create-admin.mjs
+```
+Example: 
+```bash 
+cd /epiclabs23/eh/ehm/0.0.1/ehm-api/prisma
+node create-admin.mjs
+```
