@@ -111,3 +111,8 @@ npm install -g pm2
 ```bash
 pm2 startup
 ```
+
+## Install Static web server
+```bash
+npm install -g serve
+```

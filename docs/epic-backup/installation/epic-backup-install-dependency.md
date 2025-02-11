@@ -35,6 +35,11 @@ npm install -g pm2
 pm2 startup
 ```
 
+## Install Static web server
+```bash
+npm install -g serve
+```
+
 ## Install Rclone
 ```bash
 sudo -v ; curl https://rclone.org/install.sh | sudo bash
