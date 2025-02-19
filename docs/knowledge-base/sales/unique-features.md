@@ -1,12 +1,17 @@
-1. Control / Limitation over user accounts' CPU, RAM and Storage.
-2. Almost all database supported. MariaDB, ~~MySql, PostGres, MongoDB~~.
-3. Multiple PHP version simultaniously in a single account.
-4. Multiple language / platforms. Static sites, NodeJS, PHP, ~~.Net, Python, Go~~.
-5. Webroot can be set to any directory. Seperate web root and app root directory. Think about Laravel, connands should be run from app root directory, but web root should be public directory.
-6. Full shell access.
-7. Port mapping
-8. Many ways to create and manage app.
-9. Visual deployment.
-10. Cheaper license fee.
-11. Awesome support.
-12. Highly secured.
+- Control / Limitation over user accounts' CPU, RAM and Storage.
+- Almost all database supported. MariaDB, MySQL, PostgreSQL, MongoDB.
+- Multiple language / platforms. Static sites, NodeJS, PHP, Python, ~~.Net, Go~~.
+- Webroot can be set to any directory. Seperate web root and app root directory. Think about Laravel, where commands should run from app root directory, but web root should be public directory.
+- Full shell access.
+- Port mapping.
+- Multiple DNS servers. ( BIND9, CloudFlare, Hostfile, none )
+- Global DNS, Account Level DNS, Domain Level DNS settings.
+- Many ways to create and manage app.
+- One click apps.
+- Application level PHP version support.
+- Visual deployment.
+- Git.
+- Webhook.
+- Cheaper license fee.
+- Awesome support.
+- Highly secured.
