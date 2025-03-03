@@ -18,18 +18,18 @@ To get your **Cloudflare API Token** and **Account ID**, follow these steps:
    - Click on your profile icon (top-right corner).  
    - Select **My Profile**.  
    - Navigate to the **API Tokens** tab.
-
+<!-- truncate -->
 3. **Create a Custom API Token**  
    - Click **Create Token**.  
-   - Choose a **template** (e.g., "Edit DNS" for DNS management or "Create Custom Token").  
-   - If using a custom token:
-     - **Permissions**: Choose the required permissions (e.g., Zone → DNS → Edit).
-     - **Zone Resources**: Choose "All zones" or a specific domain.
+   - Click **Get Started** In the bottom "Custom Token" section.
+   - Name the token.  
+   - Make Cloudflare setup like follows:
+   - ![Setup Cloudflare API Token](../static/blog-images/coudflare-api-settings.png)
      - **Save & Generate Token**.
 
 4. **Copy and Store the Token**  
    - Once generated, **copy and save it securely**, as it won’t be shown again.
-<!-- truncate -->
+
 ---
 
 ### 🔹 **Getting the Cloudflare Account ID**
@@ -42,3 +42,5 @@ To get your **Cloudflare API Token** and **Account ID**, follow these steps:
 3. **Find the Account ID**  
    - Scroll down in the **Overview** tab.  
    - You will see the **Account ID** under the "API" section.
+
+![Setup Cloudflare API Token](../static/blog-images/cloudflare-account-id.png)
