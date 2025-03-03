@@ -62,3 +62,13 @@ epic-backup:
   label: Epic Backup
   permalink: /epic-backup
   description: Related to Epic Backup
+
+cloudflare:
+  label: Cloudflare
+  permalink: /cloudflare
+  description: Related to Cloudflare
+
+DNS:
+  label: DNS
+  permalink: /dns
+  description: Related to DNS
