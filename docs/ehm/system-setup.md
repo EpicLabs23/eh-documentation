@@ -41,6 +41,7 @@ apt install quota -y
 quota --version
 
 # Updating Filesystem Mount Options
+cp /etc/fstab /etc/fstab.bak
 vim /etc/fstab
 # Add usrquota option to the mount point /. for example, update following line:
 # /dev/disk/by-id/dm-uuid-LVM-wuyD4BzwAnaGztJ6frKFDjKjdgSCviOpA67WhOOLR7DkB8n1TxeOoWeXALpZpzbj / ext4 defaults 0 1

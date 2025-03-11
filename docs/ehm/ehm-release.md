@@ -3,7 +3,11 @@ sidebar_position: 5
 ---
 
 # Release EHM
+:::warning
+This doc is only for developers.
 
+Please skip if you are just installing EHM on production server.
+:::
 ### Get ehm-release
 
 ```bash

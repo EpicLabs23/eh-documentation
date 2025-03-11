@@ -1,8 +1,11 @@
 ---
 sidebar_position: 2
 ---
-
 # Install
+
+## Pre-requisite
+1. [Install NodeJS](https://docs.ecpanel.io/ehm/system-setup#install-nodejs-using-node-version-manager-nvm)
+
 
 ```bash
 sudo su

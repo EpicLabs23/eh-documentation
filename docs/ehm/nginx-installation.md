@@ -68,6 +68,10 @@ add_header X-XSS-Protection "1; mode=block";
 ```
 #### Install certbot
 ```bash
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo su
+```
+```bash
+apt install snapd -y
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
 ```
