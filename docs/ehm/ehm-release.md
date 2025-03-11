@@ -4,14 +4,14 @@ sidebar_position: 5
 
 # Release EHM
 
-### For Ubuntu 24.04
-
-##### Get ehm-release
+### Get ehm-release
 
 ```bash
 cd /epiclabs23/eh/ehm
 git clone https://github.com/EpicLabs23/ehm-release.git
 ```
+
+### For Ubuntu 24.04
 
 ##### Build docker image to build EHM
 ```bash
