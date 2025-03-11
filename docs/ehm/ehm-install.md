@@ -11,6 +11,7 @@ sidebar_position: 6
 5. [MariaDB Installation](../eh-services/install-mariadb)
 6. [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
 7. [EH Manager Installation](../eh-manager/eh-manager-instalation)
+8. A domain / subdomain
 
 :::warning
 Please ask for the installation details to EpicLabs23
@@ -30,7 +31,7 @@ eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 -
 
 ### Create first Admin user
 ```bash
-cd /epiclabs23/eh/epic-backup/<version>/epic-backup-api/dist/prisma
+cd /epiclabs23/eh/epic-backup/<version>/ehm-api/prisma
 node  create-admin.mjs
 ```
 Example: 
@@ -38,3 +39,13 @@ Example:
 cd /epiclabs23/eh/ehm/0.0.1/ehm-api/prisma
 node create-admin.mjs
 ```
+### Access EHM UI
+`http://<domain>:2326`
+
+### Configure EHM
+In EHM UI: 
+1. `System > Config > General Settings` update `Public IP`.
+2. `System > Config > DNS Settings` update `Public IP`.
+
+### Create packages
+Go to `Packges > Create Package`
