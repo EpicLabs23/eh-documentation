@@ -15,3 +15,6 @@
 - Cheaper license fee.
 - Awesome support.
 - Highly secured.
+
+Normally You can not run Dotnet 9 or latest and 3 or lold in the same server.
+But, in EHM / ECP you can.
