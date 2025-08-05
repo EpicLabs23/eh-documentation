@@ -8,7 +8,6 @@ sidebar_position: 3
 ```bash
 docker pull ubuntu/bind9:latest
 ```
-Git clone or pull: https://github.com/EpicLabs23/eh-services.git /epiclabs23/eh/eh-services/dns
 
 ### Disable Ubuntu built-in DNS resolver
 1. Stop the OS built-in DNS service `service systemd-resolved stop`
