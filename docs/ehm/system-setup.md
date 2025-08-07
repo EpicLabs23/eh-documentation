@@ -24,13 +24,20 @@ sudo tune2fs -Q prjquota /dev/nvme0n1p2
 ```
 Now project quota is enabled on `/dev/nvme0n1p2` partition.
 
-We need to control `/home` and `/var/lib/docker` directories. so, set "P" attribute to these directories recursively. will enforce a hierarchical  structure  for project id's. for detail (man chattr)
+#### Step 2: Set project quota
+Enable project quota on mount point
+```bash
+sudo quotaon -Pv /
+```
+We need to control `/home` and `/var/lib/docker/..../diff` directories. so, set "P" attribute to these directories recursively. will enforce a hierarchical  structure  for project id's. for detail (man chattr)
 
 ```bash
 sudo apt install e2fsprogs # for chattr
 sudo chattr -R +P /home
-sudo chattr -R +P /var/lib/docker
 ```
+EHM will set "P" for docker directory.
+
+
 Rest of the steps, like `quotaon`, project name, project id, project directories these are done by EHM.
 
 Some helpful commands to debug
