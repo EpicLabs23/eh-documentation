@@ -4,7 +4,47 @@ sidebar_position: 2
 
 # System Setup
 
-### Quota
+### Project quota setup on EXT4
+:::warning
+Supports on ubuntu >= 24.04
+
+Linux kernel version > 4.4
+:::
+
+#### Step 1: Enable project quota support in file system
+For an existing EXT4 partition, asuming the partition name is `/dev/nvme0n1p2` and mount point is `/`
+
+To enable quota, the partition or device should be in unmounted state.
+
+Since this is mounted in `/` we need a ubuntu bootable USB drive, from that bootable USB drive run ubuntu as "Try Ubuntu" and run the following command
+
+```bash
+sudo tune2fs -O quota /dev/nvme0n1p2
+sudo tune2fs -Q prjquota /dev/nvme0n1p2
+```
+Now project quota is enabled on `/dev/nvme0n1p2` partition.
+
+We need to control `/home` and `/var/lib/docker` directories. so, set "P" attribute to these directories recursively. will enforce a hierarchical  structure  for project id's. for detail (man chattr)
+
+```bash
+sudo apt install e2fsprogs # for chattr
+sudo chattr -R +P /home
+sudo chattr -R +P /var/lib/docker
+```
+Rest of the steps, like `quotaon`, project name, project id, project directories these are done by EHM.
+
+Some helpful commands to debug
+```bash
+df -Th # show file system type and mount point
+lsblk # list block devices
+fdisk -l # list partitions
+lsattr # list file attributes
+edquota # list project quota
+setquota # set project quota
+repquota # show project quota
+du -sh # show disk usage
+```
+### Quota (Obsolated)
 Ref.: 
 https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-20-04
 
