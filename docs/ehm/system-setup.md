@@ -50,6 +50,7 @@ edquota # list project quota
 setquota # set project quota
 repquota # show project quota
 du -sh # show disk usage
+quotaon -ap # show quota status
 ```
 
 #### Dependencies
