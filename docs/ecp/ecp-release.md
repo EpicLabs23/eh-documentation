@@ -11,22 +11,33 @@ sidebar_position: 2
 **Step 1:** update the `/epiclabs23/eh/ecp/ecp-api/version.json` with the new release number and time.
 
 **Step 2:** Build and push
+
 ```bash
 sudo su
 cd /epiclabs23/eh/ecp/ecp-docker/ecp-base
 ./release.sh
 ```
 
-## Dev (ecp-base-dev)
+## Dev (ecp-go-dev)
 
 **Step 1:** Build Final Dev Image
 
 ```bash
-cd /epiclabs23/eh/ecp/ecp-docker/ecp-base-dev/
-docker build -t nahidacm/ecp-base-dev:latest -f Dockerfile . 
+cd /epiclabs23/eh/ecp/ecp-docker/ecp-go-dev/
+docker build -t nahidacm/ecp-go-dev:latest -f Dockerfile .
 ```
-**To start development / debugging of ecp-api and ecp-ui** 
-1. Make an ECP account from `ehm` panel using `ECP Base Dev` Hosting environment.
-2. The container for this account should mount `/epiclabs23/eh/ecp/ecp-api:/epic-apps/ecp/ecp-api` and `/epiclabs23/eh/ecp/ecp-ui:/epic-apps/ecp/ecp-ui`
-3. `docker exec` on the container and run the `api` and `ui` in dev mode.
+
+**To start development / debugging of ecp-api and ecp-ui**
+
+1. Make an ECP account from `ehm` panel using `ECP go Dev` Hosting environment.
+2. The container for this account should mount `/epiclabs23/eh/ecp/ecp-go:/epic-apps/ecp/ecp-go` and `/epiclabs23/eh/ecp/ecp-ui:/epic-apps/ecp/ecp-ui`
+3. `docker exec` on the container and run the `ecp-go` and `ecp-ui` in dev mode.
 4. Make changes on the host machine files, since they are mounted in the container.
+5. Run dev setup script
+
+```bash
+docker exec -it <ecp_username>_container bash
+su <ecp_username>
+/epiclabs23/eh/ecp/dev-setup.sh
+source ~/.bashrc
+```
