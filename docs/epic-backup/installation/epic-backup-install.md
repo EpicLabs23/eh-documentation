@@ -37,6 +37,8 @@ eh-manager install-epic-backup --version 0.0.1 --apiurl http://localhost:2330 --
 
 `--targetDir` is optional default value is `/epiclabs23/eh/epic-backup`
 
+`--apiurl` may seem confusing, because now, this is the `baseUrl`. In productionfrontend and backend both are running in same port, api is jsut with a prefix `/api`
+
 ### Create first Admin user
 
 ```bash
@@ -51,14 +53,9 @@ node /epiclabs23/eh/epic-backup/0.0.1/epic-backup-api/dist/prisma/create-admin.m
 
 # Update epic-backup-api production version
 
-@ToDo: Following is a temporary installation solution. We will automate this process in the future. That will let user update from UI. Currently it does not have any relation with the release script
-
 ```bash
-# Keep backup of .env and database.db file
-# Delete everything else from /epiclabs23/eh/epic-backup/epic-backup-api
-# Upload and extract the code as per above
-# Restore the .env and database.db file
-# then continue from Installation section
+sudo su
+eh-manager update-epic-backup
 ```
 
 ## Dev Installation
