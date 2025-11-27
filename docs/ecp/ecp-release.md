@@ -8,9 +8,27 @@ sidebar_position: 2
 
 **In the Dev PC:**
 
-**Step 1:** update the `/epiclabs23/eh/ecp/ecp-api/version.json` with the new release number and time.
+### Update version file
 
-**Step 2:** Build and push
+update the `/epiclabs23/eh/ecp/ecp-go/version.json` with the new release number and time.
+
+### Git Tag
+
+```bash
+cd /epiclabs23/eh/ecp/ecp-go
+git tag -a <version> -m "<message>"
+git push origin <version>
+```
+
+```bash
+cd /epiclabs23/eh/ecp/ecp-ui
+git tag -a <version> -m "<message>"
+git push origin <version>
+```
+
+### Build and push
+
+This will build both the api and ui
 
 ```bash
 sudo su
