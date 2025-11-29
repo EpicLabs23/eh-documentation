@@ -1,12 +1,8 @@
-### Adding new php version 
-- Update ECP `ecp-docker/ecp-base-dev/Dockerfile` to install the expected PHP version.
+### Adding new php version to ECP
+
 - Update ECP `ecp-docker/ecp-base/Dockerfile` to install the expected PHP version.
-- Update `ecp-api/src/modules/php/php.controller.ts:getVersion()` function for list of versions.
-- Update `ehm-api/src/modules/ecp/php/php.service.ts:getPhpVersions()` function for list of versions.
 - Update `ehm-api/src/modules/docker/docker.service.ts:startContainer` function to mount the fpm configuration pool and default php-ini
-- Update `ecp-docker/ecp-base-dev/startup.sh` to start the php-fpm
-- Update `ecp-docker/ecp-base/startup.sh` to start the php-fpm
-- Update `ecp-docker/ecp-base-dev/config_php_fpm.sh` to keep the php config change synced.
+- Add supervisor config files under `ecp-docker/ecp-base/supervisor/php`
 - Update `ecp-docker/ecp-base/config_php_fpm.sh` to keep the php config change synced.
 - Rebuild the ECP Docker image.
 - Update ECP account.
