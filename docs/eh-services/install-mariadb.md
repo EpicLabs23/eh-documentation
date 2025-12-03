@@ -6,7 +6,16 @@ sidebar_position: 2
 
 ```bash
 cd /epiclabs23/eh/eh-services/mariadb
-# Create .env file and change password in .env
+```
+
+## Create .env file and change password in .env
+
+```bash
 cp .env.sample .env
+```
+
+## Run the container
+
+```bash
 docker compose up -d
 ```

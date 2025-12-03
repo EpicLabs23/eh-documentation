@@ -53,14 +53,12 @@ sudo mount -o remount /
 
 ```bash
 sudo quotacheck -cum /
-sudo quotacheck -cgum /
 ```
 
 Creates:
 
 ```
 /aquota.user
-/aquota.group
 ```
 
 ---
@@ -114,7 +112,7 @@ quota -u username
 ✅ **Summary:**
 
 1. Install quota tools
-2. Add `usrquota,grpquota` to `/etc/fstab`
+2. Add `usrquota` to `/etc/fstab`
 3. `quotacheck` to create quota files
 4. `quotaon` to activate
 5. Use `quota` / `repquota` to check usage

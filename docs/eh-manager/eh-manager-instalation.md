@@ -12,10 +12,25 @@ sidebar_position: 2
 
 ```bash
 sudo su
+```
+
+```bash
 cd /epiclabs23/eh
+```
+
+```bash
 git clone https://nahidacm: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@github.com/EpicLabs23/eh-manager.git
+```
+
+```bash
 cd /epiclabs23/eh/eh-manager
+```
+
+```bash
 npm install
+```
+
+```bash
 npm link
 ```
 

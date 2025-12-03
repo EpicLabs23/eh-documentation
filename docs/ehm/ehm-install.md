@@ -47,7 +47,7 @@ node /epiclabs23/eh/ehm/0.0.2/ehm-api/prisma/create-admin.mjs
 
 ### Access EHM UI
 
-`http://<domain>:2326`
+`http://<domain>:2325`
 
 ### Configure EHM
 

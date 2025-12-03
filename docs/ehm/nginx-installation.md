@@ -3,9 +3,11 @@ sidebar_position: 3
 ---
 
 # Nginx Intallation
+
 Nginx is required for Epic Host to map domains with user applications.
 
 #### Installation
+
 ```bash
 sudo su
 apt update
@@ -13,8 +15,15 @@ apt install nginx -y
 ```
 
 #### Configuration
+
 ##### Include configuration directory of EHM accounts' server blocks
+
 Add following line in `/etc/nginx/nginx.conf` file. This should be very last line of `http` block.
+
+```bash
+vim /etc/nginx/nginx.conf
+```
+
 ```bash
 .......
 .......
@@ -27,29 +36,44 @@ http{
     include /etc/nginx/epiclabs23/*/sites_enabled/*.conf;
 }
 ```
-Now Restart the nginx service `service nginx restart`
+
+Now Restart the nginx service
+
+```bash
+service nginx restart
+```
 
 ##### Generate self signed certificates to use as default certificate for ECP
+
 Refference Guide: https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu
 
 Creating TLS Certificate:
+
 ```bash
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
             -keyout /etc/ssl/private/nginx-selfsigned.key \
             -out /etc/ssl/certs/nginx-selfsigned.crt \
             -subj "/C=BD/ST=Dhaka/L=Dhaka/O=EpicLabs23/OU=EpicLabs"
 ```
+
 Create a strong Diffie-Hellman (DH):
+
 ```bash
 openssl dhparam -out /etc/nginx/dhparam.pem 4096
 ```
+
 Creating a Configuration Snippet with Strong Encryption Settings:
 
 Create a file named `/etc/nginx/snippets/ssl-params.conf` with following contents:
+
+```bash
+vim /etc/nginx/snippets/ssl-params.conf
+```
+
 ```conf
 ssl_protocols TLSv1.3;
 ssl_prefer_server_ciphers on;
-ssl_dhparam /etc/nginx/dhparam.pem; 
+ssl_dhparam /etc/nginx/dhparam.pem;
 ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
 ssl_ecdh_curve secp384r1;
 ssl_session_timeout  10m;
@@ -66,12 +90,21 @@ add_header X-Frame-Options DENY;
 add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 ```
+
 #### Install certbot
+
 ```bash
 sudo su
 ```
+
 ```bash
 apt install snapd -y
+```
+
+```bash
 snap install --classic certbot
+```
+
+```bash
 ln -s /snap/bin/certbot /usr/bin/certbot
 ```
