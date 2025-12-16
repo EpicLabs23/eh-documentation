@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # System Setup
 
-### Project quota setup on EXT4
+### Quota setup on EXT4
 
 :::warning
 Supports on ubuntu >= 24.04
@@ -18,6 +18,8 @@ Here’s a concise summary for **enabling and checking user quotas** on an **Ubu
 
 ## 🧩 **Enable & Check User Quotas (ext4, Ubuntu 24)**
 
+### Reference: https://www.tecmint.com/set-filesystem-disk-quotas-on-ubuntu/
+
 ### **1️⃣ Install quota tools**
 
 ```bash
@@ -26,6 +28,27 @@ sudo apt install quota
 ```
 
 ---
+
+### Installing the Module for Quota Kernel
+
+For those running a **cloud-based virtual system**, the default Ubuntu installation may be missing the kernel modules that support the use of quota. You must confirm using the find tool and ensure that the two modules, quota_v1, and quota \_v2, are inside the /lib/modules directory.
+
+```bash
+find /lib/modules/`uname -r` -type f -name '*quota_v*.ko*'
+```
+
+Expected output is something like:
+
+```bash
+/lib/modules/6.8.0-90-generic/kernel/fs/quota/quota_v2.ko.zst
+/lib/modules/6.8.0-90-generic/kernel/fs/quota/quota_v1.ko.zst
+```
+
+Do not worry about the kernel versions as long as the two modules are present. If not found, use the following command to install quota kernel modules as shown.
+
+```bash
+apt install linux-image-extra-virtual
+```
 
 ### **2️⃣ Enable quotas in `/etc/fstab`**
 
