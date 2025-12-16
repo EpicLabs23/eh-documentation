@@ -12,7 +12,15 @@ sidebar_position: 2
 
 update the `/epiclabs23/eh/ecp/ecp-go/version.json` with the new release number and time.
 
+#### Update version number in footer
+
+```bash
+/epiclabs23/eh/ecp/ecp-ui/src/layouts/partials/Footer.tsx
+```
+
 ### Git Tag
+
+Before tagging, make sure all the changes are committed and pushed to the remote repository.
 
 ```bash
 cd /epiclabs23/eh/ecp/ecp-go
