@@ -31,12 +31,6 @@ docker build -t nahidacm/ehm-builder-ubuntu:24.04 -f Dockerfile .
 Copy previous version script from `/epiclabs23/eh/ehm/ehm-release/update-scripts/*_update.sh`
 With latest version number in the same directory. Make neccessary updates on the script if needed.
 
-#### Update version number in footer
-
-```bash
-/epiclabs23/eh/ehm/ehm-ui/src/layouts/partials/Footer.tsx
-```
-
 ### Git Tag
 
 Before tagging, make sure all the changes are committed and pushed to the remote repository.

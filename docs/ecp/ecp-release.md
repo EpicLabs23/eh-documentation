@@ -8,10 +8,6 @@ sidebar_position: 2
 
 **In the Dev PC:**
 
-### Update version file
-
-update the `/epiclabs23/eh/ecp/ecp-go/version.json` with the new release number and time.
-
 ### Git Tag
 
 Before tagging, make sure all the changes are committed and pushed to the remote repository.
