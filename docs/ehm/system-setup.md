@@ -18,7 +18,7 @@ Here’s a concise summary for **enabling and checking user quotas** on an **Ubu
 
 ## 🧩 **Enable & Check User Quotas (ext4, Ubuntu 24)**
 
-### Reference: https://www.tecmint.com/set-filesystem-disk-quotas-on-ubuntu/
+Reference: https://www.tecmint.com/set-filesystem-disk-quotas-on-ubuntu/
 
 ### **1️⃣ Install quota tools**
 
