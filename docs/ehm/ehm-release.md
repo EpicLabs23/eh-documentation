@@ -41,20 +41,30 @@ git tag -a <version> -m "<message>"
 git push origin <version>
 ```
 
-````bash
+```bash
 cd /epiclabs23/eh/ecp/ecp-ui
 git tag -a <version> -m "<message>"
 git push origin <version>
+```
 
-#### Now build EHM and push the to public build server
+#### Now build EHM and publish the release to GitHub
+
+Requires the [GitHub CLI](https://cli.github.com/) (`gh`) installed and authenticated
+(`gh auth login`) with an account that has push/admin access to the public
+[EpicLabs23/ecp-ehm-free](https://github.com/EpicLabs23/ecp-ehm-free) repo.
 
 ```bash
 sudo su
 cd /epiclabs23/eh/ehm/ehm-release
-./distribute_ubuntu_24.04.sh
-````
+./public_github_release.sh
+```
 
-Above commands build and push the code to the version repository server. The updater or installer will pull the code from the server.
+Above command builds the release tarball and publishes it as a GitHub Release
+(tag = version number) on the public `EpicLabs23/ecp-ehm-free` repo. The source
+code stays in the private `ehm-release`/`ehm-api`/`ehm-ui` repos — the public repo
+only hosts the compiled release assets that customers install/update from. If a
+release for that version already exists, the tarball asset is re-uploaded
+(`--clobber`) instead of failing.
 
 ### For Ubuntu 22.04
 
