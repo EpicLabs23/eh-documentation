@@ -67,8 +67,3 @@ the private `ehm-release`/`ehm-api`/`ehm-ui` repos — the public repo only host
 the compiled release assets that customers install/update from. If a release
 for that version already exists, the tarball asset is re-uploaded (`--clobber`)
 instead of failing.
-
-### Installation / Update on live server
-
-**In Live server:**
-Follow the instruction here: https://github.com/EpicLabs23/ehm-installer
