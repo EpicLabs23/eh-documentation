@@ -26,7 +26,13 @@ git push origin <version>
 
 ### Build and push
 
-This will build both the api and ui
+Note: Release doc for various ecp images are availble under corresponding docker directory under:
+
+```bash
+/epiclabs23/eh/ecp/ecp-docker/*
+```
+
+This will build `ecp-base`s both the api and ui
 
 ```bash
 sudo su
