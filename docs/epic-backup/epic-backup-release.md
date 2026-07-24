@@ -31,5 +31,5 @@ sudo su
 
 ```bash
 cd /epiclabs23/eh/epic-backup/epic-backup-api
-./release.sh
+./public_github_release.js
 ```
