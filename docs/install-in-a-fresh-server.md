@@ -282,3 +282,9 @@ npm link
 ```bash
 eh-manager install-epic-backup
 ```
+
+#### 15. Install EHM
+
+```bash
+eh-manager install-ehm
+```

@@ -29,6 +29,23 @@ docker build -t nahidacm/ehm-builder-ubuntu:24.04 -f Dockerfile .
 Copy previous version script from `/epiclabs23/eh/ehm/ehm-release/update-scripts/*_update.sh`
 With latest version number in the same directory. Make neccessary updates on the script if needed.
 
+#### System requirements file
+
+`public_github_release.js` publishes `/epiclabs23/eh/ehm/ehm-release/system-requirements/{version}_requirements.json` as a standalone asset on the GitHub release (falling back to the latest existing one if this version has none yet, same as the update script). `eh-manager` fetches this asset directly — before downloading the (much larger) release tarball — to check CPU/memory (warnings) and minimum Ubuntu/Node versions (hard requirements). Fields:
+
+```json
+{
+  "cpuCores": 2,
+  "memoryGb": 4,
+  "ubuntuVersion": ">=22.4.0",
+  "nodeVersion": ">=22.0.0"
+}
+```
+
+`ubuntuVersion` and `nodeVersion` are checked with [`semver.satisfies()`](https://github.com/npm/node-semver#ranges), so they take a semver range, not just a bare version — e.g. `">=22.0.0 <24.0.0"` to also cap the maximum. A bare version like `"22.0.0"` means an *exact* match, so always use a range operator (`>=`, `^`, etc.) unless you really mean to pin an exact version.
+
+Add a new file here only when the minimum requirements actually change for a release.
+
 #### Git Tag
 
 Before tagging, make sure all the changes are committed and pushed to the remote repository.
