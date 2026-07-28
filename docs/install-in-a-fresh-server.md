@@ -288,3 +288,19 @@ eh-manager install-epic-backup
 ```bash
 eh-manager install-ehm
 ```
+
+#### 16. Create first Admin user
+
+```bash
+node /epiclabs23/eh/ehm/<version>/ehm-api/prisma/create-admin.mjs
+```
+
+#### 17. Configure EHM admin panel
+
+Left Side Menu -> Config -> General Settings -> Public IP
+
+Left Side Menu -> Config -> General Settings -> DNS Settings -> Default DNS Server
+
+Left Side Menu -> Config -> General Settings -> Email Settings
+
+#### 16. Enable https for ehm url
