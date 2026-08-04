@@ -295,6 +295,23 @@ Replace `<your-ehm-domain>` below with the domain you pointed at this server in 
 
 Make sure the domain points to this server.
 
+Create a bare server block for the domain first — certbot's nginx plugin needs an existing `server_name` match on port 80 to insert the ACME challenge into:
+
+```bash
+vim /etc/nginx/conf.d/<your-ehm-domain>.conf
+```
+
+```conf
+server {
+    listen 80;
+    server_name <your-ehm-domain>;
+}
+```
+
+```bash
+nginx -t && service nginx reload
+```
+
 Request the certificate
 
 ```bash

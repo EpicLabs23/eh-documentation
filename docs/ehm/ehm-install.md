@@ -49,6 +49,8 @@ node /epiclabs23/eh/ehm/0.0.2/ehm-api/prisma/create-admin.mjs
 
 `http://<domain>:2325`
 
+This is a plain HTTP address, reachable directly on the port EHM listens on. See [Enable HTTPS for EHM](./enable-https) to front it with a domain and a Let's Encrypt certificate before using it in production.
+
 ### Configure EHM
 
 In EHM UI:

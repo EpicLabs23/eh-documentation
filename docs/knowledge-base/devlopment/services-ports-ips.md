@@ -59,6 +59,8 @@ ehm-ui uses port: `2325`
 
 ehm-api uses port: `2326`
 
+If HTTPS is enabled for EHM's own domain (see [Enable HTTPS for EHM](../../ehm/enable-https)), nginx terminates SSL on `443` and reverse-proxies to `2325`/`2326` locally — `443` (and `80` for the redirect) become the actual publicly reachable ports, and `2325`/`2326` no longer need to be open externally.
+
 ---
 
 **PhpMyAdmin:**
