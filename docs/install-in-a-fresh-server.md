@@ -303,4 +303,73 @@ Left Side Menu -> Config -> General Settings -> DNS Settings -> Default DNS Serv
 
 Left Side Menu -> Config -> General Settings -> Email Settings
 
-#### 16. Enable https for ehm url
+#### 18. Enable https for ehm url
+
+Replace `<your-ehm-domain>` below with the domain you pointed at this server in step 14.
+
+Make sure the domain points to this server.
+
+Request the certificate
+
+```bash
+certbot certonly --nginx -m <your-email> --agree-tos --no-eff-email -d <your-ehm-domain>
+```
+
+This issues the certificate to `/etc/letsencrypt/live/<your-ehm-domain>/{fullchain.pem,privkey.pem}`. Now replace the file's contents with the final config: redirect `80` to `443`, and terminate SSL for both the UI (`2325`) and the API/websocket (`2326`) behind a single domain, using the `/api` path prefix for API traffic:
+
+```bash
+vim /etc/nginx/conf.d/<your-ehm-domain>.conf
+```
+
+```conf
+server {
+    listen 80;
+    server_name <your-ehm-domain>;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name <your-ehm-domain>;
+
+    ssl_certificate /etc/letsencrypt/live/<your-ehm-domain>/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<your-ehm-domain>/privkey.pem;
+    include /etc/nginx/snippets/ssl-params.conf;
+
+    client_max_body_size 1024M;
+
+    # EHM API websocket (events gateway)
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:2326;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+
+    # EHM API
+    location /api/ {
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:2326/;
+    }
+
+    # EHM UI
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:2325;
+    }
+}
+```
+
+```bash
+nginx -t && service nginx reload
+```
