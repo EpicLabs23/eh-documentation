@@ -59,7 +59,38 @@ docker build -t nahidacm/ecp-go-dev:latest -f Dockerfile .
 
 ```bash
 docker exec -it <ecp_username>_container bash
+```
+
+Make some files and directories writable by both the non root host machine user and <ecp_username> from conside of the container. For dev pupose only.
+
+```bash
+chmod 777 /epiclabs23/eh/ecp/ecp-ui/node_modules/ -R
+chmod 777 /epiclabs23/eh/ecp/ecp-ui/package-lock.json
+chmod 777 /epiclabs23/eh/ecp/ecp-go/tmp
+```
+
+Now setup dev specific environments
+
+```bash
 su <ecp_username>
 /epiclabs23/eh/ecp/dev-setup.sh
 source ~/.bashrc
+```
+
+Adjust the `CORS_ALLOW_ORIGINS` in `.env` accordingly
+
+Start ecp golang based api backend in dev mode
+
+```bash
+su <ecp_username>
+cd /epiclabs23/eh/ecp/ecp-go
+air
+```
+
+Start ecp frontend in new terminal from inside the docker container with the <ecp_username> in very same way of ecp-go
+
+```bash
+su <ecp_username>
+cd /epiclabs23/eh/ecp/ecp-ui
+npm run dev
 ```
