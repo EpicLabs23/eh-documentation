@@ -12,8 +12,9 @@ sidebar_position: 6
 4. [EH Services Installation](../eh-services/intro)
 5. [MariaDB Installation](../eh-services/install-mariadb)
 6. [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
-7. [EH Manager Installation](../eh-manager/eh-manager-instalation)
-8. A domain / subdomain
+7. [InfluxDB Installation](../eh-services/install-influxdb) (optional, for historical metrics)
+8. [EH Manager Installation](../eh-manager/eh-manager-instalation)
+9. A domain / subdomain
 
 :::warning
 Please ask for the installation details to EpicLabs23
@@ -26,12 +27,16 @@ sudo su
 eh-manager install-ehm
 ```
 
+This also prompts **"Enable InfluxDB metrics history?"**. Answer yes only if you completed the optional [InfluxDB Installation](../eh-services/install-influxdb) step above — it creates the InfluxDB admin token and writes it into EHM API's `.env` for you. Answer no (the default) to skip it; EHM runs fine without InfluxDB.
+
 ### Non-interactive Installation
 
 ```bash
 sudo su
-eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04
+eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04 --influx false
 ```
+
+Pass `--influx true` instead if InfluxDB is installed and running.
 
 ### Create first Admin user
 
