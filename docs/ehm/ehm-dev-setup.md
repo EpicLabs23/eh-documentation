@@ -107,4 +107,10 @@ Only needed if you're touching the relevant module — see `.env.sample` for the
 
 - `ECP_DIR` — path to a checked-out `ecp-go`/`ecp-ui`, needed by anything that shells out to the ECP CLI
 - `EHM_ENCRYPTION_KEY` — 32-byte hex key (`openssl rand -hex 32`), needed by the `account-git` module to encrypt OAuth client secrets
-- `INFLUX_METRICS_ENABLED` / `INFLUXDB_*` — needed for container metrics history, see [Install InfluxDB](../eh-services/install-influxdb)
+- `INFLUX_METRICS_ENABLED` / `INFLUXDB_*` — needed for container metrics history. In production `eh-manager install-ehm`/`update-ehm` create the token for you (see [Install InfluxDB](../eh-services/install-influxdb)), but in dev you're editing `.env` directly, so after starting the container:
+
+  ```bash
+  docker exec -it influxdb influxdb3 create token --admin
+  ```
+
+  Paste the printed `apiv3_...` token into `INFLUXDB_TOKEN`, and set `INFLUX_METRICS_ENABLED=true` — the check is a strict `=== 'true'` string compare, so anything else (`yes`, `1`, ...) silently leaves it disabled.
