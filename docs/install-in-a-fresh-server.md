@@ -254,7 +254,23 @@ Run the container
 docker compose up -d
 ```
 
-#### 13. Install EH-Manager
+#### 13. Install InfluxDB
+
+InfluxDB stores container CPU/memory/network time series metrics (`DockerMetricsService` in EHM API). This step is optional — EHM works without it, but historical metrics graphs and time-series queries require it. The container must be named `influxdb` — `eh-manager install-ehm`/`update-ehm` (step 17) exec into it by that name to create the admin token.
+
+```bash
+cd /epiclabs23/eh/eh-services/influxdb
+```
+
+Run the container
+
+```bash
+docker compose up -d
+```
+
+That's it for this step — leave the database/token creation to `eh-manager`. When you get to step 17 (`eh-manager install-ehm`), it will prompt **"Enable InfluxDB metrics history?"**; answer yes (or pass `--influx true`) and it creates the admin token and writes `INFLUX_METRICS_ENABLED=true` + `INFLUXDB_TOKEN` into EHM API's `.env` for you. The `ecp_metrics` database itself is created automatically on first write by `DockerMetricsService`, so it does not need to be created up front. If you skip this step entirely, just answer no (or omit `--influx`) at that prompt and EHM runs without Influx.
+
+#### 14. Install EH-Manager
 
 ```bash
 git clone https://github.com/EpicLabs23/eh-manager.git /epiclabs23/eh/eh-manager
@@ -272,26 +288,26 @@ npm install
 npm link
 ```
 
-#### 14. Prepare domains
+#### 15. Prepare domains
 
 - Decide the domain name you want use to access EHM.
 - Point the domain to this server IP.
 
-#### 15. Install Epic Backup
+#### 16. Install Epic Backup
 
 ```bash
 eh-manager install-epic-backup
 ```
 
-#### 15. Install EHM
+#### 17. Install EHM
 
 ```bash
 eh-manager install-ehm
 ```
 
-#### 16. Enable https for ehm url
+#### 18. Enable https for ehm url
 
-Replace `<your-ehm-domain>` below with the domain you pointed at this server in step 14.
+Replace `<your-ehm-domain>` below with the domain you pointed at this server in step 15.
 
 Make sure the domain points to this server.
 
@@ -377,13 +393,13 @@ server {
 nginx -t && service nginx reload
 ```
 
-#### 17. Create first Admin user
+#### 19. Create first Admin user
 
 ```bash
 node /epiclabs23/eh/ehm/<version>/ehm-api/prisma/create-admin.mjs
 ```
 
-#### 18. Configure EHM admin panel
+#### 20. Configure EHM admin panel
 
 Left Side Menu -> Config -> General Settings -> Public IP
 
