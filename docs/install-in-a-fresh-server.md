@@ -262,6 +262,13 @@ InfluxDB stores container CPU/memory/network time series metrics (`DockerMetrics
 cd /epiclabs23/eh/eh-services/influxdb
 ```
 
+The image runs as a non-root user (`influxdb3`, uid `1500`), but Docker creates bind-mounted host directories as `root` on first run. Fix ownership before starting the container, or it crash-loops with `PermissionDenied` trying to write its catalog:
+
+```bash
+sudo mkdir -p data plugins
+sudo chown -R 1500:1500 data plugins
+```
+
 Run the container
 
 ```bash
