@@ -188,6 +188,31 @@ Create Docker network
 docker network create eh_network --subnet=172.1.0.0/16
 ```
 
+Isolate account containers from each other
+
+Every hosting account's container lives on `eh_network`, and a plain Docker bridge network lets any container on it reach any other by IP. Without this, one compromised account's container could reach every sibling account's container directly. These rules go in the `DOCKER-USER` chain — the hook Docker itself provides for operator-added firewall rules, evaluated before Docker's own rules and not wiped out when Docker restarts. `172.1.0.0/27` (`.0`-`.31`) is reserved for shared infrastructure (MariaDB, MongoDB, Postgres, MSSQL, phpMyAdmin, plus headroom) — see `getIpForNewAccount()` in `ehm-api`, which never allocates an account an IP inside that block. Traffic between the host (nginx `proxy_pass`, container callbacks to EHM) and a container never passes through this chain, so nothing here needs an exception for that — only container-to-container traffic is affected.
+
+```bash
+# Let return traffic through for connections already permitted
+iptables -A DOCKER-USER -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow anything on eh_network to reach the reserved infra block
+iptables -A DOCKER-USER -s 172.1.0.0/16 -d 172.1.0.0/27 -j ACCEPT
+
+# Block every other new connection between two addresses on eh_network
+# (i.e. sibling account containers reaching each other)
+iptables -A DOCKER-USER -s 172.1.0.0/16 -d 172.1.0.0/16 -j DROP
+```
+
+Persist these across reboots (Ubuntu has no iptables-persistence installed by default):
+
+```bash
+apt-get install -y iptables-persistent   # prompts to save current rules on install
+netfilter-persistent save
+```
+
+Verify before moving on — from the host, `curl` an account's `local_ip` to confirm nginx can still reach it; from inside one account's container, confirm it can still reach `172.1.0.6` (MariaDB) but a `curl` to a sibling account's `local_ip:2324` now times out. If anything unexpected breaks, `iptables -F DOCKER-USER && netfilter-persistent save` reverts to allow-everything.
+
 #### 10. Install MariaDB
 
 ```bash
