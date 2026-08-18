@@ -273,10 +273,28 @@ Enable memory overcommit
 sysctl vm.overcommit_memory=1 && echo "vm.overcommit_memory = 1" | tee -a /etc/sysctl.conf && sysctl vm.overcommit_memory
 ```
 
+Create .env file and set a password. Redis is bound to `127.0.0.1` only (not reachable from outside this server), but `requirepass` is required regardless — the container won't start without it.
+
+```bash
+cp .env.sample .env
+```
+
+```bash
+sed -i "s/^REDIS_PASSWORD=.*/REDIS_PASSWORD=$(openssl rand -hex 32)/" .env
+```
+
 Run the container
 
 ```bash
 docker compose up -d
+```
+
+**Important**: `eh-manager install-ehm` (step 17) does not set this for you the way it does the MariaDB root password and Influx token — after that step, manually copy the same value into EHM API's own `.env` (`/epiclabs23/eh/ehm/<version>/ehm-api/.env`, `REDIS_PASSWORD=`) and restart EHM API, or logins/refresh tokens/rate limiting will fail with 500s since EHM won't be able to authenticate to Redis.
+
+```bash
+cat /epiclabs23/eh/eh-services/redis/.env  # copy this value
+vim /epiclabs23/eh/ehm/<version>/ehm-api/.env  # paste it into REDIS_PASSWORD=
+pm2 restart ehm-api
 ```
 
 #### 13. Install InfluxDB

@@ -36,8 +36,12 @@ docker compose up -d
 ```bash
 cd /epiclabs23/eh/eh-services/redis
 sudo sysctl vm.overcommit_memory=1 && echo "vm.overcommit_memory = 1" | sudo tee -a /etc/sysctl.conf
+cp .env.sample .env
+sed -i "s/^REDIS_PASSWORD=.*/REDIS_PASSWORD=$(openssl rand -hex 32)/" .env
 docker compose up -d
 ```
+
+Redis requires a password now (`requirepass` — `docker compose up` fails without `REDIS_PASSWORD` set in `.env`) and is bound to `127.0.0.1` only. You'll copy this same password into `ehm-api/.env` in step 2 below — see [Install Redis](../eh-services/install-redis) for the full detail if something doesn't line up.
 
 Everything else is optional — only start it if you're actively working on that feature area:
 
@@ -55,7 +59,7 @@ npm install
 cp .env.sample .env
 ```
 
-The sample already points at the services started above (`MYSQL_HOST=172.1.0.6`, `REDIS_HOST=localhost`) — no edits needed unless you changed a password in step 1.
+The sample already points at the services started above (`MYSQL_HOST=172.1.0.6`, `REDIS_HOST=localhost`), but you do need one edit: set `REDIS_PASSWORD` to the same value you generated into `eh-services/redis/.env` in step 1 — the sample ships with it commented out, and EHM API can't authenticate to Redis without it (logins, refresh tokens, and rate limiting all fail with `500`s otherwise). Also update `MYSQL_ROOT_PASSWORD` if you changed MariaDB's password in step 1.
 
 Generate the RSA keypair EHM uses to sign JWTs (writes to `/ehm/jwt/private.pem` and `/ehm/jwt/public.pem` by default):
 
