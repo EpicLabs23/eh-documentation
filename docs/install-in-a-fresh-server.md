@@ -456,3 +456,12 @@ Left Side Menu -> Config -> General Settings -> Public IP
 Left Side Menu -> Config -> General Settings -> DNS Settings -> Default DNS Server
 
 Left Side Menu -> Config -> General Settings -> Email Settings
+
+#### 21. Host Benchmark dependencies (optional)
+
+Powers the on-demand host benchmark under Resource Monitor -> Benchmark in EHM (CPU, memory, and disk I/O tests used to detect an oversold/noisy-neighbor host). Can be installed anytime, including skipped entirely — those specific tests just show as "not installed" and the rest of EHM is unaffected.
+
+```bash
+apt update
+apt install -y sysbench fio
+```

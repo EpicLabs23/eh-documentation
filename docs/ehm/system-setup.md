@@ -178,6 +178,15 @@ apt install unzip -y
 apt install wget -y
 ```
 
+##### Host Benchmark (sysbench, fio)
+
+Powers the on-demand host benchmark under Resource Monitor -> Benchmark in EHM (CPU, memory, and disk I/O tests used to detect an oversold/noisy-neighbor host). Optional — if skipped, those specific tests show as "not installed" but the rest of EHM works normally.
+
+```bash
+sudo apt update
+sudo apt install -y sysbench fio
+```
+
 ##### Create a nonroot user to avoid some classic issue that conflicts with ECP user
 
 ```bash
