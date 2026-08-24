@@ -37,7 +37,7 @@ This will build `ecp-base`s both the api and ui
 ```bash
 sudo su
 cd /epiclabs23/eh/ecp/ecp-docker/ecp-base
-./release.sh
+./release.js
 ```
 
 ## Dev (ecp-go-dev)
