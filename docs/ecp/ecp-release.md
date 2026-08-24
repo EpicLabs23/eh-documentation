@@ -40,6 +40,31 @@ cd /epiclabs23/eh/ecp/ecp-docker/ecp-base
 ./release.js
 ```
 
+### Releasing multiple images at once
+
+Each `ecp-docker/*` directory has its own standalone `release.js`, but `release-all.js` (in `ecp-docker/`) can drive several of them in one run, prompting for a version for each as it goes:
+
+```bash
+sudo su
+cd /epiclabs23/eh/ecp/ecp-docker
+
+# Release everything
+./release-all.js all
+
+# Release specific images by name
+./release-all.js ecp-base wp-php-8.4
+
+# Interactive: pick by number or name, or type "all"
+./release-all.js
+
+# List available targets
+./release-all.js --help
+```
+
+The default version it suggests for each image is the next patch version after the latest tag published on Docker Hub (e.g. `1.1.2` → `1.1.3`) — press Enter to accept it, or type a different version.
+
+If `dotnet-3` is among the selected targets, it prints a reminder that `ecp-go` must already be built separately for Ubuntu 20.04 (see `dotnet-3/README.md`) and asks for confirmation before proceeding; declining just skips `dotnet-3` and continues with the rest.
+
 ## Dev (ecp-go-dev)
 
 **Step 1:** Build Final Dev Image
