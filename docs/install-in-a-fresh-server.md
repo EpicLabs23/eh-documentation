@@ -465,3 +465,13 @@ Powers the on-demand host benchmark under Resource Monitor -> Benchmark in EHM (
 apt update
 apt install -y sysbench fio
 ```
+
+#### 22. Deny host shell access for hosting accounts
+
+See [Deny Host Shell Access](./ehm/deny-host-shell-access.md) for why this is needed.
+
+```bash
+cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$(date +%Y%m%d%H%M%S)
+echo "DenyGroups ecp-accounts" | tee -a /etc/ssh/sshd_config
+sshd -t && { systemctl reload sshd || systemctl reload ssh; }
+```
