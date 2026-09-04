@@ -70,7 +70,13 @@ If EHM was installed via `eh-manager`, the updater reads `INFLUXDB_TOKEN` out of
 
 ### Corrupted file causing crash-loop / repeated errors (delete just that file)
 
+`docker-compose.yml` runs the container through `heal-entrypoint.sh`, which does this automatically. On every crash it greps that run's own output for a `wal/…` or `dbs/…` path the error names, deletes just that file (never anything under `catalog/`), and retries — up to `INFLUXDB_HEAL_MAX_ATTEMPTS` times (default 3). It never wipes `./data` on its own and never touches the admin token/catalog. Check `docker logs influxdb` for `[influxdb-heal]` lines to see what it did.
+
+It gives up and leaves the container crash-looping (visible in `docker logs`) when: the error doesn't name a recognizable `wal/`/`dbs/` file, the named path points into `catalog/`, or the attempt cap is hit — those need the manual steps below. Also worth knowing: this InfluxDB 3 version already tolerates some WAL corruption on its own — a `WARN … Skipping corrupt WAL file` in the logs during replay is the server recovering by itself and isn't something `heal-entrypoint.sh` needs to (or will) act on; it only intervenes when a run actually exits non-zero.
+
 Symptom: the container crash-loops, or writes/queries keep failing, and `docker logs influxdb` names one specific file it can't read — usually a WAL segment (`wal/<number>.wal`) left half-written by an unclean container kill or host crash, occasionally a persisted file under `dbs/`. Try this before wiping `./data` entirely: the admin token and catalog live outside these files, so deleting just the bad one doesn't touch auth or your other measurements.
+
+To do it by hand (e.g. `heal-entrypoint.sh` gave up, or you're diagnosing something it didn't catch):
 
 1. Find the offending file from the logs:
 
