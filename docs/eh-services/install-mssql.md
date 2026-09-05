@@ -4,7 +4,7 @@ sidebar_position: 10
 
 # Install MSSQL
 
-Optional — only needed if you want to offer MSSQL databases to ECP accounts. There is no per-account provisioning UI for MSSQL yet; this only makes the engine reachable and reported as available.
+Optional — only needed if you want to offer MSSQL databases to ECP accounts. Per-account database/login provisioning and count/size quota enforcement are available via the `ecp-mssql` API (see `ehm-api`'s `docs/RESOURCE_MONITORING.md`); there's no ecp-ui panel for it yet, only the API.
 
 ```bash
 cd /epiclabs23/eh/eh-services/mssql
@@ -50,9 +50,27 @@ address) will not be reachable in that case. Instead:
 2. Firewall `MSSQL_PORT` on that host to only accept connections from the EHM host's IP.
 3. In `ehm-api/.env`, set `MSSQL_IP` to that host's real LAN IP — not `172.1.0.10`.
 
+Database/login provisioning and quota still work fine over this LAN connection (they're plain
+T-SQL over the wire protocol). One-click backup/restore does not — see "One-click backup/restore"
+below — leave `MSSQL_BACKUP_HOST_DIR` unset in this topology.
+
+## One-click backup/restore (same host as EHM only)
+
+Account databases can be backed up to storage.bd via `POST /ecp-mssql/backup-to-storage-bd` /
+`restore-from-storage-bd`, using T-SQL's own `BACKUP DATABASE`/`RESTORE DATABASE` under the hood —
+which always write/read **server-side**, inside this container. `docker-compose.yml` here already
+bind-mounts a `./backup` directory into the container at `/var/opt/mssql/backup` for exactly this,
+so EHM (running on the same host) can read the backup file straight off disk instead of needing a
+network file-transfer step. This means **MSSQL backup/restore only works when MSSQL runs on the
+same host as EHM** — unlike Postgres/MySQL/MongoDB's backup (which stream over the wire protocol
+and don't care about topology), there's no equivalent for a separate-instance MSSQL install today.
+
+Nothing to create manually — `./backup` is created automatically as part of the bind mount the
+first time `docker compose up` runs here.
+
 ## Wire the config into EHM API
 
-`eh-manager install-ehm`/`update-ehm` does not carry this value into EHM API's `.env` for you — set it manually, once:
+`eh-manager install-ehm`/`update-ehm` does not carry these values into EHM API's `.env` for you — set them manually, once:
 
 ```bash
 # ehm-api/.env
@@ -60,6 +78,9 @@ MSSQL_ENABLED=true
 MSSQL_IP=172.1.0.10   # or the MSSQL host's LAN IP - see above
 MSSQL_PORT=1433
 MSSQL_SA_PASSWORD=<same value as mssql/.env>
+# Same-host installs only (see "One-click backup/restore" above) - the host
+# path to this directory's own ./backup, e.g.:
+MSSQL_BACKUP_HOST_DIR=/epiclabs23/eh/eh-services/mssql/backup
 ```
 
 Then restart EHM API:
