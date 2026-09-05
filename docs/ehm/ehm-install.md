@@ -13,8 +13,11 @@ sidebar_position: 6
 5. [MariaDB Installation](../eh-services/install-mariadb)
 6. [PhpMyAdmin Installation](../eh-services/install-phpmyadmin)
 7. [InfluxDB Installation](../eh-services/install-influxdb) (optional, for historical metrics)
-8. [EH Manager Installation](../eh-manager/eh-manager-instalation)
-9. A domain / subdomain
+8. [PostgreSQL Installation](../eh-services/install-postgresql) (optional, to offer Postgres databases to ECP accounts)
+9. [MSSQL Installation](../eh-services/install-mssql) (optional, to offer MSSQL databases to ECP accounts)
+10. [MongoDB Installation](../eh-services/install-mongodb) (optional, to offer MongoDB databases to ECP accounts)
+11. [EH Manager Installation](../eh-manager/eh-manager-instalation)
+12. A domain / subdomain
 
 :::warning
 Please ask for the installation details to EpicLabs23
