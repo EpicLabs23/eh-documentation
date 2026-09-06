@@ -22,13 +22,13 @@ sed -i "s/^POSTGRES_SUPER_USER_PASSWORD=.*/POSTGRES_SUPER_USER_PASSWORD=$(openss
 
 ## Existing installs upgrading from an EHM-managed container
 
-Older EHM versions created and started this container themselves (via the "Postgresql Settings" page in EHM's UI). If you already have a `postgresql` container running that way, stop and remove it first — your data is preserved either way, since it lives in the host path set by `PGDATA_HOST` (default `/epiclabs23/eh/postgres_data`), not in the container itself:
+Older EHM versions created and started this container themselves (via the "Postgresql Settings" page in EHM's UI), storing data at a fixed host path (`/epiclabs23/eh/postgres_data`). This compose file instead stores data in a named Docker volume (`postgres-data`), so a fresh `docker compose up -d` here starts with an empty database — it does not pick up that old host path. If you have existing databases there worth keeping, migrate them manually (e.g. `pg_dumpall`/`pg_restore`, or copy the old container's data directory into the new volume) before removing the old container:
 
 ```bash
 docker stop postgresql && docker rm postgresql
 ```
 
-Set `POSTGRES_SUPER_USER`/`POSTGRES_SUPER_USER_PASSWORD` in `.env` here to match whatever you originally set for that container (not a freshly generated one), or the new container won't be able to authenticate against the existing data directory.
+Set `POSTGRES_SUPER_USER`/`POSTGRES_SUPER_USER_PASSWORD` in `.env` here to match whatever you originally set for that container (not a freshly generated one), or the new container won't be able to authenticate against migrated data.
 
 ## Run the container
 
