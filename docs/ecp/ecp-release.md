@@ -52,7 +52,7 @@ cd /epiclabs23/eh/ecp/ecp-docker
 ./release-all.js all
 
 # Release specific images by name
-./release-all.js ecp-base wp-php-8.4
+./release-all.js ecp-base managed-wordpress
 
 # Interactive: pick by number or name, or type "all"
 ./release-all.js
