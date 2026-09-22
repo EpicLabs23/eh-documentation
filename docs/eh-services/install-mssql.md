@@ -24,13 +24,42 @@ sed -i "s/^MSSQL_SA_PASSWORD=.*/MSSQL_SA_PASSWORD=$(openssl rand -base64 16)Aa1!
 
 ## Existing installs upgrading from an EHM-managed container
 
-Older EHM versions created and started this container themselves (via the "MSSQL Settings" page in EHM's UI). If you already have an `mssql` container running that way, stop and remove it first — your data is preserved in the named Docker volume `mssql-data`, which isn't deleted along with the container:
+Older EHM versions created and started this container themselves (via the "MSSQL Settings" page in EHM's UI), using the same named Docker volume this compose file uses — `mssql-data`, mounted at `/var/opt/mssql`. Docker volumes exist independently of any container, so unlike Postgres above, **no manual dump/restore is needed for the default case**: stopping and removing the old container, then starting this compose file, re-attaches to that same volume with all databases and logins already in it.
+
+Confirm the old container really is using that volume before you delete it — an install that customized the container-creation code or was set up by hand could differ:
+
+```bash
+docker inspect mssql --format '{{json .Mounts}}'
+# Expect to see "Name":"mssql-data","Destination":"/var/opt/mssql"
+```
+
+If that matches, stop and remove the old container:
 
 ```bash
 docker stop mssql && docker rm mssql
 ```
 
 Set `MSSQL_SA_PASSWORD` in `.env` here to match whatever you originally set for that container (not a freshly generated one), or the new container won't be able to authenticate against the existing data volume.
+
+### If the volume name doesn't match (or you're moving to a different host)
+
+Take a native backup instead of relying on volume continuity. This only covers the databases you name — **server-level logins (`CREATE LOGIN`, used for every ECP-account database login here) live in the `master` database**, not in the user database being backed up, so back up `master` too if you need those to come across, or recreate the logins by hand afterward.
+
+From the **old** container, while it's still running:
+
+```bash
+docker exec mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P '<old SA password>' -C \
+  -Q "BACKUP DATABASE [YourDb] TO DISK = N'/var/opt/mssql/YourDb.bak'"
+docker cp mssql:/var/opt/mssql/YourDb.bak ./YourDb.bak
+```
+
+Repeat per database (and for `master`, if you need the logins). Then stop/remove the old container as above, bring up the new one (see "Run the container" below), copy the backup(s) in, and restore:
+
+```bash
+docker cp ./YourDb.bak mssql:/var/opt/mssql/backup/YourDb.bak
+docker exec mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P '<new SA password>' -C \
+  -Q "RESTORE DATABASE [YourDb] FROM DISK = N'/var/opt/mssql/backup/YourDb.bak'"
+```
 
 ## Run the container
 

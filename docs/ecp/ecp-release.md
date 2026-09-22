@@ -24,6 +24,16 @@ git tag -a <version> -m "<message>"
 git push origin <version>
 ```
 
+`ecp-docker` (the Dockerfiles/release scripts below) is its own repo too — tag it the same way. Its
+per-image Docker Hub tags (managed by `release.js`/`release-all.js` below) are a separate thing from
+this git tag; this just marks the exact source state of the Dockerfiles/release tooling itself:
+
+```bash
+cd /epiclabs23/eh/ecp/ecp-docker
+git tag -a <version> -m "<message>"
+git push origin <version>
+```
+
 ### Build and push
 
 Note: Release doc for various ecp images are availble under corresponding docker directory under:

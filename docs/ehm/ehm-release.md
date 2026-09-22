@@ -42,7 +42,7 @@ With latest version number in the same directory. Make neccessary updates on the
 }
 ```
 
-`ubuntuVersion` and `nodeVersion` are checked with [`semver.satisfies()`](https://github.com/npm/node-semver#ranges), so they take a semver range, not just a bare version — e.g. `">=22.0.0 <24.0.0"` to also cap the maximum. A bare version like `"22.0.0"` means an *exact* match, so always use a range operator (`>=`, `^`, etc.) unless you really mean to pin an exact version.
+`ubuntuVersion` and `nodeVersion` are checked with [`semver.satisfies()`](https://github.com/npm/node-semver#ranges), so they take a semver range, not just a bare version — e.g. `">=22.0.0 <24.0.0"` to also cap the maximum. A bare version like `"22.0.0"` means an _exact_ match, so always use a range operator (`>=`, `^`, etc.) unless you really mean to pin an exact version.
 
 Add a new file here only when the minimum requirements actually change for a release.
 
@@ -50,17 +50,31 @@ Add a new file here only when the minimum requirements actually change for a rel
 
 Before tagging, make sure all the changes are committed and pushed to the remote repository.
 
+`public_github_release.js` only tags the public `ecp-ehm-free` output repo (with the release assets) —
+it does not tag the private source repos. Tag all three EHM source repos with the same `<version>` so
+the exact source state behind a release is always recoverable later:
+
 ```bash
-cd /epiclabs23/eh/ecp/ecp-go
+cd /epiclabs23/eh/ehm/ehm-api
 git tag -a <version> -m "<message>"
 git push origin <version>
 ```
 
 ```bash
-cd /epiclabs23/eh/ecp/ecp-ui
+cd /epiclabs23/eh/ehm/ehm-ui
 git tag -a <version> -m "<message>"
 git push origin <version>
 ```
+
+```bash
+cd /epiclabs23/eh/ehm/ehm-release
+git tag -a <version> -m "<message>"
+git push origin <version>
+```
+
+ECP (`ecp-go`/`ecp-ui`) is tagged and released independently — see `docs/ecp/ecp-release.md`'s own
+"Git Tag" section. EHM and ECP version numbers aren't required to match; tag each with whatever its
+own release history calls for.
 
 #### Now build EHM and publish the release to GitHub
 

@@ -3,6 +3,10 @@ sidebar_position: 7
 ---
 # Update EHM
 
+:::danger
+Updating to **2.0.0**? Read [Upgrading from 1.1.x to 2.0.0](./upgrading-to-2.0.0) first — this is a major version with breaking changes (OpenLiteSpeed replaces PHP-FPM/nginx, PHP 7.4 dropped, Postgres/MSSQL/MongoDB become standalone `eh-services` instead of EHM-managed containers) that need action before/during this command if they apply to you.
+:::
+
 :::info
 Updating to **1.1.4**? Read [Upgrading from 1.1.3 to 1.1.4](./upgrading-to-1.1.4) — non-breaking from 1.1.3, but if you're still on **1.1.2 or earlier, update to 1.1.3 first**: 1.1.4's script no longer repeats 1.1.3's admin-preserving data migration, and skipping straight to 1.1.4 would lock out existing admins.
 :::
