@@ -1,0 +1,11 @@
+{
+    "position": 26,
+    "label": "storage.bd",
+    "collapsible": true,
+    "collapsed": false,
+    "className": "red",
+    "link": {
+      "type": "generated-index",
+      "title": "storage.bd overview"
+    }
+  }
