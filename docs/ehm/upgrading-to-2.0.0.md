@@ -15,7 +15,8 @@ sidebar_position: 7.7
 - **Database count/size quotas** for MySQL and Postgres, enforced per-account.
 - **OpenLiteSpeed replaces PHP-FPM/nginx** for `php`/`static`/`wordpress` apps. The `php-nginx` deploy type was renamed to `php`, and **PHP 7.4 support was dropped** — the current image ships lsphp 8.1/8.3/8.4 only. This is the change most likely to break an existing account if not handled — see Step 3 below.
 - **Nginx conf generation became on-demand, transactional, and drift-detected** — configs regenerate from DB state instead of being hand-maintained files. See `docs/NGINX.md` in `ehm-api`.
-- **storage.bd backup**, both EHM's own host-level backup and a per-account reseller-provisioned backup tenant (MySQL/Postgres/MSSQL/MongoDB). Existing accounts don't get a backup tenant automatically — see Step 4.
+- **storage.bd backup**, both EHM's own host-level backup and a per-account reseller-provisioned backup tenant (MySQL/Postgres/MSSQL/MongoDB). Existing accounts don't get a backup tenant automatically — see Step 4. If you haven't configured storage.bd at all yet, start with [Storage.bd Backup Setup](./storage-bd-setup).
+- **Git provider integrations** (GitHub/GitLab/Bitbucket OAuth, so ECP accounts can import apps directly from a repo). Opt-in, no impact on existing accounts if skipped — see [Git Integrations Setup](./git-integrations-setup).
 - **Managed WordPress Hosting** — a new opt-in product on the same OpenLiteSpeed/lsphp stack. Nothing to do unless you plan to offer it.
 - **Certificate management moved into the Domains menu** in the admin UI (previously its own top-level menu) — cosmetic, no action needed.
 - **A disk-cleanup subsystem** (Docker images/volumes, export archives, old `ehm-release` versions, resource-monitor events, and leftover host directories from the old nginx/PHP-FPM architecture) — dry-run report + admin-triggered execute, under **Maintenance** in the admin UI. See `docs/CLEANUP_POLICY.md`.
@@ -80,7 +81,9 @@ The full guide also covers cross-install migration (export-import) gaps if you'r
 
 ### 5. Backfill storage.bd tenants for existing accounts (optional)
 
-New accounts get a storage.bd backup tenant automatically; existing accounts don't, until you run:
+Requires storage.bd already configured ([Storage.bd Backup Setup](./storage-bd-setup)) — if you haven't
+set up storage.bd at all, do that first. New accounts get a storage.bd backup tenant automatically;
+existing accounts don't, until you run:
 
 ```bash
 cd ehm-api
@@ -102,5 +105,6 @@ Until this runs, an existing account simply has no backup coverage — it isn't 
 - Full per-account upgrade path (container reimage, PHP compatibility, cross-install export/import gaps): `docs/UPGRADE_GUIDE.md` in `ehm-api`.
 - DB engine topology, per-account jailing/quotas: `docs/DB_TOPOLOGY.md` in `ehm-api`.
 - Nginx/OpenLiteSpeed architecture and on-demand conf generation: `docs/NGINX.md` in `ehm-api`.
-- Per-account backup via storage.bd: `docs/BACKUP.md` in `ehm-api`.
+- Per-account backup via storage.bd: `docs/BACKUP.md` in `ehm-api`, or [Storage.bd Backup Setup](./storage-bd-setup) for initial configuration.
 - Disk cleanup subsystem: `docs/CLEANUP_POLICY.md` in `ehm-api`.
+- Setting up Git provider OAuth apps: [Git Integrations Setup](./git-integrations-setup), or `docs/GIT_INTEGRATIONS.md` in `ehm-api` for the underlying design.

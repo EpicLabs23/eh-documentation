@@ -79,3 +79,13 @@ Go to `Packges > Create Package`
 ### DNS Setup
 
 1. Go to `System > Config > DNS Settings` and update the `Public IP`
+
+### Configure Storage.bd Backups (optional, recommended)
+
+Without this, neither EHM's own host backup nor per-account backup works. See
+[Storage.bd Backup Setup](./storage-bd-setup).
+
+### Configure Git Integrations (optional)
+
+Only needed if ECP accounts should be able to import apps from GitHub/GitLab/Bitbucket via OAuth instead
+of a manual clone URL. See [Git Integrations Setup](./git-integrations-setup).
