@@ -66,6 +66,12 @@ In EHM UI:
 1. `System > Config > General Settings` update `Public IP`.
 2. `System > Config > DNS Settings` update `Public IP`.
 
+### Load Docker Images
+
+EHM ships with no built-in docker image list. Go to `System > Config > Docker Images` and click **Load Image List** — this is required before any account/package can be created.
+
+It fetches from `DOCKER_IMAGES_REMOTE_URL` (set in ehm-api's `.env`) on the server. If it fails, this is usually a transient network issue reaching GitHub, not a bug — on the server, run `curl <DOCKER_IMAGES_REMOTE_URL>` (see the value in ehm-api's `.env`) to confirm it's reachable, then retry from the UI.
+
 ### Create packages
 
 Go to `Packges > Create Package`
