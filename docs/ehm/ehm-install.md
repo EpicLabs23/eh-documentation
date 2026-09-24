@@ -41,6 +41,13 @@ eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 -
 
 Pass `--influx true` instead if InfluxDB is installed and running.
 
+`--apiurl` is just a bootstrap value at this point — the domain and HTTPS reverse proxy don't exist yet.
+Once you've completed [Enable HTTPS for EHM](./enable-https), come back and set `EHM_API_PUBLIC_URL` in
+`ehm-api`'s `.env` to the real public URL (`https://<your-ehm-domain>/api`, **with** the `/api` prefix —
+not a bare domain or the dev `:2326` port), then `pm2 restart ehm-api`. This value is embedded in account
+JWTs and used for the Git Integrations OAuth callback, so ECP calls back to the wrong place until it's
+corrected.
+
 ### Create first Admin user
 
 ```bash

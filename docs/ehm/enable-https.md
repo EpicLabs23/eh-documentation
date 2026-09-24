@@ -104,6 +104,28 @@ nginx -t && service nginx reload
 
 `ehm-ui`'s frontend code (`src/app/init.js`) builds its API/websocket URLs from `window.location` at runtime — in a production build it targets `<origin>/api` for axios and `<origin>` (default `/socket.io` namespace) for sockets, so no `.env` edit is required for this to work once the nginx config above is in place.
 
+### Update `EHM_API_PUBLIC_URL`
+
+Unlike the UI, `ehm-api` doesn't infer its own public URL — it's still whatever was set at install time
+(typically the `http://localhost:2326` bootstrap value from [Install EHM](./ehm-install)). Update it now
+that the domain and `/api` prefix exist:
+
+```bash
+vim /epiclabs23/eh/ehm/<version>/ehm-api/.env
+```
+
+```
+EHM_API_PUBLIC_URL=https://<your-ehm-domain>/api
+```
+
+```bash
+pm2 restart ehm-api
+```
+
+This value is embedded in account JWTs (`ehm_api_public_url` claim, see `docs/AUTH.md` in `ehm-api`) and
+used to build the Git Integrations OAuth callback URL — skip this step and ECP keeps calling back to the
+old bootstrap value.
+
 ### Access EHM
 
 `https://<your-ehm-domain>`

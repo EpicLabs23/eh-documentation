@@ -32,7 +32,9 @@ The callback URL is the same shape for all three, built from your install's `EHM
 ${EHM_API_PUBLIC_URL}/account-git/<provider>/callback
 ```
 
-e.g. `https://ehm.example.com/account-git/github/callback`.
+e.g. `https://ehm.example.com/api/account-git/github/callback` — in production, `EHM_API_PUBLIC_URL` points
+at the `/api` path behind the reverse proxy (frontend and backend share the default HTTPS port), not a
+bare host with a `:2326` port like local dev.
 
 - **GitHub**: create an OAuth App at `github.com/settings/developers` → note the Client ID and generate a
   Client Secret.

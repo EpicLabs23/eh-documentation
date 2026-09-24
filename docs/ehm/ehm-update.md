@@ -29,5 +29,10 @@ This also prompts **"Enable InfluxDB metrics history?"**, defaulting to whatever
 ### Non-interactive Installation
 ```bash
 sudo su
-eh-manager update-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04 --influx false
+eh-manager update-ehm -v 0.0.1 --dbpass drootp --os 24.04 --influx false
 ```
+
+`--apiurl` is omitted above on purpose: when left out, `EHM_API_PUBLIC_URL` is carried forward as-is from
+the current `.env`. Only pass `--apiurl <url>` if you actually need to change it — passing the dev-default
+`http://localhost:2326` on a production install would silently overwrite the real public URL (breaking
+ECP callbacks / Git Integrations) with every update.

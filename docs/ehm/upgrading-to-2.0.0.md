@@ -63,8 +63,13 @@ or non-interactively:
 
 ```bash
 sudo su
-eh-manager update-ehm -v 2.0.0 --dbpass <your-mysql-root-password> --apiurl http://localhost:2326 --os 24.04 --influx false
+eh-manager update-ehm -v 2.0.0 --dbpass <your-mysql-root-password> --os 24.04 --influx false
 ```
+
+`--apiurl` is intentionally omitted — when left out, `EHM_API_PUBLIC_URL` carries forward as-is from the
+current `.env`. Only pass `--apiurl <url>` if you actually need to change it; passing the dev-default
+`http://localhost:2326` on a production install would silently overwrite the real public URL (breaking
+ECP callbacks / Git Integrations).
 
 `2.0.0_update.sh` writes the new `.env` (including `POSTGRES_ENABLED`/`MSSQL_ENABLED`/`MONGO_ENABLED`, each defaulting `true` since reaching this script means the feature was already active), regenerates the JWT keypair, runs `prisma db push` (this release's schema changes are additive, so it should hit no destructive-change prompt — if it does, stop and look before confirming), restarts `ehm-api`/`ehm-ui` via `pm2`, and installs `pm2-logrotate`.
 

@@ -89,8 +89,13 @@ or non-interactively:
 
 ```bash
 sudo su
-eh-manager update-ehm -v 1.1.3 --dbpass <your-mysql-root-password> --apiurl http://localhost:2326 --os 24.04 --influx false
+eh-manager update-ehm -v 1.1.3 --dbpass <your-mysql-root-password> --os 24.04 --influx false
 ```
+
+`--apiurl` is intentionally omitted — when left out, `EHM_API_PUBLIC_URL` carries forward as-is from the
+current `.env`. Only pass `--apiurl <url>` if you actually need to change it; passing the dev-default
+`http://localhost:2326` on a production install would silently overwrite the real public URL (breaking
+ECP callbacks / Git Integrations).
 
 This version's update script (`1.1.3_update.sh`) now does the critical data migration automatically, **before** it touches the schema:
 

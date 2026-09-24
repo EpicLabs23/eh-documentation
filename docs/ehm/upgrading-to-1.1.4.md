@@ -51,8 +51,13 @@ or non-interactively:
 
 ```bash
 sudo su
-eh-manager update-ehm -v 1.1.4 --dbpass <your-mysql-root-password> --apiurl http://localhost:2326 --os 24.04 --influx false
+eh-manager update-ehm -v 1.1.4 --dbpass <your-mysql-root-password> --os 24.04 --influx false
 ```
+
+`--apiurl` is intentionally omitted — when left out, `EHM_API_PUBLIC_URL` carries forward as-is from the
+current `.env`. Only pass `--apiurl <url>` if you actually need to change it; passing the dev-default
+`http://localhost:2326` on a production install would silently overwrite the real public URL (breaking
+ECP callbacks / Git Integrations).
 
 `1.1.4_update.sh` installs `sysbench`/`fio`, writes the `.env` (now including `HOST_METRICS_ENABLED`, carried forward from the previous `.env` by `eh-manager`), regenerates the JWT keypair, runs `prisma db push`, and restarts `ehm-api`/`ehm-ui` via `pm2` — the same shape as the 1.1.3 script, with those additions. It still carries forward the `REDIS_PASSWORD` requirement.
 
