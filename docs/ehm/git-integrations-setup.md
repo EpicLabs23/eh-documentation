@@ -38,11 +38,12 @@ bare host with a `:2326` port like local dev.
 
 - **GitHub**: create an OAuth App at `github.com/settings/developers` → note the Client ID and generate a
   Client Secret.
-- **GitLab**: create an application at `gitlab.com/-/profile/applications` (or your self-hosted instance's
+- **GitLab**: create an application at `https://gitlab.com/-/user_settings/applications` (or your self-hosted instance's
   equivalent) with the `api` scope (or narrower, per your needs) → note the Application ID and Secret. If
   self-hosted, you'll also set `base_url` in step 3.
 - **Bitbucket**: create an OAuth consumer under your workspace's settings → note the Key (client_id) and
   Secret. Bitbucket fixes scopes on the consumer itself, not at authorize time.
+  Create OAuth Client: `https://bitbucket.org/<bitbucket-username>/workspace/settings/oauth-clients`
 
 ## 3. Store the credentials in EHM
 
