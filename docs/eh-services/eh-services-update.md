@@ -6,8 +6,9 @@ sidebar_position: 12
 
 Unlike EHM/ECP, `eh-services` isn't a single versioned product — there's no `eh-manager update-*`
 command for it and no version tags on the repo. Each service (MariaDB, Redis, InfluxDB, Bind9,
-phpMyAdmin, Postgres, MSSQL, MongoDB) is its own independent `docker-compose` stack under this repo,
-and "updating" just means pulling the latest source and re-applying whichever stacks you actually run.
+phpMyAdmin, Postgres, MSSQL, MongoDB, pgAdmin) is its own independent `docker-compose` stack under
+this repo, and "updating" just means pulling the latest source and re-applying whichever stacks you
+actually run.
 
 ## 1. Pull the latest source
 
@@ -44,13 +45,19 @@ cd mariadb   # or dns
 docker compose up -d --build
 ```
 
-**Services running a public image** (`redis`, `influxdb`, `phpmyadmin`, `postgresql`, `mssql`, `mongodb`):
+**Services running a public image** (`redis`, `influxdb`, `phpmyadmin`, `postgresql`, `mssql`,
+`mongodb`):
 
 ```bash
 cd redis   # or whichever service
 docker compose pull
 docker compose up -d
 ```
+
+**`pgadmin` is pinned, not on `:latest`** — `docker compose pull` here won't move it. Bumping the
+pinned tag in `pgadmin/docker-compose.yml` requires re-diffing `patches/*.sql` against the new
+version's stock files first, or the cross-tenant tree-filtering patches can silently stop applying
+correctly. See the "Bumping the pgAdmin version" section of `install-pgadmin.md`.
 
 Existing data is untouched by this — every service stores its data in a named volume or bind mount
 that isn't removed when the container is recreated (see that service's own install page if you're
@@ -64,6 +71,11 @@ If you changed a password, host, port, or bind address that `ehm-api/.env` also 
 ```bash
 pm2 restart ehm-api
 ```
+
+`pgadmin-nginx`'s published port (`2331`) and phpMyAdmin's (`2329`) are the exception — nothing in
+`ehm-api/.env` mirrors them. They're hardcoded into `ecp-ui` (`getPgAdminUrl()`/`getPhpMyAdminUrl()`
+in `LeftMenu.jsx`), so changing either requires updating that constant and rebuilding/redeploying
+`ecp-ui` instead, not touching EHM API.
 
 ## Verify
 

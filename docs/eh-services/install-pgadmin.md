@@ -38,8 +38,13 @@ docker compose up -d
 
 This starts two containers: `pgadmin` itself (no published port — only reachable from the sidecar
 below) and `pgadmin-nginx`, published on `2331` — the only externally reachable port in this stack.
-If `2331` is already in use on your host, change the published port in `docker-compose.yml`
-(`ports: - '2331:80'` under `pgadmin-nginx`).
+
+`2331` is not just this stack's default — it's hardcoded into ECP's own "PgAdmin" link
+(`getPgAdminUrl()` in `ecp-ui/src/layouts/partials/LeftMenu.jsx`), the same way phpMyAdmin's link
+hardcodes `2329`. If `2331` is already in use on your host, changing `ports: - '2331:80'` under
+`pgadmin-nginx` in `docker-compose.yml` is not enough on its own — you also have to update that
+constant in `ecp-ui` to match and rebuild/redeploy `ecp-ui`, or the link will point at the old port
+and fail to load. There's no `.env`/`ehm-api` config for this port to wire through instead.
 
 ## Verify the identity header format
 
