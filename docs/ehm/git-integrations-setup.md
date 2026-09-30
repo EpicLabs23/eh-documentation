@@ -22,7 +22,9 @@ you haven't set it already:
 openssl rand -hex 32
 ```
 
-Add the result to `ehm-api/.env` as `EHM_ENCRYPTION_KEY`, then restart `ehm-api` (`pm2 restart ehm-api`).
+Add the result to `ehm-api/.env` as `EHM_ENCRYPTION_KEY`, then restart `ehm-api` from its directory with
+`pm2 restart ecosystem.config.js` (not `pm2 restart ehm-api` by name — that reuses whatever env PM2
+captured at the last `pm2 start ecosystem.config.js` instead of re-reading `.env`).
 
 ## 2. Register an OAuth app with each provider you want
 

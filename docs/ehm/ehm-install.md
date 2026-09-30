@@ -44,7 +44,7 @@ Pass `--influx true` instead if InfluxDB is installed and running.
 `--apiurl` is just a bootstrap value at this point — the domain and HTTPS reverse proxy don't exist yet.
 Once you've completed [Enable HTTPS for EHM](./enable-https), come back and set `EHM_API_PUBLIC_URL` in
 `ehm-api`'s `.env` to the real public URL (`https://<your-ehm-domain>/api`, **with** the `/api` prefix —
-not a bare domain or the dev `:2326` port), then `pm2 restart ehm-api`. This value is embedded in account
+not a bare domain or the dev `:2326` port), then `cd /epiclabs23/eh/ehm/<version>/ehm-api && pm2 restart ecosystem.config.js` (not `pm2 restart ehm-api` — that just respawns with whatever env PM2 captured at the last `pm2 start ecosystem.config.js`, without re-reading `.env`). This value is embedded in account
 JWTs and used for the Git Integrations OAuth callback, so ECP calls back to the wrong place until it's
 corrected.
 

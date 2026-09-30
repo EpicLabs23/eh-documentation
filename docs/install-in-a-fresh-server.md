@@ -294,7 +294,8 @@ docker compose up -d
 ```bash
 cat /epiclabs23/eh/eh-services/redis/.env  # copy this value
 vim /epiclabs23/eh/ehm/<version>/ehm-api/.env  # paste it into REDIS_PASSWORD=
-pm2 restart ehm-api
+cd /epiclabs23/eh/ehm/<version>/ehm-api
+pm2 restart ecosystem.config.js
 ```
 
 #### 13. Install InfluxDB

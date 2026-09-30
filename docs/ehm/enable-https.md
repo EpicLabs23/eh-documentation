@@ -119,7 +119,8 @@ EHM_API_PUBLIC_URL=https://<your-ehm-domain>/api
 ```
 
 ```bash
-pm2 restart ehm-api
+cd /epiclabs23/eh/ehm/<version>/ehm-api
+pm2 restart ecosystem.config.js
 ```
 
 This value is embedded in account JWTs (`ehm_api_public_url` claim, see `docs/AUTH.md` in `ehm-api`) and

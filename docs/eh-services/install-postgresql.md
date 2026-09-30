@@ -80,7 +80,8 @@ POSTGRES_SUPER_USER_PASSWORD=<same value as postgresql/.env>
 Then restart EHM API:
 
 ```bash
-pm2 restart ehm-api   # production, or:
+cd /epiclabs23/eh/ehm/<version>/ehm-api  # your currently installed EHM version
+pm2 restart ecosystem.config.js   # production, or:
 # Ctrl-C and re-run `npm run start:dev` in a dev environment
 ```
 

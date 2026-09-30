@@ -62,7 +62,8 @@ INFLUXDB_TOKEN="<new token>"
 Then restart the EHM API process so it picks up the new value (the InfluxDB client is constructed once at startup from `process.env`, so a live-reload/watch restart of the process is required — editing `.env` alone isn't enough):
 
 ```bash
-pm2 restart ehm-api   # production, or:
+cd /epiclabs23/eh/ehm/<version>/ehm-api  # your currently installed EHM version
+pm2 restart ecosystem.config.js   # production, or:
 # Ctrl-C and re-run `npm run start:dev` in a dev environment
 ```
 

@@ -44,7 +44,8 @@ REDIS_PASSWORD=<same value as redis/.env>
 Then restart EHM API so it picks up the new value (the Redis client is constructed once at startup, so editing `.env` alone isn't enough):
 
 ```bash
-pm2 restart ehm-api   # production, or:
+cd /epiclabs23/eh/ehm/<version>/ehm-api  # your currently installed EHM version
+pm2 restart ecosystem.config.js   # production, or:
 # Ctrl-C and re-run `npm run start:dev` in a dev environment
 ```
 

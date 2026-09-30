@@ -69,7 +69,8 @@ If you changed a password, host, port, or bind address that `ehm-api/.env` also 
 (Redis password; Postgres/MSSQL/MongoDB credentials or IP), update it there too:
 
 ```bash
-pm2 restart ehm-api
+cd /epiclabs23/eh/ehm/<version>/ehm-api  # your currently installed EHM version
+pm2 restart ecosystem.config.js
 ```
 
 `pgadmin-nginx`'s published port (`2331`) and phpMyAdmin's (`2329`) are the exception — nothing in
