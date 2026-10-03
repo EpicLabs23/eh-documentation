@@ -1,33 +1,30 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # System Setup
 
-### Quota setup on EXT4
+## Quota setup on ext4
 
 :::warning
-Supports on ubuntu >= 24.04
+Tested on Ubuntu 24.04 with ext4. Needs Linux kernel 4.4 or newer.
 
-Linux kernel version > 4.4
+On Contabo's Ubuntu 24.04 images you can run the ready-made script instead: see step 2 of [Install on a fresh server](../getting-started/install-on-a-fresh-server.md).
 :::
 
-Here’s a concise summary for **enabling and checking user quotas** on an **Ubuntu 24 Server using ext4** 👇
+EHM limits each account's disk use with ext4 user quotas, so quotas must be on before you create accounts.
 
----
 
-## 🧩 **Enable & Check User Quotas (ext4, Ubuntu 24)**
 
 Reference: https://www.tecmint.com/set-filesystem-disk-quotas-on-ubuntu/
 
-### **1️⃣ Install quota tools**
+### 1. Install quota tools
 
 ```bash
 sudo apt update
 sudo apt install quota
 ```
 
----
 
 ### Installing the Module for Quota Kernel
 
@@ -50,7 +47,7 @@ Do not worry about the kernel versions as long as the two modules are present. I
 apt install linux-image-extra-virtual
 ```
 
-### **2️⃣ Enable quotas in `/etc/fstab`**
+### 2. Enable quotas in `/etc/fstab`
 
 Edit:
 
@@ -70,9 +67,8 @@ Then remount:
 sudo mount -o remount /
 ```
 
----
 
-### **3️⃣ Create quota files**
+### 3. Create quota files
 
 ```bash
 sudo quotacheck -cum /
@@ -84,23 +80,21 @@ Creates:
 /aquota.user
 ```
 
----
 
-### **4️⃣ Turn quotas on**
+### 4. Turn quotas on
 
 ```bash
 sudo quotaon -v /
 ```
 
-✅ Output should say:
+Output should say:
 
 ```
 /dev/sda1 [/]: user quotas turned on
 ```
 
----
 
-### **5️⃣ Verify quotas are active**
+### 5. Verify quotas are active
 
 ```bash
 sudo repquota -a
@@ -112,9 +106,8 @@ or for one user:
 sudo quota -u username
 ```
 
----
 
-### **6️⃣ (Optional) Set user quota**
+### 6. (Optional) Set a user quota by hand
 
 ```bash
 sudo setquota -u username 2000000 2500000 0 0 /
@@ -122,9 +115,8 @@ sudo setquota -u username 2000000 2500000 0 0 /
 
 (soft = 2 GB, hard = 2.5 GB)
 
----
 
-### **7️⃣ View user quota**
+### 7. View a user's quota
 
 ```bash
 quota -u username
@@ -132,19 +124,7 @@ quota -u username
 
 ---
 
-✅ **Summary:**
-
-1. Install quota tools
-2. Add `usrquota` to `/etc/fstab`
-3. `quotacheck` to create quota files
-4. `quotaon` to activate
-5. Use `quota` / `repquota` to check usage
-
----
-
-Would you like me to add a short script to **automate these steps** for new Ubuntu servers?
-
-Some helpful commands to debug
+Helpful commands for debugging:
 
 ```bash
 df -Th # show file system type and mount point
@@ -158,27 +138,27 @@ du -sh # show disk usage
 quotaon -ap # show quota status
 ```
 
-#### Dependencies
+## Dependencies
 
 ```bash
 sudo apt update
 sudo apt install -y build-essential
 ```
 
-##### Zip - Unzip
+### Zip - Unzip
 
 ```bash
 apt install zip -y
 apt install unzip -y
 ```
 
-##### Wget
+### Wget
 
 ```bash
 apt install wget -y
 ```
 
-##### Host Benchmark (sysbench, fio)
+### Host Benchmark (sysbench, fio)
 
 Powers the on-demand host benchmark under Resource Monitor -> Benchmark in EHM (CPU, memory, and disk I/O tests used to detect an oversold/noisy-neighbor host). Optional — if skipped, those specific tests show as "not installed" but the rest of EHM works normally.
 
@@ -187,17 +167,23 @@ sudo apt update
 sudo apt install -y sysbench fio
 ```
 
-##### Create a nonroot user to avoid some classic issue that conflicts with ECP user
+### Create a non-root `ehm` user
 
 ```bash
 useradd ehm
 ```
 
-### Install Nodejs using Node Version Manager (NVM)
+## Install Node.js using nvm {#install-nodejs-using-node-version-manager-nvm}
 
-https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04#option-3-installing-node-using-the-node-version-manager
+EHM needs Node.js 24 or newer.
 
-This application dpends of PM2 and Rclone
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+source ~/.bashrc
+nvm install 24
+```
+
+EHM runs under PM2 and serves its UI with `serve`.
 
 ## Install PM2
 

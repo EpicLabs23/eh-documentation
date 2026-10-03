@@ -1,11 +1,14 @@
 ---
-sidebar_position: 6
+sidebar_position: 4
 ---
 
 # Install EHM
 
+Installing on a brand-new server? [Install on a fresh server](../getting-started/install-on-a-fresh-server.md) walks through everything below in one page. This page is the same install, split by component.
+
 ### Pre-requisite
 
+0. A server that meets the [requirements](../getting-started/requirements.md)
 1. [System Setup](./system-setup)
 2. [Nginx Installation](./nginx-installation)
 3. [Docker Installation](./docker-installation)
@@ -19,8 +22,8 @@ sidebar_position: 6
 11. [EH Manager Installation](../eh-manager/eh-manager-instalation)
 12. A domain / subdomain
 
-:::warning
-Please ask for the installation details to EpicLabs23
+:::tip
+Prefer not to do it yourself? Epic Labs 23 offers paid installation and support — see [Introduction](../intro.md#paid-services-from-epic-labs-23).
 :::
 
 ### Interactive Installation
@@ -36,7 +39,7 @@ This also prompts **"Enable InfluxDB metrics history?"**. Answer yes only if you
 
 ```bash
 sudo su
-eh-manager install-ehm -v 0.0.1 --dbpass drootp --apiurl http://localhost:2326 --os 24.04 --influx false
+eh-manager install-ehm -v <version> --dbpass <mariadb-root-password> --apiurl http://localhost:2326 --os 24.04 --influx false
 ```
 
 Pass `--influx true` instead if InfluxDB is installed and running.
@@ -57,7 +60,7 @@ node /epiclabs23/eh/ehm/<version>/ehm-api/prisma/create-admin.mjs
 Example:
 
 ```bash
-node /epiclabs23/eh/ehm/0.0.2/ehm-api/prisma/create-admin.mjs
+node /epiclabs23/eh/ehm/2.0.5/ehm-api/prisma/create-admin.mjs
 ```
 
 ### Access EHM UI
@@ -70,8 +73,9 @@ This is a plain HTTP address, reachable directly on the port EHM listens on. See
 
 In EHM UI:
 
-1. `System > Config > General Settings` update `Public IP`.
-2. `System > Config > DNS Settings` update `Public IP`.
+1. `System > Config > General Settings`: set `Public IP`.
+2. `System > Config > DNS Settings`: choose the default DNS server and set its public IP.
+3. `System > Config > Email Settings`: SMTP details for account and alert emails.
 
 ### Load Docker Images
 
@@ -81,11 +85,7 @@ It fetches from `DOCKER_IMAGES_REMOTE_URL` (set in ehm-api's `.env`) on the serv
 
 ### Create packages
 
-Go to `Packges > Create Package`
-
-### DNS Setup
-
-1. Go to `System > Config > DNS Settings` and update the `Public IP`
+Go to `Package > Create Package`. A package sets an account's CPU, memory, disk, bandwidth and database limits.
 
 ### Configure Storage.bd Backups (optional, recommended)
 

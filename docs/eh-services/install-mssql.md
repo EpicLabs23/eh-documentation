@@ -4,7 +4,7 @@ sidebar_position: 10
 
 # Install MSSQL
 
-Optional — only needed if you want to offer MSSQL databases to ECP accounts. Per-account database/login provisioning and count/size quota enforcement are available via the `ecp-mssql` API (see `ehm-api`'s `docs/RESOURCE_MONITORING.md`); there's no ecp-ui panel for it yet, only the API.
+Optional — only needed if you want to offer MSSQL databases to ECP accounts. Accounts manage them under **Database > SQL Databases** in ECP, with per-account count and size limits from their package.
 
 ```bash
 cd /epiclabs23/eh/eh-services/mssql
@@ -85,8 +85,7 @@ below — leave `MSSQL_BACKUP_HOST_DIR` unset in this topology.
 
 ## One-click backup/restore (same host as EHM only)
 
-Account databases can be backed up to storage.bd via `POST /ecp-mssql/backup-to-storage-bd` /
-`restore-from-storage-bd`, using T-SQL's own `BACKUP DATABASE`/`RESTORE DATABASE` under the hood —
+Account databases can be backed up to storage.bd from ECP, using T-SQL's own `BACKUP DATABASE`/`RESTORE DATABASE` under the hood —
 which always write/read **server-side**, inside this container. `docker-compose.yml` here already
 bind-mounts a `./backup` directory into the container at `/var/opt/mssql/backup` for exactly this,
 so EHM (running on the same host) can read the backup file straight off disk instead of needing a

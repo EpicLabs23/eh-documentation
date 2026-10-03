@@ -2,87 +2,81 @@
 sidebar_position: 8
 ---
 
-# Install Bind9 DNS
+# Install BIND9 DNS
 
-### Pull the BIND9 docker image before disabling built-in DNS server
+Optional. Install this if EH should host DNS zones for account domains. You can use Cloudflare instead, or manage DNS yourself (**System > Config > DNS Settings**).
+
+The stack runs BIND9 plus a small management API (`bind9-api`) that EHM uses to edit zones. DNS (port 53) is public; the API (port 8053) only listens on localhost.
+
+## 1. Free up port 53
+
+Ubuntu's built-in resolver uses port 53. Build the image first (it needs DNS to download packages), then turn the resolver off:
 
 ```bash
-docker pull ubuntu/bind9:latest
+cd /epiclabs23/eh/eh-services/dns
+docker compose build
 ```
 
-### Disable Ubuntu built-in DNS resolver
-
-1. Stop the OS built-in DNS service `service systemd-resolved stop`
-2. Backup existing `/etc/resolv.conf` just for safety. `mv /etc/resolv.conf /etc/resolv.conf.backup`
-3. Disable the service from startup `systemctl disable systemd-resolved`
-4. Confirm if port 53 is free: `sudo lsof -i :53` . this should return nothing.
-
-### Installation:
-
-1. `cd /epiclabs23/eh/eh-services/dns`
-2. Start docker container:
-
 ```bash
-docker run -d \
---name bind9 \
--p 53:53/udp \
--p 53:53/tcp \
--e TZ=Asia/Dhaka \
--e BIND9_USER=root \
--v /epiclabs23/eh/eh-services/dns/etc/bind:/etc/bind \
--v /epiclabs23/eh/eh-services/dns/var/cache/bind:/var/cache/bind \
--v /epiclabs23/eh/eh-services/dns/var/lib/bind:/var/lib/bind \
---restart=always \
-ubuntu/bind9:latest
+systemctl stop systemd-resolved
+systemctl disable systemd-resolved
+mv /etc/resolv.conf /etc/resolv.conf.backup
+sudo lsof -i :53    # should print nothing
 ```
 
-3. Configure Your Local Machine to Use the DNS Server: `vim /etc/resolv.conf` then add following content
+Give the server a resolver again:
 
 ```bash
+cat > /etc/resolv.conf <<'CONF'
 nameserver 127.0.0.1
 nameserver 8.8.8.8
-nameserver 45.125.222.158
+nameserver 1.1.1.1
 search .
+CONF
 ```
 
-4. Test DNS server:
+## 2. Start BIND9
+
+Set your time zone under `environment: TZ` in `docker-compose.yml` if you like, then:
+
+```bash
+docker compose up -d
+docker logs bind9-eh
+```
+
+Test it:
 
 ```bash
 dig @127.0.0.1 www.example.local
 ```
 
-or
+## 3. Connect EHM
+
+Read the management API's username and password:
 
 ```bash
-nslookup www.example.local 127.0.0.1
-
+docker exec bind9-eh cat /etc/bind9-api/config.yml
 ```
 
-5. Managing DNS server:
+In EHM, **System > Config > DNS Settings**: enable BIND9, set the API base URL to `http://localhost:8053`, and enter that username and password. EHM then creates and updates zones for account domains itself.
+
+Point your domain's nameservers (at your registrar) to this server, with glue records if the nameserver names are under the same domain.
+
+## Managing BIND9 by hand
 
 ```bash
-docker exec bind9 named-checkzone ehm23.com /etc/bind/zones/db.ehm23.com
-docker exec bind9 named-checkzone 57.169.49.103.in-addr.arpa /etc/bind/zones/db.57.169.49.103
-docker exec bind9 rndc reload
-docker stop bind9
-docker start bind9
-docker logs bind9
+docker exec bind9-eh named-checkzone <zone> /etc/bind/zones/db.<zone>
+docker exec bind9-eh rndc reload
+docker compose restart
+docker logs bind9-eh
 ```
 
-6. Settings, forward DNS etc are available in: `./etc/bind/named.conf.options`
+Options such as forwarders are in `./etc/bind/named.conf.options`. Zone files are under `./etc/bind`, kept on the host.
 
-### Adding a new zone file:
+## Undo
 
-1. Copy the `db.example.local` file as template, make changes accordingly.
-2. For any subdomain add an 'A' entry on this very same file.
-3. Update `named.conf.local` with the new zone file.
-
-### Debug
-
-Start built-in DNS: `service systemd-resolved start`
-
-Check status of built-in DNS: `service systemd-resolved status`
-
-Enable the built-in DSN in startup `systemctl enable systemd-resolved`
-
-Copy back the backed up config file: `cp /etc/resolv.conf.backup /etc/resolv.conf`
+```bash
+docker compose down
+systemctl enable --now systemd-resolved
+cp /etc/resolv.conf.backup /etc/resolv.conf
+```

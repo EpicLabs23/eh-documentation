@@ -1,10 +1,11 @@
 ---
 sidebar_position: 2
+slug: /install-in-a-fresh-server
 ---
 
-# Install in a fresh server
+# Install on a fresh server
 
-These are the exact steps I did to install EHM and related services in folloing server
+A complete, copy-and-paste install of EHM and its services on a new server. It was written and tested on this server:
 
 ```txt
 Provider: Contabo
@@ -22,6 +23,8 @@ ssh root@<server-ip>
 ```
 
 #### 2. Enable user quota
+
+This script is for Contabo's Ubuntu 24.04 images. On other providers, follow [System setup](../ehm/system-setup) instead.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/EpicLabs23/ecp-ehm-free/refs/heads/main/data/ehm/enable_user_quota_contabo_ubuntu_24.sh | bash
@@ -61,7 +64,7 @@ pm2 startup
 npm install -g serve
 ```
 
-#### 6. Nginx Intallation
+#### 6. Nginx installation
 
 ```bash
 apt update
@@ -190,7 +193,7 @@ docker network create eh_network --subnet=172.1.0.0/16
 
 Isolate account containers from each other
 
-Every hosting account's container lives on `eh_network`, and a plain Docker bridge network lets any container on it reach any other by IP. Without this, one compromised account's container could reach every sibling account's container directly. These rules go in the `DOCKER-USER` chain — the hook Docker itself provides for operator-added firewall rules, evaluated before Docker's own rules and not wiped out when Docker restarts. `172.1.0.0/27` (`.0`-`.31`) is reserved for shared infrastructure (MariaDB, MongoDB, Postgres, MSSQL, phpMyAdmin, plus headroom) — see `getIpForNewAccount()` in `ehm-api`, which never allocates an account an IP inside that block. Traffic between the host (nginx `proxy_pass`, container callbacks to EHM) and a container never passes through this chain, so nothing here needs an exception for that — only container-to-container traffic is affected.
+Every hosting account's container lives on `eh_network`, and a plain Docker bridge network lets any container on it reach any other by IP. Without this, one compromised account's container could reach every sibling account's container directly. These rules go in the `DOCKER-USER` chain — the hook Docker itself provides for operator-added firewall rules, evaluated before Docker's own rules and not wiped out when Docker restarts. `172.1.0.0/27` (`.0`-`.31`) is reserved for shared infrastructure (MariaDB, MongoDB, Postgres, MSSQL, phpMyAdmin, plus headroom); EHM never gives an account an IP inside that block. Traffic between the host (nginx `proxy_pass`, container callbacks to EHM) and a container never passes through this chain, so nothing here needs an exception for that — only container-to-container traffic is affected.
 
 ```bash
 # Let return traffic through for connections already permitted
@@ -300,7 +303,7 @@ pm2 restart ecosystem.config.js
 
 #### 13. Install InfluxDB
 
-InfluxDB stores container CPU/memory/network time series metrics (`DockerMetricsService` in EHM API). This step is optional — EHM works without it, but historical metrics graphs and time-series queries require it. The container must be named `influxdb` — `eh-manager install-ehm`/`update-ehm` (step 17) exec into it by that name to create the admin token.
+InfluxDB stores container CPU/memory/network history for EHM's charts. This step is optional — EHM works without it, but historical metrics graphs and time-series queries require it. The container must be named `influxdb` — `eh-manager install-ehm`/`update-ehm` (step 17) exec into it by that name to create the admin token.
 
 ```bash
 cd /epiclabs23/eh/eh-services/influxdb
@@ -319,7 +322,7 @@ Run the container
 docker compose up -d
 ```
 
-That's it for this step — leave the database/token creation to `eh-manager`. When you get to step 17 (`eh-manager install-ehm`), it will prompt **"Enable InfluxDB metrics history?"**; answer yes (or pass `--influx true`) and it creates the admin token and writes `INFLUX_METRICS_ENABLED=true` + `INFLUXDB_TOKEN` into EHM API's `.env` for you. The `ecp_metrics` database itself is created automatically on first write by `DockerMetricsService`, so it does not need to be created up front. If you skip this step entirely, just answer no (or omit `--influx`) at that prompt and EHM runs without Influx.
+That's it for this step — leave the database/token creation to `eh-manager`. When you get to step 17 (`eh-manager install-ehm`), it will prompt **"Enable InfluxDB metrics history?"**; answer yes (or pass `--influx true`) and it creates the admin token and writes `INFLUX_METRICS_ENABLED=true` + `INFLUXDB_TOKEN` into EHM API's `.env` for you. The `ecp_metrics` database itself is created automatically on first write, so it does not need to be created up front. If you skip this step entirely, just answer no (or omit `--influx`) at that prompt and EHM runs without Influx.
 
 #### 14. Install EH-Manager
 
@@ -344,11 +347,16 @@ npm link
 - Decide the domain name you want use to access EHM.
 - Point the domain to this server IP.
 
-#### 16. Install Epic Backup
+#### 16. Optional services
 
-```bash
-eh-manager install-epic-backup
-```
+Install any of these now if you plan to offer them. Each page ends with the `.env` values to copy into EHM API after step 17.
+
+- [PostgreSQL](../eh-services/install-postgresql) and [pgAdmin](../eh-services/install-pgadmin)
+- [MSSQL](../eh-services/install-mssql)
+- [MongoDB](../eh-services/install-mongodb)
+- [BIND9 DNS](../eh-services/install-bind9-dns), if EH should host DNS zones
+
+For backups through storage.bd, install a verified `restic` binary now: [Install restic](../ehm/host-backup.md#install-restic).
 
 #### 17. Install EHM
 
@@ -444,6 +452,15 @@ server {
 nginx -t && service nginx reload
 ```
 
+Now point EHM at its public URL. Set `EHM_API_PUBLIC_URL=https://<your-ehm-domain>/api` in `/epiclabs23/eh/ehm/<version>/ehm-api/.env`, then:
+
+```bash
+cd /epiclabs23/eh/ehm/<version>/ehm-api
+pm2 restart ecosystem.config.js
+```
+
+Why this matters: [Enable HTTPS for EHM](../ehm/enable-https#update-ehm_api_public_url).
+
 #### 19. Create first Admin user
 
 ```bash
@@ -452,11 +469,14 @@ node /epiclabs23/eh/ehm/<version>/ehm-api/prisma/create-admin.mjs
 
 #### 20. Configure EHM admin panel
 
-Left Side Menu -> Config -> General Settings -> Public IP
+Sign in at `https://<your-ehm-domain>`, then:
 
-Left Side Menu -> Config -> General Settings -> DNS Settings -> Default DNS Server
-
-Left Side Menu -> Config -> General Settings -> Email Settings
+1. **System > Config > General Settings**: set the server's **Public IP**.
+2. **System > Config > DNS Settings**: choose the default DNS server (BIND9, Cloudflare or none).
+3. **System > Config > Email Settings**: SMTP details, so EHM can send account and alert emails.
+4. **System > Config > Docker Images**: click **Load Image List**. Accounts can't be created until this is done.
+5. **Package > Create Package**: create at least one package.
+6. Optional: [storage.bd backups](../ehm/storage-bd-setup), [Git integrations](../ehm/git-integrations-setup), [resource monitoring](../ehm/resource-monitoring).
 
 #### 21. Host Benchmark dependencies (optional)
 
@@ -469,7 +489,7 @@ apt install -y sysbench fio
 
 #### 22. Deny host shell access for hosting accounts
 
-See [Deny Host Shell Access](./ehm/deny-host-shell-access.md) for why this is needed.
+See [Deny host shell access](../ehm/deny-host-shell-access) for why this is needed.
 
 ```bash
 cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$(date +%Y%m%d%H%M%S)

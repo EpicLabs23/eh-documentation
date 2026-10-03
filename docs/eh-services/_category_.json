@@ -1,11 +1,11 @@
 {
-    "position": 5,
-    "label": "EH Services",
-    "collapsible": true,
-    "collapsed": false,
-    "className": "red",
-    "link": {
-      "type": "generated-index",
-      "title": "EH Services"
-    }
+  "position": 5,
+  "label": "EH Services",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "EH Services",
+    "description": "The shared services EHM uses (databases, Redis, InfluxDB, DNS, admin tools), each a Docker Compose stack from the public eh-services repo."
   }
+}

@@ -1,11 +1,11 @@
 {
-    "position": 10,
-    "label": "Epic Manager",
-    "collapsible": true,
-    "collapsed": false,
-    "className": "red",
-    "link": {
-      "type": "generated-index",
-      "title": "Epic Manager overview"
-    }
+  "position": 6,
+  "label": "EH Manager",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "EH Manager",
+    "description": "The command-line tool that installs and updates EHM."
   }
+}

@@ -6,8 +6,8 @@ sidebar_position: 9.5
 
 Optional — only needed if you want to give ECP accounts a one-click SSO login into pgAdmin for
 their own PostgreSQL databases. Requires PostgreSQL (the previous page) to already be installed
-and reachable. See `ehm-api/docs/PGADMIN.md` for the full design (this is SSO-login-only today —
-accounts still add their own server connection by hand the first time).
+and reachable. Sign-in is automatic, but accounts still add their own server connection by hand the
+first time.
 
 ```bash
 cd /epiclabs23/eh/eh-services/pgadmin
@@ -28,7 +28,7 @@ sed -i "s/^PGADMIN_SHARED_SECRET=.*/PGADMIN_SHARED_SECRET=$(openssl rand -hex 32
 opening the container directly, e.g. to check User Management) — no ECP account ever uses it, they
 all arrive pre-authenticated. `PGADMIN_SHARED_SECRET` is the value pgAdmin checks to make sure the
 identity header it receives really came from this stack's own nginx sidecar and not a client that
-reached it directly — see `ehm-api/docs/PGADMIN.md`'s trust-boundary section.
+reached it directly.
 
 ## Run the containers
 
@@ -39,12 +39,8 @@ docker compose up -d
 This starts two containers: `pgadmin` itself (no published port — only reachable from the sidecar
 below) and `pgadmin-nginx`, published on `2331` — the only externally reachable port in this stack.
 
-`2331` is not just this stack's default — it's hardcoded into ECP's own "PgAdmin" link
-(`getPgAdminUrl()` in `ecp-ui/src/layouts/partials/LeftMenu.jsx`), the same way phpMyAdmin's link
-hardcodes `2329`. If `2331` is already in use on your host, changing `ports: - '2331:80'` under
-`pgadmin-nginx` in `docker-compose.yml` is not enough on its own — you also have to update that
-constant in `ecp-ui` to match and rebuild/redeploy `ecp-ui`, or the link will point at the old port
-and fail to load. There's no `.env`/`ehm-api` config for this port to wire through instead.
+ECP's "PgAdmin" link always points at port `2331` (as its phpMyAdmin link always points at `2329`),
+so keep this port free and don't change it in `docker-compose.yml`.
 
 ## Verify the identity header format
 
@@ -58,7 +54,7 @@ and `'X-Ehm-Pgadmin-User'` and re-run `docker compose up -d`.
 ## Bumping the pgAdmin version
 
 `patches/databases-nodes.sql` and `patches/roles-nodes.sql` overwrite two of pgAdmin's own internal
-SQL template files (see `ehm-api/docs/PGADMIN.md`'s "Cross-tenant tree filtering" section) so the
+SQL template files so the
 Databases/Login-Group-Roles tree doesn't list every other account's database/role by default.
 They're tied byte-for-byte to pgAdmin `9.16`'s exact file paths/content — before changing the
 pinned image tag, diff both files against the new version's stock templates

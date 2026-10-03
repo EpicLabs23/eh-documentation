@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7.6
+slug: /ehm/upgrading-to-1.1.4
 ---
 
 # Upgrading from 1.1.3 to 1.1.4
@@ -14,19 +15,18 @@ Updating **eh-manager itself**? `HOST_METRICS_ENABLED` is now carried forward fr
 
 ## What's in this release
 
-- **Host Machine Benchmark** ("noisy neighbor" detector), under **Resource Monitor → Benchmark**, admin-only. Runs an on-demand ~30-90s suite (CPU steal/iowait, sysbench CPU/memory, `fio` disk IOPS/latency, network ping) to tell whether the underlying VPS is being starved by other tenants on the same host, and persists results (`HostBenchmarkRun`) so a trend across runs can be seen. See `docs/HOST_BENCHMARK.md` in `ehm-api`.
-- **Host machine resource collection.** `system/host-metrics` now also collects host-wide (not just per-container) CPU/memory/disk/network into InfluxDB, gated by the new `HOST_METRICS_ENABLED` env var (defaults `true`, only takes effect when `INFLUX_METRICS_ENABLED=true`).
+- **Host Machine Benchmark** ("noisy neighbor" detector), under **Resource Monitor → Benchmark**, admin-only. Runs an on-demand ~30-90s suite (CPU steal/iowait, sysbench CPU/memory, `fio` disk IOPS/latency, network ping) to tell whether the underlying VPS is being starved by other tenants on the same host, and keeps results so a trend across runs can be seen. See [Host benchmark](../host-benchmark.md).
+- **Host machine resource collection.** EHM now also collects host-wide (not just per-container) CPU/memory/disk/network into InfluxDB, gated by the new `HOST_METRICS_ENABLED` env var (defaults `true`, only takes effect when `INFLUX_METRICS_ENABLED=true`).
 - **Resource monitor / alerting improvements:**
   - Usage notifications (email + in-app) now show an EMA-smoothed average percent instead of a raw instantaneous reading, so the number in the message better matches what the account actually experienced.
   - Notification banners can now be dismissed per-account; a dismissed banner re-shows automatically once the underlying severity/action actually changes, instead of staying dismissed forever.
   - Notifications gained `read-all`, `clear-all`, and single-delete endpoints.
   - Resource usage notification emails include more detail and better formatting (ECP URL, username).
   - New line charts for container metrics history.
-- **`/auth/clients/:client_id/regenerate-secret`** — rotate an `IntegrationClient`'s secret in place (same `client_id`/name/permissions), and reactivate it if it had been revoked. This is now the documented "undo" path for a revoke — see `docs/AUTH.md`.
+- **Regenerate an integration client's secret** — rotate a client's secret in place (same client ID, name and permissions), and reactivate it if it had been revoked. This is the way to undo a revoke.
 - **New account welcome email format** — cosmetic only, no action needed.
-- A Postman collection for the EHM + ECP APIs was added to the `ehm-api` repo (`postman/`) — developer convenience, not something that ships or runs on a server.
 
-Every schema change this release (`ResourceMonitorState.avg_percent`/`dismissed_action`/`dismissed_at`, the new `HostBenchmarkRun` table) is additive — new nullable columns or a brand-new table. There's no data migration step to run by hand; `prisma db push` (part of the normal update script) picks these up on its own.
+Every database change in this release is additive (new columns and a new table). There's no data migration step to run by hand; the normal update script applies them.
 
 ## Before you start
 
@@ -36,7 +36,7 @@ Nothing is required before running the update. Optionally, if you plan to use th
 sudo apt install -y sysbench fio
 ```
 
-This is best-effort — `HostBenchmarkService` degrades gracefully per-step if a tool is missing (that step just reports "not installed" in the run instead of failing the whole benchmark), so a failed install here doesn't block the rest of the update. If your host has no internet access or the install fails for any other reason, install the packages by hand later whenever you want to use the feature.
+This is best-effort — the benchmark degrades gracefully per-step if a tool is missing (that step just reports "not installed" in the run instead of failing the whole benchmark), so a failed install here doesn't block the rest of the update. If your host has no internet access or the install fails for any other reason, install the packages by hand later whenever you want to use the feature.
 
 ## Step-by-step
 
@@ -69,10 +69,10 @@ Unlike the previous point, this script does **not** repeat 1.1.3's `User.role ->
 
 - **`HOST_METRICS_ENABLED` carries forward from your previous `.env`**, same as `EHM_API_PUBLIC_URL`/`INFLUX_ENABLED` — if you'd previously set it to `false`, it stays `false`. If your `.env` never had this key (any install before this release), it comes up as `false` by default rather than the `.env.sample` default of `true` — turn it on by hand in `/epiclabs23/eh/ehm/1.1.4/ehm-api/.env` (`HOST_METRICS_ENABLED=true`, then `pm2 restart ehm-api`) if you want host-wide metrics collection. This only matters when `INFLUX_METRICS_ENABLED=true` — otherwise the flag has no effect either way.
 - **The Host Benchmark page will show every step as "not installed"** until `sysbench`/`fio` are present — expected if the apt install above didn't run or failed.
-- **Existing `IntegrationClient`s are unaffected** — `regenerate-secret` is a new, opt-in action; nothing rotates automatically.
+- **Existing integration clients are unaffected** — regenerating a secret is a new, opt-in action; nothing rotates automatically.
 
-## Questions this guide doesn't answer
+## More help
 
-- Host Benchmark architecture, indicators, and how to read the results: `docs/HOST_BENCHMARK.md` in `ehm-api`.
-- Resource monitoring/alerting internals: `docs/RESOURCE_MONITORING.md` in `ehm-api`.
-- `IntegrationClient` management (`/auth/clients*`, including `regenerate-secret`): `docs/AUTH.md` in `ehm-api`.
+- Reading benchmark results: [Host benchmark](../host-benchmark.md).
+- Resource monitoring and alerts: [Resource monitoring](../resource-monitoring.md).
+- Integration clients: [Billing integration API](../../integrations/billing-api.md).

@@ -53,15 +53,7 @@ postgresql:
   permalink: /postgresql
   description: Related to PostgreSQL
 
-google-drive:
-  label: Google Drive
-  permalink: /google-drive
-  description: Related to Google Drive
 
-epic-backup:
-  label: Epic Backup
-  permalink: /epic-backup
-  description: Related to Epic Backup
 
 cloudflare:
   label: Cloudflare
@@ -72,3 +64,11 @@ DNS:
   label: DNS
   permalink: /dns
   description: Related to DNS
+wordpress:
+  label: WordPress
+  permalink: /wordpress
+  description: WordPress hosting
+security:
+  label: Security
+  permalink: /security
+  description: Security practices

@@ -6,13 +6,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Epic Labs 23',
-  tagline: 'Server Management Solution',
+  tagline: 'Free shared hosting software: EHM and ECP',
   favicon: 'img/epic-labs-icon.png',
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  url: 'https://docs.ecpanel.io',
   baseUrl: '/',
 
   // GitHub pages deployment config.
@@ -76,8 +73,9 @@ const config: Config = {
           label: 'EH Documentation',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/ecp-vs-compatitors', label: 'Compare', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/EpicLabs23/ecp-ehm-free',
           label: 'GitHub',
           position: 'right',
         },
@@ -85,6 +83,22 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      links: [
+        {
+          title: 'Docs',
+          items: [
+            {label: 'Introduction', to: '/intro'},
+            {label: 'Install on a fresh server', to: '/install-in-a-fresh-server'},
+          ],
+        },
+        {
+          title: 'Community',
+          items: [
+            {label: 'Report a bug', href: 'https://github.com/EpicLabs23/ecp-ehm-free/issues'},
+            {label: 'Discussions', href: 'https://github.com/EpicLabs23/ecp-ehm-free/discussions'},
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} Epic Labs 23.`,
     },
     prism: {

@@ -28,11 +28,11 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'EB',
+    title: 'Epic Labs 23',
     img_src: 'img/full-el23.svg',
     description: (
       <>
-        Epic Backup
+        Support, hosting and services
       </>
     ),
   },

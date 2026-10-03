@@ -2,7 +2,7 @@
 slug: wordpress-security-best-practices
 title: WordPress Security Best Practices
 authors: mahmudur
-tags: [postgres, aclitem]
+tags: [wordpress, security]
 time: 2025-01-23T12:00
 ---
 

@@ -1,10 +1,10 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
-# Nginx Intallation
+# Nginx Installation
 
-Nginx is required for Epic Host to map domains with user applications.
+Nginx routes each account domain to the right app. EHM writes the per-account server blocks; you only set up the base install here.
 
 #### Installation
 

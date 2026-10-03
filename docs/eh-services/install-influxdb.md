@@ -44,7 +44,7 @@ InfluxDB 3 stores exactly one admin token, named `_admin`, and its hash lives in
 
 ### Lost or invalid admin token
 
-Symptom: EHM API logs `401 Unauthorized` from InfluxDB on metrics writes/queries (`docker-metrics.service.ts`), or you simply no longer have the token that's supposed to be in `ehm-api/.env`.
+Symptom: EHM API logs `401 Unauthorized` from InfluxDB on metrics writes/queries, or you simply no longer have the token that's supposed to be in `ehm-api/.env`.
 
 Because you can't auth to delete the old token if you've lost it, and `create token --admin` regenerates in place rather than blocking, recovery is a single step:
 

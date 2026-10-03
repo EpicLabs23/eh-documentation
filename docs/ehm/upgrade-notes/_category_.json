@@ -1,0 +1,11 @@
+{
+  "position": 7.5,
+  "label": "Upgrade notes",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Upgrade notes",
+    "description": "Read the note for each version you are upgrading through before running eh-manager update-ehm."
+  }
+}

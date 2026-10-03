@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6.1
+sidebar_position: 6.2
 ---
 
 # Git Integrations Setup (GitHub / GitLab / Bitbucket)
@@ -10,12 +10,13 @@ repo via OAuth. Nothing else in EHM depends on this.
 :::
 
 Each EHM install registers its **own** OAuth app per provider — there's no shared/central broker, since
-OAuth providers require a fixed callback URL and ECP tenant domains differ per install. Full design in
-`docs/GIT_INTEGRATIONS.md` in `ehm-api`; this page is just the setup steps.
+OAuth providers require a fixed callback URL and ECP tenant domains differ per install.
+
+Customers then connect their account and deploy as described in [Deploy from Git](../ecp/deploy-from-git.md).
 
 ## 1. Set `EHM_ENCRYPTION_KEY`
 
-Required before saving any provider's client secret (it's what encrypts `client_secret_enc` at rest). If
+Required before saving any provider's client secret (it encrypts the saved secret). If
 you haven't set it already:
 
 ```bash
@@ -41,10 +42,12 @@ bare host with a `:2326` port like local dev.
 - **GitHub**: create an OAuth App at `github.com/settings/developers` → note the Client ID and generate a
   Client Secret.
 - **GitLab**: create an application at `https://gitlab.com/-/user_settings/applications` (or your self-hosted instance's
-  equivalent) with the `api` scope (or narrower, per your needs) → note the Application ID and Secret. If
+  equivalent) with the `api` scope (needed for automatic push webhooks; `read_api read_repository` is enough for cloning only) → note the Application ID and Secret. If
   self-hosted, you'll also set `base_url` in step 3.
 - **Bitbucket**: create an OAuth consumer under your workspace's settings → note the Key (client_id) and
   Secret. Bitbucket fixes scopes on the consumer itself, not at authorize time.
+  Tick **Repositories: Read** and **Webhooks: Read and write**, or customers can't get automatic push webhooks
+  (a later change to the consumer only takes effect after each customer reconnects).
   Create OAuth Client: `https://bitbucket.org/<bitbucket-username>/workspace/settings/oauth-clients`
 
 ## 3. Store the credentials in EHM
@@ -75,8 +78,8 @@ From ECP, the "Connect GitHub/GitLab/Bitbucket" option on app creation should no
 ## Troubleshooting
 
 - **OAuth popup redirects but nothing happens / ECP shows no result**: check `EHM_API_PUBLIC_URL` is the
-  exact public origin ECP's JWT claims expect — the callback page's `postMessage` is validated by origin
-  on the ECP side (see `docs/GIT_INTEGRATIONS.md`), so a mismatch here silently drops the result.
+  exact public origin ECP expects — ECP checks where the callback result came from, so a mismatch here
+  silently drops the result.
   Confirm the callback URL registered with the provider matches it exactly, including scheme and port.
 - **"invalid client" from the provider**: double check the `client_id`/`client_secret` were saved for the
   right provider key (`github`/`gitlab`/`bitbucket`, lowercase) and that `enabled` is `true`.

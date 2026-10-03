@@ -57,7 +57,7 @@ docker compose up -d
 **`pgadmin` is pinned, not on `:latest`** — `docker compose pull` here won't move it. Bumping the
 pinned tag in `pgadmin/docker-compose.yml` requires re-diffing `patches/*.sql` against the new
 version's stock files first, or the cross-tenant tree-filtering patches can silently stop applying
-correctly. See the "Bumping the pgAdmin version" section of `install-pgadmin.md`.
+correctly. See [Bumping the pgAdmin version](./install-pgadmin.md#bumping-the-pgadmin-version).
 
 Existing data is untouched by this — every service stores its data in a named volume or bind mount
 that isn't removed when the container is recreated (see that service's own install page if you're
@@ -74,9 +74,8 @@ pm2 restart ecosystem.config.js
 ```
 
 `pgadmin-nginx`'s published port (`2331`) and phpMyAdmin's (`2329`) are the exception — nothing in
-`ehm-api/.env` mirrors them. They're hardcoded into `ecp-ui` (`getPgAdminUrl()`/`getPhpMyAdminUrl()`
-in `LeftMenu.jsx`), so changing either requires updating that constant and rebuilding/redeploying
-`ecp-ui` instead, not touching EHM API.
+`ehm-api/.env` mirrors them. ECP's phpMyAdmin and pgAdmin links always use these two ports, so
+don't change them.
 
 ## Verify
 
@@ -90,5 +89,5 @@ docker compose logs -f <service>   # if anything looks wrong
 - Moving a service off an old EHM-managed container onto this standalone stack for the first time, or
   running it on a separate host from EHM: that service's own install page (Install PostgreSQL / MSSQL
   / MongoDB / Redis / etc., in this same section).
-- What EHM reads from each service and how it decides "configured" vs "reachable": `docs/DB_TOPOLOGY.md`
-  in `ehm-api`.
+- Which `.env` values EHM reads for each engine: the "Wire the config into EHM API" section of that
+  engine's install page.

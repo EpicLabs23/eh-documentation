@@ -2,7 +2,7 @@
 slug: cloudflare-api-token-and-account-id
 title: Cloudflare API Token and Account ID
 authors: mahmudur
-tags: [cloudflare, DNS, epic-backup]
+tags: [cloudflare, DNS]
 time: 2025-01-07T09:19
 ---
 

@@ -34,4 +34,4 @@ address, in `ehm-api/.env`) will not be reachable in that case. Instead:
 
 Since EHM's own database (`EHM_DATABASE_URL`) lives here too, EHM won't start at all until this is
 wired up correctly — there's no graceful degradation for MariaDB the way there is for the optional
-Postgres/MSSQL/MongoDB engines (see `ehm-api/docs/DB_TOPOLOGY.md`).
+Postgres/MSSQL/MongoDB engines.

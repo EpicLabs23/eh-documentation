@@ -22,7 +22,7 @@ sed -i "s/^MONGO_ROOT_PASSWORD=.*/MONGO_ROOT_PASSWORD=$(openssl rand -hex 16)/" 
 
 ## Existing installs upgrading from an EHM-managed container
 
-Older EHM versions created and started this container themselves (via the "MongoDB Settings" page in EHM's UI), and older `ecp-mongodb.service.ts` versions had the root credentials hardcoded (`admin`/`adminpassword`) rather than reading them from config. If you already have a `mongodb` container running that way, stop and remove it first — your data is preserved in the named Docker volume `mongo-data`, which isn't deleted along with the container:
+Older EHM versions created and started this container themselves (via the "MongoDB Settings" page in EHM's UI), with the root credentials fixed at `admin`/`adminpassword`. If you already have a `mongodb` container running that way, stop and remove it first — your data is preserved in the named Docker volume `mongo-data`, which isn't deleted along with the container:
 
 ```bash
 docker stop mongodb && docker rm mongodb

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7.5
+slug: /ehm/upgrading-to-1.1.3
 ---
 
 # Upgrading from 1.1.2 to 1.1.3
@@ -12,19 +13,19 @@ This release includes a breaking database schema change (existing admins are loc
 
 Everything below landed between the `1.1.2` release cut and now. It's a large batch — a full authorization rewrite plus a dedicated security-hardening pass — not the usual incremental update:
 
-- **Authorization rewritten from roles to fine-grained permissions.** `User.role` ("admin"/"user") is gone, replaced by `User.is_admin` (boolean) plus a permission-catalog system (`@RequirePermissions(...)`). Every route now requires an explicit permission — a route with none is unreachable, where previously it was reachable by any authenticated caller.
-- **New `/integration/*` API** for external billing/provisioning systems (WHMCS-style): OAuth 2.0 Client Credentials, `IntegrationClient` management via `/auth/clients`, full audit log. Replaces the old irrevocable, ~100-year `access_token`/`integration_token` columns, which are removed entirely.
+- **Authorization rewritten from roles to fine-grained permissions.** The admin/user role is replaced by an admin flag plus per-user permissions. Every action now requires an explicit permission — anything without one is refused, where previously any signed-in staff user could reach it.
+- **New [billing integration API](../../integrations/billing-api.md)** for external billing/provisioning systems (WHMCS-style): OAuth 2.0 client credentials, managed under **Integration** in EHM, with a full audit log. Replaces the old long-lived API tokens, which are removed entirely.
 - **A dedicated security pass** found and fixed several **confirmed, live-exploitable** issues, not just hardening:
-  - Command injection reachable by any hosting account (no admin needed) in several `ecp/*` modules (`oneclick`, `ecp-cli`, `ecp-nginx`, `ssl`, `php`, DNS host-file editing) — all fixed by moving off raw shell strings to argv-array `spawn` calls, plus input validation.
-  - SQL injection reachable by any hosting account in the MySQL database/user management endpoints — fixed via identifier allowlisting and parameterized queries.
+  - Command injection reachable by any hosting account in several control panel features (one-click apps, Nginx, SSL, PHP and DNS host-file editing).
+  - SQL injection reachable by any hosting account in MySQL database and user management.
   - `eh-services` (Redis, InfluxDB, phpMyAdmin) were reachable from the public internet with no authentication.
-  - `CryptoService` (account secrets: MySQL passwords, git tokens) migrated from unauthenticated AES-256-CBC to authenticated AES-256-GCM.
-  - `eh-config` secrets (Bind9 password, Cloudflare token, Postgres superuser password) are now encrypted at rest instead of plaintext.
+  - Stored account secrets (MySQL passwords, Git tokens) moved to authenticated encryption (AES-256-GCM).
+  - Configuration secrets (BIND9 password, Cloudflare token, Postgres superuser password) are now encrypted at rest.
   - Rate limiting added to auth endpoints and to every generated Nginx server block.
-  - `ecp-go`: per-account JWT/container binding fixed (a valid JWT for one account no longer works against another account's container), GitHub webhook signature verification no longer fails open, `CreateFromGit` shell injection fixed.
+  - ECP: a sign-in token for one account no longer works against another account's control panel; GitHub webhook signatures are always checked; a shell injection when creating an app from Git is fixed.
   - Container-to-container network isolation (`DOCKER-USER` iptables rule) — new requirement for existing servers, see step 6 below.
 
-Full details of every fix: `docs/SECURITY_CHECKLIST.md` in the `ehm-api` repo.
+Updating is strongly recommended.
 
 ## Before you start
 
@@ -134,13 +135,13 @@ pm2 restart ehm-api
 
 ### 5. If you use the `/integration/*` API today
 
-There's no "today" to migrate from — this API is new in this release. Skip this step unless a billing/provisioning system integration is planned; see `docs/INTEGRATIONS.md` in `ehm-api` to set one up (`POST /auth/clients` to create a client, then the client authenticates via `POST /auth/token`).
+There's no "today" to migrate from — this API is new in this release. Skip this step unless a billing/provisioning system integration is planned; see [Billing integration API](../../integrations/billing-api.md) to set one up.
 
-**If anything external was using the old long-lived `access_token`/`integration_token` bearer credentials** (the "API Cred." feature that used to be on the Users screen), it stops working — those columns are dropped, not just deprecated. There is no automatic migration path for this, because those tokens couldn't be revoked or scoped in the first place; issue a proper `IntegrationClient` via `/auth/clients` instead and update the external system's credentials.
+**If anything external was using the old long-lived `access_token`/`integration_token` bearer credentials** (the "API Cred." feature that used to be on the Users screen), it stops working — those columns are dropped, not just deprecated. There is no automatic migration path for this, because those tokens couldn't be revoked or scoped in the first place; create an integration client (**Integration > Create Client**) instead and update the external system's credentials.
 
 ### 6. Apply the `DOCKER-USER` iptables rule (once per server, if not already applied)
 
-New this release: account containers on `eh_network` are no longer allowed to reach each other directly (previously a compromised container could reach every sibling account's container). This needs a one-time host firewall rule — full commands and verification steps are in [Install in a fresh server](./ehm-install), step 9. Existing servers need this applied by hand; it isn't part of `eh-manager update-ehm`.
+New this release: account containers on `eh_network` are no longer allowed to reach each other directly (previously a compromised container could reach every sibling account's container). This needs a one-time host firewall rule — full commands and verification steps are in [Install on a fresh server](../../getting-started/install-on-a-fresh-server.md), step 9. Existing servers need this applied by hand; it isn't part of `eh-manager update-ehm`.
 
 ## What to expect afterward
 
@@ -148,8 +149,7 @@ New this release: account containers on `eh_network` are no longer allowed to re
 - **Existing Nginx configs don't get rate limiting until they're regenerated.** New server blocks (new accounts, or any action that re-renders an existing one — SSL changes, port-map updates) get the new `limit_req`/`limit_conn` protection automatically; untouched configs keep working exactly as before, just without it, until next regenerated.
 - **Refresh tokens issued before the update still work** (they're opaque Redis-stored strings, unaffected by the schema change) — but if Redis was reachable from the internet before this update, consider it compromised and flush it: `redis-cli -a <password> FLUSHALL` forces everyone to log in again.
 
-## Questions this guide doesn't answer
+## More help
 
-- Full per-endpoint permission list: `permission-catalog.ts` in `ehm-api` (`ALL_PERMISSIONS` / `ROLE_DEFAULT_PERMISSIONS`).
-- Full list of every fix in the security pass, with severity and verification notes: `docs/SECURITY_CHECKLIST.md` in `ehm-api`.
-- Setting up the new Integration API: `docs/INTEGRATIONS.md` in `ehm-api`.
+- Setting up the new integration API: [Billing integration API](../../integrations/billing-api.md).
+- Anything else: [GitHub discussions](https://github.com/EpicLabs23/ecp-ehm-free/discussions), or paid support from Epic Labs 23.

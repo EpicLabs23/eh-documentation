@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 5
 ---
 
 # Enable HTTPS for EHM
@@ -102,7 +102,7 @@ server {
 nginx -t && service nginx reload
 ```
 
-`ehm-ui`'s frontend code (`src/app/init.js`) builds its API/websocket URLs from `window.location` at runtime — in a production build it targets `<origin>/api` for axios and `<origin>` (default `/socket.io` namespace) for sockets, so no `.env` edit is required for this to work once the nginx config above is in place.
+The EHM UI works out its API and websocket addresses from the URL it is opened on (`<origin>/api` and `<origin>/socket.io`), so the UI needs no config change once this nginx config is in place.
 
 ### Update `EHM_API_PUBLIC_URL`
 
@@ -123,9 +123,8 @@ cd /epiclabs23/eh/ehm/<version>/ehm-api
 pm2 restart ecosystem.config.js
 ```
 
-This value is embedded in account JWTs (`ehm_api_public_url` claim, see `docs/AUTH.md` in `ehm-api`) and
-used to build the Git Integrations OAuth callback URL — skip this step and ECP keeps calling back to the
-old bootstrap value.
+Every account's control panel uses this address to reach EHM, and Git Integrations builds its OAuth callback
+URL from it — skip this step and ECP keeps calling back to the old bootstrap value.
 
 ### Access EHM
 

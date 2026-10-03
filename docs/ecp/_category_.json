@@ -1,11 +1,11 @@
 {
-    "position": 20,
-    "label": "ECP",
-    "collapsible": true,
-    "collapsed": false,
-    "className": "red",
-    "link": {
-      "type": "generated-index",
-      "title": "ECP overview"
-    }
+  "position": 7,
+  "label": "ECP (Control Panel) Guide",
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "ECP guide",
+    "description": "For hosting customers: using your account's control panel."
   }
+}

@@ -20,7 +20,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/intro">
-            Epic Hosting Docs
+            Read the docs
           </Link>
         </div>
       </div>
@@ -32,8 +32,8 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={siteConfig.title}
+      description="Documentation for EHM (Epic Hosting Manager) and ECP (Epic Control Panel), free shared hosting software from Epic Labs 23.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

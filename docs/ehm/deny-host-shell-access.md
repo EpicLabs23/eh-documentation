@@ -21,8 +21,7 @@ You need to apply it yourself on every EHM host, following the steps below.
 
 ## What EHM already does automatically
 
-As of the version that includes this fix, `SystemUserService.createSystemUser` (`ehm-api`) does
-two things for every **newly created** hosting account, with no manual step required:
+Since EHM 1.1.3, EHM does two things for every **newly created** hosting account, with no manual step required:
 
 1. Sets the account's login shell to `/usr/sbin/nologin` (`useradd -s /usr/sbin/nologin ...`) —
    blocks interactive login, `su`, and running a remote command over SSH (`ssh user@host 'cmd'`).
