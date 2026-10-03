@@ -167,6 +167,42 @@ sudo apt update
 sudo apt install -y sysbench fio
 ```
 
+### Database clients (import & restore)
+
+EHM runs the database command-line clients on the host for the control
+panel's database **Import** and **Restore** features. These run the clients
+in a hardened mode, so specific versions are required — with an older or
+missing client, import/restore is refused (the rest of EHM works normally,
+and EHM logs a clear warning at startup saying which client to fix).
+
+- **MariaDB client** — required (MySQL import/restore use its `--sandbox`
+  option, which the Oracle MySQL client does not have):
+
+  ```bash
+  sudo apt install -y mariadb-client
+  ```
+
+- **PostgreSQL client 18** — required only if you offer PostgreSQL to
+  accounts. It must be new enough to have the `\restrict` command
+  (PostgreSQL 18, or an August-2025-or-later minor of 17/16/15/14/13).
+  Ubuntu's default `postgresql-client` is usually too old, so install 18
+  from the PostgreSQL apt repository, matching the PostgreSQL server version
+  EHM uses:
+
+  ```bash
+  sudo apt install -y curl ca-certificates
+  sudo install -d /usr/share/postgresql-common/pgdg
+  sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc \
+    --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] \
+    https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+    | sudo tee /etc/apt/sources.list.d/pgdg.list
+  sudo apt update
+  sudo apt install -y postgresql-client-18
+  ```
+
+  Confirm `psql --version` reports 18.x (or a supported back-patched minor).
+
 ### Create a non-root `ehm` user
 
 ```bash
