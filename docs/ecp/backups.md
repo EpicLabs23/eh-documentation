@@ -6,7 +6,7 @@ sidebar_position: 5
 
 Backups go to [storage.bd](https://storage.bd), encrypted before they leave your account. Your hosting provider usually sets this up for you when your account is created. If you see a message asking you to set it up, go to **System > Config > Storage.bd**, or ask your provider.
 
-You can also use your own storage.bd account instead of your provider's by entering its details there.
+You can also use your own storage.bd account instead of your provider's: create a backup space in the storage.bd dashboard and enter its **Space ID**, **Space access key ID** and **Space secret key** there. The space access key belongs to that one backup space and is only for this account's backups.
 
 ## Files
 

@@ -54,15 +54,17 @@ There is no restore button for the host backup. Restore is done with `restic` as
 ### 1. Gather what you need
 
 - The repository password: `sudo cat /ehm/storage-bd/host-backup-restic-password`. **Keep a copy of this file somewhere off the server.** Without it the backup can't be decrypted.
-- The **Base URL**, **Host Backup Tenant ID**, **Install ID** and **Client Secret** from **System > Config > Storage.bd Settings** (or from your own records if EHM is down).
+- The **Base URL** and, under **Host Backup**, the **Space ID**, **Space access key ID** and **Space secret key** from **System > Config > Storage.bd Settings** (or from your own records if EHM is down). These are EHM's own backup space's values, not the reseller API credentials.
 
 ### 2. Get a short-lived access token
 
 ```bash
 BASE_URL="<base url>"
-TENANT_ID="<host backup tenant id>"
-INSTALL_ID="<host backup install id>"
-INSTALL_SECRET="<host backup client secret>"
+# The API still uses its older field names: tenant_id = Space ID,
+# install_id = Space access key ID, install_secret = Space secret key.
+TENANT_ID="<Space ID>"
+INSTALL_ID="<Space access key ID>"
+INSTALL_SECRET="<Space secret key>"
 
 TOKEN=$(curl -s -X POST "$BASE_URL/auth/data-token" \
   -H 'Content-Type: application/json' \

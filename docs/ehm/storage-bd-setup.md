@@ -29,10 +29,14 @@ pm2 restart ecosystem.config.js
 
 ## 2. Get storage.bd credentials
 
-You need a storage.bd reseller account with two sets of credentials:
+You need a storage.bd reseller account with two different kinds of credential. They are not interchangeable:
 
-- **Reseller** client ID and secret — used to create a backup space for each new hosting account.
-- **Host backup** tenant ID, install ID and client secret — a separate space used only for EHM's own backup. Keep it distinct from the reseller credentials; they are not interchangeable.
+| Credential | Belongs to | Used for |
+|---|---|---|
+| **Reseller API client ID** + **Reseller API secret** | Your reseller account | EHM creating and managing a backup space for each hosting account. Never used for backups. |
+| **Space ID** + **Space access key ID** + **Space secret key** | One backup space: here, the space for EHM's own backup | EHM's nightly host backup. |
+
+Each hosting account also gets its own Space ID and space access key, but EHM creates and stores those for you; you don't enter them.
 
 Contact Epic Labs 23 to get a storage.bd reseller account.
 
@@ -41,8 +45,8 @@ Contact Epic Labs 23 to get a storage.bd reseller account.
 **System > Config > Storage.bd Settings**:
 
 - **Base URL** — the storage.bd API address you were given (e.g. `https://api.storage.bd`).
-- **Reseller Client ID** / **Reseller Client Secret**.
-- **Host Backup Tenant ID** / **Host Backup Install ID** / **Host Backup Client Secret**.
+- Under **Reseller account**: **Reseller API client ID** / **Reseller API secret**.
+- Under **Host Backup (EHM's own backup space)**: **Space ID** / **Space access key ID** / **Space secret key**.
 
 Save. New accounts get a backup space automatically when they are created, and the host backup runs nightly at 02:00 server time — nothing else to do for EHM's own backup.
 
