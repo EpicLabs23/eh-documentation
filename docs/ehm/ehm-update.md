@@ -7,6 +7,10 @@ sidebar_position: 7
 Updating from 1.1.x to **2.0.0 or later**? Read [Upgrading from 1.1.x to 2.0.0](./upgrade-notes/upgrading-to-2.0.0.md) first — this is a major version with breaking changes (OpenLiteSpeed replaces PHP-FPM/nginx, PHP 7.4 dropped, Postgres/MSSQL/MongoDB become standalone `eh-services` instead of EHM-managed containers) that need action before/during this command if they apply to you.
 :::
 
+:::warning
+Updating from 2.0.5 or earlier to **2.0.6 or later** (up to 2.0.9)? Read [Upgrading from 2.0.5 to 2.0.9](./upgrade-notes/upgrading-to-2.0.9.md) first. Epic DNS must be configured, or creating accounts and adding domains fails. Every account must also be updated right after EHM, or its git push deploys and Supervisor actions stop working.
+:::
+
 :::info
 Updating to **1.1.4**? Read [Upgrading from 1.1.3 to 1.1.4](./upgrade-notes/upgrading-to-1.1.4.md) — non-breaking from 1.1.3, but if you're still on **1.1.2 or earlier, update to 1.1.3 first**: 1.1.4's script no longer repeats 1.1.3's admin-preserving data migration, and skipping straight to 1.1.4 would lock out existing admins.
 :::
@@ -29,7 +33,7 @@ This also prompts **"Enable InfluxDB metrics history?"**, defaulting to whatever
 ### Non-interactive update
 ```bash
 sudo su
-eh-manager update-ehm -v <version> --dbpass <mariadb-root-password> --os 24.04 --influx false
+eh-manager update-ehm --nv <version> --dbpass <mariadb-root-password> --os 24.04 --influx false
 ```
 
 `--apiurl` is omitted above on purpose: when left out, `EHM_API_PUBLIC_URL` is carried forward as-is from
