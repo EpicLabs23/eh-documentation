@@ -73,9 +73,13 @@ cd /epiclabs23/eh/ehm/<version>/ehm-api  # your currently installed EHM version
 pm2 restart ecosystem.config.js
 ```
 
-`pgadmin-nginx`'s published port (`2331`) and phpMyAdmin's (`2329`) are the exception — nothing in
-`ehm-api/.env` mirrors them. ECP's phpMyAdmin and pgAdmin links always use these two ports, so
-don't change them.
+phpMyAdmin (`2329`) and pgAdmin (`2331`) are served by EHM's Nginx, not published by their
+containers. ECP's phpMyAdmin and pgAdmin links always use these two ports, so don't change them.
+
+**After re-applying `phpmyadmin` or `pgadmin`, restart EHM** (command above), even if nothing in
+`ehm-api/.env` changed. Older versions of these stacks published `2329`/`2331` themselves; once the
+recreated containers let go of the ports, EHM's restart is what makes Nginx serve them over HTTPS.
+Until then phpMyAdmin and pgAdmin are unreachable.
 
 ## Verify
 

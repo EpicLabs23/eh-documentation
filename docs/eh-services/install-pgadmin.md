@@ -36,11 +36,13 @@ reached it directly.
 docker compose up -d
 ```
 
-This starts two containers: `pgadmin` itself (no published port — only reachable from the sidecar
-below) and `pgadmin-nginx`, published on `2331` — the only externally reachable port in this stack.
+This starts two containers: `pgadmin` itself and `pgadmin-nginx`, the sign-in sidecar in front of
+it. Neither publishes a port. EHM's Nginx serves the sidecar over HTTPS on port `2331` of each
+account's primary domain, with that domain's certificate, and ECP's "PgAdmin" link opens it there
+(as its phpMyAdmin link opens port `2329`). Keep port `2331` open in your firewall and free on the host.
 
-ECP's "PgAdmin" link always points at port `2331` (as its phpMyAdmin link always points at `2329`),
-so keep this port free and don't change it in `docker-compose.yml`.
+If you install pgAdmin after EHM is already running, restart EHM so it sets up the port
+(`pm2 restart ecosystem.config.js` in your installed `ehm-api` folder).
 
 ## Verify the identity header format
 

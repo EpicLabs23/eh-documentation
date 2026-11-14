@@ -10,8 +10,8 @@ sidebar_position: 1
 | :--- | :--- |
 | 80, 443 | Account websites, and the EHM panel once [HTTPS is enabled](../ehm/enable-https.md) |
 | 2324 | ECP (each account's control panel), at `https://<account domain>:2324` |
-| 2329 | phpMyAdmin (one-click sign-in from ECP) |
-| 2331 | pgAdmin (one-click sign-in from ECP), only if installed |
+| 2329 | phpMyAdmin (one-click sign-in from ECP), HTTPS on each account's domain |
+| 2331 | pgAdmin (one-click sign-in from ECP), HTTPS on each account's domain, only if installed |
 | 53 (TCP and UDP) | BIND9 DNS, only if EH hosts your DNS |
 | Ports you map | Any custom ports you allow accounts to use (**Network > Port Mapping**) |
 
@@ -27,8 +27,8 @@ EHM's own UI (2325) and API (2326) only need to be reachable directly before HTT
 | MongoDB (optional) | Container | `172.1.0.7` | 27017, localhost only |
 | PostgreSQL (optional) | Container | `172.1.0.8` | 5432, localhost only |
 | MSSQL (optional) | Container | `172.1.0.10` | 1433, localhost only |
-| phpMyAdmin | Container | `172.1.0.5` | 2329 |
-| pgAdmin (optional) | Container | — | 2331 |
+| phpMyAdmin | Container | `172.1.0.5` | none (Nginx serves 2329) |
+| pgAdmin (optional) | Container | `172.1.0.11` (sign-in sidecar) | none (Nginx serves 2331) |
 | Redis | Container | — | 6379, localhost only |
 | InfluxDB (optional) | Container | — | 8181, localhost only |
 | BIND9 (optional) | Container | — | 53; management API 8053, localhost only |
