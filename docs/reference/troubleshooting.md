@@ -30,6 +30,31 @@ sudo quota -vs <username>
 sudo find / -user <username> -type d -exec du -h --max-depth=1 {} + 2>/dev/null | sort -rh | head -n 10
 ```
 
+## Account provisioning fails with "nginx -t failed"
+
+Symptom: creating an account fails with `Account provisioning failed: ... nginx -t failed - change reverted, nginx was never reloaded`. Older EHM versions put the real reason only in `~/.pm2/logs/ehm-api-out.log`, among many `ssl_stapling` warnings. Look for the `[emerg]` line:
+
+```
+[emerg] could not build variables_hash, you should increase variables_hash_bucket_size: 64
+```
+
+Cause: nginx's hash tables for variables or server names are full. Every account adds vhosts, so a server with enough accounts outgrows nginx's default sizes. The new account's config is fine, but `nginx -t` fails for the whole server.
+
+Fix: add these lines to the `http` block of `/etc/nginx/nginx.conf`, or raise them if they are already there:
+
+```nginx
+variables_hash_max_size 2048;
+variables_hash_bucket_size 128;
+server_names_hash_max_size 4096;
+server_names_hash_bucket_size 128;
+```
+
+Then run `nginx -t`. It should pass with no `could not build` warning. Run `systemctl reload nginx` and create the account again. If `nginx -t` reports that a directive is duplicate, it is also set in `/etc/nginx/conf.d/eh-hash-sizes.conf`. Remove the line from one of the two files.
+
+From EHM 2.0.11, EHM sets these values itself in `/etc/nginx/conf.d/eh-hash-sizes.conf` at startup (only the ones you haven't set), raises them once on this error, and puts the `[emerg]` line in the error message.
+
+Early sign: `nginx -t` passes but prints `could not build optimal variables_hash` (or `server_names_hash`). That means the table is almost full and provisioning will fail soon, so raise the sizes now. EHM 2.0.11+ logs this as a warning.
+
 ## Error: `GLIBC_2.34' not found`
 
 The server's OS is older than the release was built for. Check the [requirements](../getting-started/requirements.md).

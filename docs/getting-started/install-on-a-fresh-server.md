@@ -95,6 +95,17 @@ http{
 }
 ```
 
+Keep the stock `include /etc/nginx/conf.d/*.conf;` line in the same `http` block. EHM writes its own http-level settings there, including `eh-hash-sizes.conf`:
+
+```nginx
+variables_hash_max_size 2048;
+variables_hash_bucket_size 128;
+server_names_hash_max_size 4096;
+server_names_hash_bucket_size 128;
+```
+
+nginx's defaults are too small for a server with many accounts. Once the tables fill up, `nginx -t` fails for the whole server and new accounts can't be created (see [Troubleshooting](../reference/troubleshooting.md#account-provisioning-fails-with-nginx--t-failed)). EHM only writes the directives you haven't set yourself. If you'd rather set them in `nginx.conf`, add the four lines above to its `http` block; EHM then leaves them alone. Setting one in both places makes `nginx -t` fail.
+
 Now Restart the nginx service
 
 ```bash
