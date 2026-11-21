@@ -353,6 +353,12 @@ npm install
 npm link
 ```
 
+Replace nginx's "Welcome to nginx!" page for domains that point here but have no site yet (and stop HTTPS showing another site's content). See [Default page for unconfigured domains](../ehm/default-page).
+
+```bash
+eh-manager nginx-default-page
+```
+
 #### 15. Prepare domains
 
 - Decide the domain name you want use to access EHM.

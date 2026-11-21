@@ -45,4 +45,6 @@ ECP callbacks / Git Integrations) with every update.
 
 Updating EHM doesn't touch existing accounts' containers. Each account keeps running its current ECP image until it is updated — see [Updating existing accounts](./upgrade-notes/updating-existing-accounts.md).
 
+Servers installed before the `nginx-default-page` command existed still show "Welcome to nginx!" for domains with no site, and another site's content over HTTPS. Run this once: `eh-manager nginx-default-page`. See [Default page for unconfigured domains](./default-page).
+
 Keep `eh-services` current too: [Update EH services](../eh-services/eh-services-update.md).

@@ -69,6 +69,16 @@ node /epiclabs23/eh/ehm/2.0.5/ehm-api/prisma/create-admin.mjs
 
 This is a plain HTTP address, reachable directly on the port EHM listens on. See [Enable HTTPS for EHM](./enable-https) to front it with a domain and a Let's Encrypt certificate before using it in production.
 
+### Set the default page for unconfigured domains
+
+Once per server, replace nginx's "Welcome to nginx!" page (and stop HTTPS showing another site's content) for domains that point here but have no site yet:
+
+```bash
+eh-manager nginx-default-page
+```
+
+See [Default page for unconfigured domains](./default-page).
+
 ### Configure EHM
 
 In EHM UI:

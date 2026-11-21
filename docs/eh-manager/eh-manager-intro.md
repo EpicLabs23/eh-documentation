@@ -10,5 +10,6 @@ sidebar_position: 1
 | :--- | :--- |
 | `eh-manager install-ehm` | First install. See [Install EHM](../ehm/ehm-install). |
 | `eh-manager update-ehm` | Update to a newer release. See [Update EHM](../ehm/ehm-update). |
+| `eh-manager nginx-default-page` | One-time: show a "No website here yet" page for domains with no site, and refuse HTTPS for them. See [Default page for unconfigured domains](../ehm/default-page). |
 
 Run it as root. It asks for anything it needs; every prompt also has a command-line flag for non-interactive use.
